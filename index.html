@@ -144,6 +144,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .setup-box code{background:var(--sf2);padding:1px 5px;border-radius:3px;font-size:11px;color:var(--accH)}
 .setup-box .step-num{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--acc);color:#fff;font-size:10px;font-weight:700;margin-right:4px}
 
+/* Extension banner */
+.ext-banner{padding:10px 18px;border-radius:var(--r);margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:12px}
+.ext-banner.ok{background:var(--goodBg);border:1px solid rgba(16,185,129,.2);color:var(--good)}
+.ext-banner.warn{background:var(--badBg);border:1px solid rgba(245,158,11,.2);color:var(--bad)}
+.ext-banner .ext-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ext-banner.ok .ext-dot{background:var(--good);box-shadow:0 0 8px rgba(16,185,129,.5)}
+.ext-banner.warn .ext-dot{background:var(--bad);box-shadow:0 0 8px rgba(245,158,11,.5)}
+.ext-banner a{color:inherit;font-weight:600;text-decoration:underline}
+.ext-banner strong{font-weight:600}
+
+/* Applying overlay on card */
+.card.applying{border-color:var(--acc);position:relative}
+.card.applying::after{content:'';position:absolute;inset:0;background:rgba(59,130,246,.05);border-radius:var(--r);pointer-events:none}
+.card-progress{display:none;margin-top:8px;padding:8px;background:var(--accBg);border:1px solid rgba(59,130,246,.2);border-radius:6px;font-size:11px;color:var(--acc);text-align:center}
+.card-progress.show{display:flex;align-items:center;justify-content:center;gap:8px}
+.card-progress .cp-spinner{width:14px;height:14px;border:2px solid rgba(59,130,246,.2);border-top-color:var(--acc);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+
 /* Toasts */
 .toasts{position:fixed;bottom:16px;right:16px;z-index:200;display:flex;flex-direction:column;gap:6px}
 .toast{padding:10px 16px;border-radius:8px;font-size:12px;font-weight:500;animation:si .2s ease;max-width:400px;box-shadow:0 4px 20px rgba(0,0,0,.4);display:flex;align-items:flex-start;gap:8px}
@@ -198,19 +215,39 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
   <div class="sec closed" id="sec-howto">
     <div class="sec-h" onclick="toggleSec('sec-howto')">
       <span class="chv">&#9662;</span>
-      <h2>How to Apply Settings</h2>
+      <h2>Setup &amp; How to Apply</h2>
     </div>
-    <div class="sec-b" style="max-height:800px">
+    <div class="sec-b" style="max-height:1200px">
       <div class="setup-box">
-        <h3>Quick Apply — 3 steps</h3>
+        <h3>One-time Setup — Install the Chrome Extension</h3>
         <ol>
-          <li><span class="step-num">1</span> Click an <strong>Apply</strong> button below — admin panel opens in a new tab, and the automation script is <strong>copied to your clipboard</strong></li>
-          <li><span class="step-num">2</span> On the admin panel page, press <code>F12</code> → click <code>Console</code> tab → press <code>Ctrl+V</code> (paste) → press <code>Enter</code></li>
-          <li><span class="step-num">3</span> The script automatically loads target settings from GitHub, merges them, and clicks <strong>Update</strong>. Come back here and click <strong>Confirm Applied</strong></li>
+          <li><span class="step-num">1</span> Download the <code>extension</code> folder from the <a href="https://github.com/tarasstomin-ua/COps-work-automatization/tree/main/extension" target="_blank">GitHub repo</a> (or clone the repo)</li>
+          <li><span class="step-num">2</span> Open Chrome → <code>chrome://extensions</code> → enable <strong>Developer mode</strong> (top right toggle)</li>
+          <li><span class="step-num">3</span> Click <strong>Load unpacked</strong> → select the <code>extension</code> folder</li>
+          <li><span class="step-num">4</span> Make sure you're <strong>logged in</strong> to <a href="https://admin-panel.bolt.eu" target="_blank">admin-panel.bolt.eu</a> in the same browser</li>
+          <li><span class="step-num">5</span> Refresh this dashboard page — the green banner "Extension connected" should appear</li>
+        </ol>
+      </div>
+      <div class="setup-box">
+        <h3>How Apply Works (with extension)</h3>
+        <ol>
+          <li><span class="step-num">1</span> Enter your name in the header</li>
+          <li><span class="step-num">2</span> Click a weather button (Good / Bad / Harsh) on any city card</li>
+          <li><span class="step-num">3</span> <strong>Done!</strong> The extension opens admin panel → waits for editor → fetches target settings from GitHub → deep merges → clicks Update → closes the tab → updates the status</li>
+        </ol>
+      </div>
+      <div class="setup-box" style="border-color:var(--bd2)">
+        <h3>Fallback (without extension)</h3>
+        <ol>
+          <li><span class="step-num">1</span> Click Apply — admin panel opens, JS script is copied to clipboard</li>
+          <li><span class="step-num">2</span> On admin panel: <code>F12</code> → <code>Console</code> → <code>Ctrl+V</code> → <code>Enter</code></li>
+          <li><span class="step-num">3</span> Come back here and click <strong>Confirm Applied</strong></li>
         </ol>
       </div>
     </div>
   </div>
+
+  <div id="ext-banner"></div>
 
   <div class="search-bar">
     <span style="color:var(--mu);font-size:14px">&#128269;</span>
@@ -342,7 +379,52 @@ function getJsonUrl(cityName, profile) {
   return `${REPO_RAW}/${c.base}/${m.folder}/${m.prefix}%20${encodeURIComponent(c.jsonName)}.json`;
 }
 
-// ── Generate automation script ───────────────────────────────────────────────
+// ── Extension detection ──────────────────────────────────────────────────────
+let extensionReady = false;
+let applyingCity = null;
+
+window.addEventListener('message', (e) => {
+  if (e.source !== window) return;
+  if (e.data?.type === 'cops-extension-ready') {
+    extensionReady = true;
+    renderExtBanner();
+  }
+  if (e.data?.type === 'cops-result') {
+    handleExtensionResult(e.data);
+  }
+});
+
+function renderExtBanner() {
+  const el = document.getElementById('ext-banner');
+  if (extensionReady) {
+    el.innerHTML = '<div class="ext-banner ok"><span class="ext-dot"></span><strong>Extension connected</strong> — Click any Apply button and settings will be applied automatically via Selenium-like automation</div>';
+  } else {
+    el.innerHTML = '<div class="ext-banner warn"><span class="ext-dot"></span><strong>Extension not detected</strong> — <a href="#" onclick="toggleSec(\'sec-howto\');document.getElementById(\'sec-howto\').scrollIntoView({behavior:\'smooth\'});return false">Install the COps Chrome Extension</a> for one-click automation, or use the manual fallback (Console paste)</div>';
+  }
+}
+
+function handleExtensionResult({ city, profile, success, message }) {
+  const cid = cardId(city);
+  const card = document.getElementById(cid);
+  if (card) {
+    card.classList.remove('applying');
+    const prog = card.querySelector('.card-progress');
+    if (prog) prog.classList.remove('show');
+  }
+  card?.querySelectorAll('.b').forEach(b => b.disabled = false);
+  applyingCity = null;
+
+  if (success) {
+    const user = getUserName();
+    setStatus(city, profile, user);
+    toast(`${city} → ${P_FULL[profile]} applied successfully by ${user}`, 'success', 6000);
+    renderAll();
+  } else {
+    toast(`Failed: ${city} — ${message || 'Unknown error'}`, 'error', 8000);
+  }
+}
+
+// ── Generate fallback automation script (for manual console paste) ───────────
 function generateScript(cityName, profile) {
   const url = getJsonUrl(cityName, profile);
   return `(async()=>{try{` +
@@ -354,26 +436,21 @@ function generateScript(cityName, profile) {
     `else{const cm2=[...document.querySelectorAll('.jsoneditor-type-modes button')].find(d=>d.textContent.trim()==='Code');if(cm2){cm2.click();await new Promise(r=>setTimeout(r,800))}}}` +
     `const ed=ace.edit(document.querySelector('.ace_editor'));` +
     `const cur=JSON.parse(ed.getValue());` +
-    `console.log('Current settings read from editor');` +
-    `const r=await fetch('${url}');` +
-    `if(!r.ok)throw new Error('Failed to fetch: HTTP '+r.status);` +
+    `const r=await fetch('${url}');if(!r.ok)throw new Error('HTTP '+r.status);` +
     `const tgt=await r.json();` +
-    `console.log('Target settings fetched from GitHub');` +
     `function mg(t,s){for(const k of Object.keys(s)){` +
     `if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])){` +
     `if(!t[k]||typeof t[k]!=='object')t[k]={};mg(t[k],s[k]);}` +
     `else{t[k]=s[k];}}return t;}` +
-    `mg(cur,tgt);` +
-    `ed.setValue(JSON.stringify(cur,null,2),-1);` +
-    `console.log('Settings merged and applied to editor');` +
+    `mg(cur,tgt);ed.setValue(JSON.stringify(cur,null,2),-1);` +
     `await new Promise(r=>setTimeout(r,500));` +
     `const btn=[...document.querySelectorAll('button')].find(b=>b.textContent.trim()==='Update');` +
     `if(btn){btn.click();console.log('Update clicked - ${cityName} ${P_FULL[profile]} applied!');}` +
-    `else{console.warn('Update button not found - please click it manually');}` +
+    `else{console.warn('Update button not found');}` +
     `}catch(e){console.error('COps Error:',e.message);alert('COps Error: '+e.message)}})()`;
 }
 
-// ── Apply flow ───────────────────────────────────────────────────────────────
+// ── Apply flow (dual mode: extension or manual fallback) ─────────────────────
 async function applySettings(cityName, profile) {
   const user = getUserName();
   if (!user) {
@@ -382,27 +459,48 @@ async function applySettings(cityName, profile) {
     return;
   }
 
+  if (applyingCity) {
+    toast('Another task is already running — wait for it to finish', 'warn');
+    return;
+  }
+
   const city = CITIES[cityName];
-  const script = generateScript(cityName, profile);
-
-  try {
-    await navigator.clipboard.writeText(script);
-  } catch(e) {
-    toast('Could not copy to clipboard — see confirm bar below', 'error');
-  }
-
-  window.open(city.url, '_blank');
-
   const cid = cardId(cityName);
-  const bar = document.querySelector(`#${cid} .confirm-bar`);
-  if (bar) {
-    bar.classList.add('show');
-    bar.dataset.city = cityName;
-    bar.dataset.profile = profile;
-    bar.querySelector('.cb-step').textContent = `${P_FULL[profile]} → ${cityName}`;
-  }
+  const card = document.getElementById(cid);
 
-  toast(`Admin panel opened for ${cityName}. Script copied — paste in Console (F12 → Console → Ctrl+V → Enter)`, 'info', 8000);
+  if (extensionReady) {
+    applyingCity = cityName;
+    card?.classList.add('applying');
+    card?.querySelectorAll('.b').forEach(b => b.disabled = true);
+    const prog = card?.querySelector('.card-progress');
+    if (prog) {
+      prog.classList.add('show');
+      prog.querySelector('.cp-msg').textContent = `Applying ${P_FULL[profile]} to ${cityName}...`;
+    }
+
+    window.postMessage({
+      type: 'cops-apply',
+      city: cityName,
+      profile,
+      adminUrl: city.url,
+      jsonUrl: getJsonUrl(cityName, profile),
+    }, '*');
+
+    toast(`Applying ${P_FULL[profile]} to ${cityName} via extension...`, 'info', 4000);
+  } else {
+    const script = generateScript(cityName, profile);
+    try { await navigator.clipboard.writeText(script); } catch(e) {}
+    window.open(city.url, '_blank');
+
+    const bar = card?.querySelector('.confirm-bar');
+    if (bar) {
+      bar.classList.add('show');
+      bar.dataset.city = cityName;
+      bar.dataset.profile = profile;
+      bar.querySelector('.cb-step').textContent = `${P_FULL[profile]} → ${cityName}`;
+    }
+    toast(`Admin panel opened. Script copied — paste in Console (F12 → Ctrl+V → Enter)`, 'info', 8000);
+  }
 }
 
 function confirmApplied(btn) {
@@ -423,12 +521,7 @@ function cancelApply(btn) {
 async function reCopyScript(btn) {
   const bar = btn.closest('.confirm-bar');
   const script = generateScript(bar.dataset.city, bar.dataset.profile);
-  try {
-    await navigator.clipboard.writeText(script);
-    toast('Script re-copied to clipboard', 'info');
-  } catch(e) {
-    toast('Copy failed', 'error');
-  }
+  try { await navigator.clipboard.writeText(script); toast('Script re-copied', 'info'); } catch(e) {}
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -573,6 +666,10 @@ function renderCitySections(filter) {
         <div class="card-top"><span class="city-name">${cn}</span><a class="admin-link" href="${city.url}" target="_blank">Admin &#8599;</a></div>
         ${statusHtml}
         <div class="btns">${btns}</div>
+        <div class="card-progress" data-city="" data-profile="">
+          <div class="cp-spinner"></div>
+          <span class="cp-msg">Applying settings via extension...</span>
+        </div>
         <div class="confirm-bar" data-city="" data-profile="">
           <p>Applying <strong class="cb-step"></strong></p>
           <p style="font-size:10px;color:var(--mu);margin-bottom:4px">Paste the script in admin panel Console (F12 → Console → Ctrl+V → Enter), then confirm:</p>
@@ -611,6 +708,8 @@ function filterCities(val) {
 
   await fetchSharedStatus();
   renderAll();
+
+  setTimeout(() => renderExtBanner(), 500);
 
   setInterval(() => renderOverview(), 30000);
 })();
