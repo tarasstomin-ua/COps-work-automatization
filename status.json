@@ -4,11 +4,22 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-16T21:54:49.708768"
+    },
+    "Dnipro": {
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-16T22:13:09.851556"
     }
   },
   "team": [],
-  "last_updated": "2026-04-16T21:54:49.708768",
+  "last_updated": "2026-04-16T22:13:09.851556",
   "history": [
+    {
+      "city": "Dnipro",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-16T22:13:09.851556"
+    },
     {
       "city": "Kyiv",
       "profile": "harsh",
