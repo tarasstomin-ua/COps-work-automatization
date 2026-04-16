@@ -9,11 +9,22 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-16T22:13:09.851556"
+    },
+    "Odesa": {
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-16T22:14:11.655005"
     }
   },
   "team": [],
-  "last_updated": "2026-04-16T22:13:09.851556",
+  "last_updated": "2026-04-16T22:14:11.655005",
   "history": [
+    {
+      "city": "Odesa",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-16T22:14:11.655005"
+    },
     {
       "city": "Dnipro",
       "profile": "harsh",
