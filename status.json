@@ -1,14 +1,20 @@
 {
   "cities": {
     "Kyiv": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-04-16T21:54:31.575951"
+      "timestamp": "2026-04-16T21:54:49.708768"
     }
   },
   "team": [],
-  "last_updated": "2026-04-16T21:54:31.575951",
+  "last_updated": "2026-04-16T21:54:49.708768",
   "history": [
+    {
+      "city": "Kyiv",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-16T21:54:49.708768"
+    },
     {
       "city": "Kyiv",
       "profile": "good",
