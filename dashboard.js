@@ -6,8 +6,11 @@
     return;
   }
 
-  const REPO_RAW = 'https://raw.githubusercontent.com/tarasstomin-ua/COps-work-automatization/main/Bad%20weather%20settings';
-  const STATUS_URL = 'https://raw.githubusercontent.com/tarasstomin-ua/COps-work-automatization/main/status.json';
+  const OWNER = 'tarasstomin-ua';
+  const REPO = 'COps-work-automatization';
+  const REPO_RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/Bad%20weather%20settings`;
+  const STATUS_URL = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/status.json`;
+  const GH_API = 'https://api.github.com';
 
   const USERS = [
     {email: 'taras.stomin@bolt.eu', name: 'Taras Stomin'},
@@ -65,16 +68,65 @@
   const PF = {good:'Good Weather',bad:'Bad Weather',harsh:'Harsh Weather'};
   const LS_STATUS = 'cops_dash_status';
   const LS_USER = 'cops_dash_user';
+  const LS_PAT = 'cops_gh_pat';
 
   function loadStatus() { try { return JSON.parse(localStorage.getItem(LS_STATUS)) || {}; } catch(e) { return {}; } }
   function saveStatus(s) { localStorage.setItem(LS_STATUS, JSON.stringify(s)); }
-  function setStatus(city, profile, user) {
+  function getUser() { return localStorage.getItem(LS_USER) || ''; }
+  function getPat() { return localStorage.getItem(LS_PAT) || ''; }
+  function savePat(v) { localStorage.setItem(LS_PAT, v.trim()); }
+
+  async function setStatus(city, profile, user) {
     const s = loadStatus();
     s[city] = {profile, user, timestamp: new Date().toISOString()};
+    if (!s._history) s._history = [];
+    s._history.unshift({city, profile, user, timestamp: new Date().toISOString()});
+    if (s._history.length > 200) s._history = s._history.slice(0, 200);
     saveStatus(s);
+    await pushStatusToGitHub(s);
   }
-  function getUser() { return localStorage.getItem(LS_USER) || ''; }
-  function setUser(v) { localStorage.setItem(LS_USER, v); }
+
+  async function pushStatusToGitHub(localStatus) {
+    const pat = getPat();
+    if (!pat) return;
+    try {
+      const fileResp = await fetch(`${GH_API}/repos/${OWNER}/${REPO}/contents/status.json`, {
+        headers: {'Authorization': 'Bearer ' + pat, 'Accept': 'application/vnd.github+json'}
+      });
+      let sha = null;
+      let remote = {cities: {}, history: [], last_updated: null};
+      if (fileResp.ok) {
+        const fileData = await fileResp.json();
+        sha = fileData.sha;
+        try { remote = JSON.parse(atob(fileData.content)); } catch(e) {}
+      }
+      for (const [city, info] of Object.entries(localStatus)) {
+        if (city === '_history') continue;
+        remote.cities = remote.cities || {};
+        remote.cities[city] = info;
+      }
+      remote.history = remote.history || [];
+      const localHist = localStatus._history || [];
+      for (const h of localHist) {
+        if (!remote.history.find(rh => rh.city === h.city && rh.timestamp === h.timestamp)) {
+          remote.history.unshift(h);
+        }
+      }
+      remote.history.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+      remote.history = remote.history.slice(0, 300);
+      remote.last_updated = new Date().toISOString();
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(remote, null, 2))));
+      const body = {message: `Status update: ${new Date().toISOString()}`, content};
+      if (sha) body.sha = sha;
+      await fetch(`${GH_API}/repos/${OWNER}/${REPO}/contents/status.json`, {
+        method: 'PUT',
+        headers: {'Authorization': 'Bearer ' + pat, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github+json'},
+        body: JSON.stringify(body)
+      });
+    } catch(e) {
+      console.warn('COps: Failed to push status to GitHub:', e);
+    }
+  }
 
   function timeAgo(iso) {
     if (!iso) return '';
@@ -168,10 +220,11 @@
       if (!clicked) throw new Error('Update button not found');
 
       await sleep(3000);
-      setStatus(cityName, profile, user);
+      await setStatus(cityName, profile, user);
       updateCardState(cityName, 'success', `${PF[profile]} applied!`);
       showLog(`${cityName} -> ${PF[profile]} applied by ${user}`, 'success');
       renderOverview();
+      renderHistory(loadStatus()._history || []);
 
     } catch(e) {
       updateCardState(cityName, 'error', e.message);
@@ -206,8 +259,24 @@
     .cd-sel label{font-size:10px;color:#5c6370;text-transform:uppercase;letter-spacing:.5px}
     .cd-sel select{background:none;border:none;color:#f0f2f5;font-size:12px;font-weight:600;outline:none;cursor:pointer}
     .cd-sel select option{background:#0f1218;color:#f0f2f5}
+    .cd-pat{background:#080a0f;border:1px solid #1c2230;border-radius:20px;padding:4px 12px;display:flex;align-items:center;gap:6px}
+    .cd-pat label{font-size:10px;color:#5c6370;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+    .cd-pat input{background:none;border:none;color:#f0f2f5;font-size:11px;font-weight:600;width:140px;outline:none;font-family:monospace}
+    .cd-pat input::placeholder{color:#3d4452;font-family:inherit}
+    .cd-pat .ok{color:#10b981;font-size:12px;display:none}
+    .cd-pat.valid .ok{display:inline}
     .cd-close{background:none;border:1px solid #252d3b;border-radius:8px;color:#5c6370;font-size:14px;padding:6px 14px;cursor:pointer;font-weight:600}
     .cd-close:hover{background:#151a22;color:#f0f2f5}
+    .cd-hist{background:#0f1218;border:1px solid #1c2230;border-radius:12px;padding:14px 18px;margin-bottom:16px}
+    .cd-hist h3{font-size:12px;font-weight:600;color:#f0f2f5;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;cursor:pointer;user-select:none}
+    .cd-hist-list{max-height:200px;overflow-y:auto}
+    .cd-hist-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #1c2230;font-size:11px}
+    .cd-hist-item:last-child{border-bottom:none}
+    .cd-hist-item .h-city{font-weight:600;color:#f0f2f5;min-width:100px}
+    .cd-hist-item .h-prof{font-weight:500;min-width:80px}
+    .cd-hist-item .h-prof.good{color:#10b981}.cd-hist-item .h-prof.bad{color:#f59e0b}.cd-hist-item .h-prof.harsh{color:#ef4444}
+    .cd-hist-item .h-user{color:#3b82f6;min-width:100px}
+    .cd-hist-item .h-time{color:#5c6370;font-size:10px;font-family:monospace}
     .cd-main{max-width:1500px;margin:0 auto;padding:20px 28px 40px}
     .cd-ov{background:#0f1218;border:1px solid #1c2230;border-radius:12px;padding:14px 18px;margin-bottom:16px}
     .cd-ov h3{font-size:12px;font-weight:600;color:#f0f2f5;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
@@ -347,6 +416,8 @@
   window.__copsApply = function(city, profile) { applySettings(city, profile); };
 
   const userOpts = USERS.map(u => `<option value="${u.email}" ${getUser() === u.email ? 'selected' : ''}>${u.name}</option>`).join('');
+  const savedPat = getPat();
+  const patValid = savedPat.startsWith('ghp_') || savedPat.startsWith('github_pat_');
 
   overlay.innerHTML = `
     <div class="cd-hdr">
@@ -362,35 +433,79 @@
             ${userOpts}
           </select>
         </div>
+        <div class="cd-pat${patValid ? ' valid' : ''}" id="cops-pat-group">
+          <label>Token:</label>
+          <input type="password" id="cops-pat" placeholder="ghp_xxx..." value="${savedPat}" oninput="window.__copsSavePat(this.value)">
+          <span class="ok" title="Token set — status will be shared">&#10003;</span>
+        </div>
         <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:#f0f2f5" id="cops-tracked-cnt">0</div><div style="font-size:9px;color:#5c6370;text-transform:uppercase;letter-spacing:.6px">Tracked</div></div>
         <button class="cd-close" onclick="document.getElementById('cops-dashboard-overlay').remove();document.getElementById('cops-log').remove()">Close Dashboard</button>
       </div>
     </div>
     <div class="cd-main">
       <div class="cd-ov" id="cops-overview"></div>
+      <div class="cd-hist" id="cops-history" style="display:none">
+        <h3 onclick="document.getElementById('cops-hist-list').style.display=document.getElementById('cops-hist-list').style.display==='none'?'block':'none'">Recent Changes \u25BE</h3>
+        <div class="cd-hist-list" id="cops-hist-list"></div>
+      </div>
       <div class="cd-search"><span style="color:#5c6370;font-size:14px">\uD83D\uDD0D</span><input type="text" placeholder="Search cities..." oninput="window.__copsFilter(this.value)"></div>
       <div id="cops-cities"></div>
     </div>
   `;
 
+  window.__copsSavePat = function(v) {
+    savePat(v);
+    const g = document.getElementById('cops-pat-group');
+    if (g) g.classList.toggle('valid', v.trim().startsWith('ghp_') || v.trim().startsWith('github_pat_'));
+  };
+
   window.__copsFilter = function(val) { renderCards(val); };
+
+  function renderHistory(history) {
+    const wrap = document.getElementById('cops-history');
+    const list = document.getElementById('cops-hist-list');
+    if (!wrap || !list || !history || !history.length) return;
+    wrap.style.display = 'block';
+    list.innerHTML = history.slice(0, 50).map(h => {
+      const prof = h.profile || 'none';
+      const userName = (h.user || '').split('@')[0] || '?';
+      const time = h.timestamp ? new Date(h.timestamp).toLocaleString('uk-UA', {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : '';
+      return `<div class="cd-hist-item"><span class="h-city">${h.city}</span><span class="h-prof ${prof}">${PF[prof] || prof}</span><span class="h-user">${userName}</span><span class="h-time">${time}</span></div>`;
+    }).join('');
+  }
 
   renderOverview();
   renderCards();
 
   fetch(STATUS_URL + '?t=' + Date.now()).then(r => r.ok ? r.json() : null).then(data => {
-    if (data?.cities) {
+    if (data) {
       const local = loadStatus();
-      for (const [city, info] of Object.entries(data.cities)) {
-        if (!local[city] || new Date(info.timestamp) > new Date(local[city].timestamp)) {
-          local[city] = info;
+      if (data.cities) {
+        for (const [city, info] of Object.entries(data.cities)) {
+          if (!local[city] || new Date(info.timestamp) > new Date(local[city].timestamp)) {
+            local[city] = info;
+          }
         }
+      }
+      if (data.history) {
+        local._history = local._history || [];
+        for (const h of data.history) {
+          if (!local._history.find(lh => lh.city === h.city && lh.timestamp === h.timestamp)) {
+            local._history.push(h);
+          }
+        }
+        local._history.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+        local._history = local._history.slice(0, 300);
       }
       saveStatus(local);
       renderOverview();
       renderCards();
+      renderHistory(local._history || data.history || []);
     }
   }).catch(() => {});
 
-  showLog('Dashboard loaded! Select your name and click a weather button.', 'success');
+  showLog(getPat()
+    ? 'Dashboard loaded! Status is shared via GitHub.'
+    : 'Dashboard loaded! Add a GitHub token (header) to share status with your team.',
+    'success');
 })();
