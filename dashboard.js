@@ -5,6 +5,8 @@
   const RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/Bad%20weather%20settings`;
   const STATUS_URL = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/status.json`;
   const GH_API = 'https://api.github.com';
+  const IS_ADMIN = window.location.hostname === 'admin-panel.bolt.eu';
+  const ADMIN_BASE = 'https://admin-panel.bolt.eu';
 
   const USERS = [
     {email:'taras.stomin@bolt.eu', name:'Taras Stomin'},
@@ -196,7 +198,7 @@
 
   // ── Pending action: auto-run after full-page redirect ──────────────────────
 
-  const pendRaw = localStorage.getItem(LS_PEND);
+  const pendRaw = IS_ADMIN ? localStorage.getItem(LS_PEND) : null;
   if (pendRaw) {
     localStorage.removeItem(LS_PEND);
     try {
@@ -246,7 +248,24 @@
     busy = true;
     const city = CITIES[cityName];
     const settingsPath = '/delivery-courier/settings/city/' + city.id;
+    const settingsUrl = ADMIN_BASE + settingsPath;
     setCardState(cityName, 'working', PICON[profile] + ' Applying ' + PF[profile] + '...');
+
+    if (!IS_ADMIN) {
+      toast('Opening admin panel... Click the bookmarklet there to apply.', 'warn');
+      try {
+        const resp = await fetch(jsonUrl(cityName, profile));
+        if (!resp.ok) throw new Error('GitHub fetch failed: HTTP ' + resp.status);
+        const target = await resp.json();
+        localStorage.setItem(LS_PEND, JSON.stringify({
+          cityName, profile, cityId: city.id, target, user, ts: Date.now()
+        }));
+      } catch(e) { /* will work without pending, user can retry */ }
+      window.open(settingsUrl, '_blank');
+      setCardState(cityName, 'error', 'Open admin-panel.bolt.eu and click bookmarklet');
+      busy = false;
+      return;
+    }
 
     try {
       toast('Fetching ' + PF[profile] + ' for ' + cityName + '...');
@@ -287,7 +306,7 @@
         bar.style.background = '#b45309';
         await sleep(1500);
         bar.remove();
-        window.location.href = 'https://admin-panel.bolt.eu' + settingsPath;
+        window.location.href = settingsUrl;
         return;
       }
 
@@ -505,14 +524,25 @@
   const uOpts = USERS.map(function(u) { return '<option value="' + u.email + '"' + (getU()===u.email?' selected':'') + '>' + u.name + '</option>'; }).join('');
   const sp = getP(), pv = sp.indexOf('ghp_') === 0 || sp.indexOf('github_pat_') === 0;
 
+  const bmCode = "javascript:void((()=>{const s=document.createElement('script');s.src='https://tarasstomin-ua.github.io/COps-work-automatization/dashboard.js?v='+Date.now();document.head.appendChild(s)})())";
+  const closeBtn = IS_ADMIN
+    ? '<button class="cbtn" onclick="document.getElementById(\'cops-overlay\').remove();document.getElementById(\'cops-log\').remove()">Close</button>'
+    : '<a class="cbtn" href="' + bmCode + '" style="text-decoration:none;cursor:grab" title="Drag to Bookmarks Bar">\u2B50 Bookmarklet</a>';
+  const infoBanner = IS_ADMIN ? ''
+    : '<div style="background:linear-gradient(135deg,#1e3a5f,#1e40af);padding:14px 40px;font-size:15px;text-align:center;color:#93c5fd">' +
+      '<strong>To apply settings:</strong> open <a href="https://admin-panel.bolt.eu" target="_blank" style="color:#60a5fa;text-decoration:underline">admin-panel.bolt.eu</a>, ' +
+      'then click the <strong>\u2B50 Bookmarklet</strong> (drag it to your Bookmarks Bar first)' +
+      '</div>';
+
   ov.innerHTML = '<div class="ch">' +
     '<div style="display:flex;align-items:center"><span class="flag">\u{1F1FA}\u{1F1E6}</span><h1>COps Weather Control</h1><span class="sub">Dashboard</span></div>' +
     '<div class="chr">' +
     '<div class="csel"><label>You</label><select onchange="localStorage.setItem(\'cops2_user\',this.value)"><option value="">-- select --</option>' + uOpts + '</select></div>' +
     '<div class="csel' + (pv ? ' v' : '') + '" id="c-pat"><label>Token</label><input type="password" placeholder="ghp_..." value="' + sp + '" oninput="window.__sp(this.value)"><span class="tok">\u2713</span></div>' +
     '<div style="text-align:center"><div style="font-size:28px;font-weight:800;color:#fff" id="c-cnt">0</div><div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.8px;font-weight:600">Tracked</div></div>' +
-    '<button class="cbtn" onclick="document.getElementById(\'cops-overlay\').remove();document.getElementById(\'cops-log\').remove()">Close</button>' +
+    closeBtn +
     '</div></div>' +
+    infoBanner +
     '<div class="cm">' +
     '<div class="cov" id="c-ov"></div>' +
     '<div class="chist" id="c-hist" style="display:none"><h3 onclick="var l=document.getElementById(\'c-hist-list\');l.style.display=l.style.display===\'none\'?\'block\':\'none\'">\u{1F4CB} Recent Changes \u25BE</h3><div class="chist-list" id="c-hist-list"></div></div>' +

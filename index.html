@@ -3,104 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Courier Ops — Weather Control Setup</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#080a0f;--sf:#0f1218;--sf2:#151a22;--bd:#1c2230;--bd2:#252d3b;--tx:#d1d5db;--txb:#f0f2f5;--mu:#5c6370;--acc:#3b82f6;--accH:#60a5fa;--good:#10b981;--r:8px;--r2:12px}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px}
-
-.hero{text-align:center;max-width:700px;margin-bottom:40px}
-.hero h1{font-size:28px;font-weight:700;color:var(--txb);margin-bottom:8px;letter-spacing:-.5px}
-.hero p{font-size:14px;color:var(--mu);line-height:1.7}
-
-.card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r2);padding:28px;max-width:700px;width:100%;margin-bottom:20px}
-.card h2{font-size:16px;font-weight:700;color:var(--txb);margin-bottom:16px;display:flex;align-items:center;gap:10px}
-.card h2 .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
-
-.steps{list-style:none;padding:0}
-.steps li{padding:10px 0;border-bottom:1px solid var(--bd);font-size:13px;line-height:1.8;display:flex;gap:10px}
-.steps li:last-child{border-bottom:none}
-.steps .sn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--sf2);color:var(--acc);font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px}
-.steps code{background:var(--sf2);padding:1px 6px;border-radius:4px;font-size:12px;color:var(--accH);font-family:"SF Mono",SFMono-Regular,Menlo,monospace}
-
-.bm-box{background:var(--bg);border:2px dashed var(--acc);border-radius:var(--r);padding:20px;text-align:center;margin:16px 0}
-.bm-box p{font-size:12px;color:var(--mu);margin-bottom:12px}
-.bm-link{display:inline-block;padding:12px 28px;background:var(--acc);color:#fff;font-size:14px;font-weight:700;border-radius:8px;text-decoration:none;cursor:grab;transition:all .15s;letter-spacing:.2px}
-.bm-link:hover{background:var(--accH);transform:scale(1.03)}
-.bm-link:active{cursor:grabbing}
-
-.note{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:var(--r);padding:14px;font-size:12px;color:var(--good);line-height:1.7;margin-top:16px}
-.note strong{font-weight:700}
-
-.how{margin-top:16px}
-.how h3{font-size:13px;font-weight:600;color:var(--txb);margin-bottom:8px}
-.how ul{padding-left:20px;font-size:12px;line-height:1.9;color:var(--tx)}
-
-.footer{margin-top:40px;text-align:center;font-size:11px;color:var(--mu)}
-.footer a{color:var(--acc);text-decoration:none}
-.footer a:hover{text-decoration:underline}
-</style>
+<title>COps Weather Dashboard</title>
+<style>body{margin:0;background:#06080d;min-height:100vh}</style>
 </head>
 <body>
-
-<div class="hero">
-  <h1>Courier Ops — Weather Control</h1>
-  <p>One-click weather settings automation for Bolt Admin Panel.<br>No extensions, no servers — works directly in your browser via bookmarklet.</p>
-</div>
-
-<div class="card">
-  <h2><span class="num">1</span> Set up the Bookmarklet (one-time, 30 sec)</h2>
-  <ol class="steps">
-    <li><span class="sn">1</span><span>Show the <strong>Bookmarks Bar</strong> in Chrome: <code>Cmd+Shift+B</code> (Mac) or <code>Ctrl+Shift+B</code> (Windows)</span></li>
-    <li><span class="sn">2</span><span>Drag the blue button below <strong>onto your Bookmarks Bar</strong>:</span></li>
-  </ol>
-
-  <div class="bm-box">
-    <p>Drag this button to your Bookmarks Bar:</p>
-    <a class="bm-link" href="javascript:void((()=>{const s=document.createElement('script');s.src='https://tarasstomin-ua.github.io/COps-work-automatization/dashboard.js?v='+Date.now();document.head.appendChild(s)})())">COps Weather Dashboard</a>
-  </div>
-
-  <div class="note">
-    <strong>Done!</strong> The bookmarklet is now saved in your browser. No installation, no extension, no admin rights needed. Works even with managed Chrome.
-  </div>
-</div>
-
-<div class="card">
-  <h2><span class="num">2</span> How to use</h2>
-  <ol class="steps">
-    <li><span class="sn">1</span><span>Open <a href="https://admin-panel.bolt.eu" target="_blank" style="color:var(--acc)">admin-panel.bolt.eu</a> and make sure you're logged in</span></li>
-    <li><span class="sn">2</span><span>Click <strong>"COps Weather Dashboard"</strong> in your Bookmarks Bar</span></li>
-    <li><span class="sn">3</span><span>A full dashboard overlay appears with all 37 cities</span></li>
-    <li><span class="sn">4</span><span>Select your name, then click <strong>Good</strong> / <strong>Bad</strong> / <strong>Harsh</strong> on any city</span></li>
-    <li><span class="sn">5</span><span>The bookmarklet opens the city settings page, merges JSON, and clicks Update — automatically!</span></li>
-  </ol>
-
-  <div class="how">
-    <h3>How it works under the hood</h3>
-    <ul>
-      <li>Bookmarklet injects a dashboard overlay on top of the admin panel page</li>
-      <li>When you click Apply, it opens the city settings in a popup window (same domain = full access)</li>
-      <li>Fetches target settings from the GitHub repo, deep-merges with current settings</li>
-      <li>Writes merged JSON to the editor and clicks Update — same as the local Selenium scripts</li>
-      <li>Your browser handles the SSL certificate and authentication automatically</li>
-      <li>Status is tracked locally and shared via the GitHub repo</li>
-    </ul>
-  </div>
-</div>
-
-<div class="card">
-  <h2><span class="num">3</span> Access</h2>
-  <ol class="steps">
-    <li><span class="sn"></span><span><strong>Taras Stomin</strong> — taras.stomin@bolt.eu</span></li>
-    <li><span class="sn"></span><span><strong>Anna Tiurina</strong> — anna.tiurina@bolt.eu</span></li>
-    <li><span class="sn"></span><span><strong>Nataliia Malakova</strong> — nataliia.malakova@bolt.eu</span></li>
-  </ol>
-  <p style="font-size:11px;color:var(--mu);margin-top:10px">Anyone with access to admin-panel.bolt.eu can use the bookmarklet. Name selection is for tracking purposes.</p>
-</div>
-
-<div class="footer">
-  <a href="https://github.com/tarasstomin-ua/COps-work-automatization" target="_blank">GitHub Repository</a> &middot; All city JSON settings are stored in the repo
-</div>
-
+<script src="dashboard.js"></script>
 </body>
 </html>
