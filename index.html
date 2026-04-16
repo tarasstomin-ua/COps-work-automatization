@@ -17,7 +17,6 @@
 }
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;font-size:13px}
 
-/* Header */
 .hdr{background:var(--sf);border-bottom:1px solid var(--bd);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;flex-wrap:wrap;gap:10px}
 .hdr-l{display:flex;align-items:center;gap:14px}
 .hdr h1{font-size:16px;font-weight:700;color:var(--txb);letter-spacing:-.3px}
@@ -30,8 +29,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
 .user-sel{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--bd);border-radius:20px;padding:4px 12px}
 .user-sel label{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px}
-.user-sel input{background:none;border:none;color:var(--txb);font-size:12px;font-weight:600;width:120px;outline:none}
-.user-sel input::placeholder{color:var(--mu2)}
+.user-sel select{background:none;border:none;color:var(--txb);font-size:12px;font-weight:600;outline:none;cursor:pointer;-webkit-appearance:none;appearance:none;padding-right:12px}
+.user-sel select option{background:var(--sf);color:var(--txb)}
 
 .gh-link{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--acc);padding:5px 12px;background:var(--accBg);border-radius:20px;border:1px solid rgba(59,130,246,.15);text-decoration:none;transition:all .15s}
 .gh-link:hover{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.3)}
@@ -39,7 +38,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
 .main{max-width:1500px;margin:0 auto;padding:20px 28px 40px}
 
-/* Sections */
 .sec{margin-bottom:16px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r2);overflow:hidden}
 .sec-h{display:flex;align-items:center;gap:10px;padding:12px 18px;cursor:pointer;user-select:none;transition:background .15s}
 .sec-h:hover{background:var(--sf2)}
@@ -50,7 +48,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .sec-b{transition:max-height .35s ease,padding .2s ease;overflow:hidden;padding:0 18px 16px}
 .sec.closed .sec-b{max-height:0!important;padding-top:0;padding-bottom:0}
 
-/* Status Overview */
 .ov-group{margin-bottom:12px}
 .ov-group:last-child{margin-bottom:0}
 .ov-group-h{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--mu);margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid var(--bd)}
@@ -68,7 +65,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .pill .pmeta{font-size:10px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
 .pill .puser{color:var(--acc);font-weight:500}
 
-/* City cards */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
 .card{background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:14px;transition:border-color .15s}
 .card:hover{border-color:var(--bd2)}
@@ -94,34 +90,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .b.active-prof{box-shadow:0 0 0 2px var(--txb);transform:scale(1.02)}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* Confirm bar */
-.confirm-bar{display:none;margin-top:8px;padding:8px;background:var(--sf);border:1px solid var(--acc);border-radius:6px;text-align:center}
-.confirm-bar.show{display:block}
-.confirm-bar p{font-size:11px;color:var(--tx);margin-bottom:6px}
-.confirm-bar code{display:block;font-size:10px;color:var(--mu);margin-bottom:8px;word-break:break-all;font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
-.cb-btns{display:flex;gap:6px;justify-content:center}
-.cb{padding:6px 16px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer}
-.cb.ok{background:var(--acc);color:#fff}.cb.ok:hover{background:var(--accH)}
-.cb.cn{background:var(--bg);color:var(--tx);border:1px solid var(--bd)}.cb.cn:hover{background:var(--sf2)}
-.cb.cp{background:var(--sf2);color:var(--txb);border:1px solid var(--bd2)}.cb.cp:hover{background:var(--bd)}
+.card.applying{border-color:var(--acc);position:relative}
+.card.applying::after{content:'';position:absolute;inset:0;background:rgba(59,130,246,.05);border-radius:var(--r);pointer-events:none}
+.card-progress{display:none;margin-top:8px;padding:8px;background:var(--accBg);border:1px solid rgba(59,130,246,.2);border-radius:6px;font-size:11px;color:var(--acc);text-align:center}
+.card-progress.show{display:flex;align-items:center;justify-content:center;gap:8px}
+.card-progress .cp-spinner{width:14px;height:14px;border:2px solid rgba(59,130,246,.2);border-top-color:var(--acc);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 
-/* Key metrics */
-.kv-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
-.kv{background:var(--sf);border-radius:6px;padding:8px 10px}
-.kv-label{font-size:9px;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
-.kv-val{font-size:12px;font-weight:600;color:var(--txb);font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
-.kv-row{display:flex;gap:6px;flex-wrap:wrap}
-.kv-chip{font-size:10px;padding:2px 6px;background:var(--bg);border:1px solid var(--bd);border-radius:4px;color:var(--tx)}
-.kv-chip b{color:var(--txb);margin-right:3px}
-.view-json-btn{display:block;width:100%;margin-top:8px;padding:6px;border:1px solid var(--bd);border-radius:6px;background:transparent;color:var(--mu);font-size:10px;cursor:pointer;transition:all .12s;text-align:center}
-.view-json-btn:hover{border-color:var(--bd2);color:var(--tx);background:var(--sf)}
-
-/* Search */
 .search-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:8px 14px}
 .search-bar input{flex:1;background:none;border:none;color:var(--txb);font-size:13px;outline:none}
 .search-bar input::placeholder{color:var(--mu2)}
 
-/* Modal */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;justify-content:center;align-items:center;backdrop-filter:blur(4px)}
 .overlay.open{display:flex}
 .modal{background:var(--sf);border:1px solid var(--bd2);border-radius:var(--r2);padding:0;max-width:800px;width:95%;max-height:85vh;display:flex;flex-direction:column}
@@ -137,31 +115,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .modal-body pre{font-size:12px;line-height:1.6;color:var(--tx);font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word}
 .json-key{color:var(--acc)}.json-str{color:var(--good)}.json-num{color:var(--bad)}.json-bool{color:#c084fc}.json-null{color:var(--mu)}
 
-/* Setup instructions */
 .setup-box{background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:14px;margin-bottom:10px}
 .setup-box h3{font-size:12px;color:var(--txb);margin-bottom:8px}
-.setup-box ol{padding-left:20px;font-size:12px;line-height:1.8;color:var(--tx)}
+.setup-box ol,.setup-box ul{padding-left:20px;font-size:12px;line-height:1.8;color:var(--tx)}
 .setup-box code{background:var(--sf2);padding:1px 5px;border-radius:3px;font-size:11px;color:var(--accH)}
 .setup-box .step-num{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--acc);color:#fff;font-size:10px;font-weight:700;margin-right:4px}
 
-/* Extension banner */
-.ext-banner{padding:10px 18px;border-radius:var(--r);margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:12px}
-.ext-banner.ok{background:var(--goodBg);border:1px solid rgba(16,185,129,.2);color:var(--good)}
-.ext-banner.warn{background:var(--badBg);border:1px solid rgba(245,158,11,.2);color:var(--bad)}
-.ext-banner .ext-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.ext-banner.ok .ext-dot{background:var(--good);box-shadow:0 0 8px rgba(16,185,129,.5)}
-.ext-banner.warn .ext-dot{background:var(--bad);box-shadow:0 0 8px rgba(245,158,11,.5)}
-.ext-banner a{color:inherit;font-weight:600;text-decoration:underline}
-.ext-banner strong{font-weight:600}
+.auth-banner{padding:10px 18px;border-radius:var(--r);margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:12px}
+.auth-banner.ok{background:var(--goodBg);border:1px solid rgba(16,185,129,.2);color:var(--good)}
+.auth-banner.warn{background:var(--badBg);border:1px solid rgba(245,158,11,.2);color:var(--bad)}
+.auth-banner .ab-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.auth-banner.ok .ab-dot{background:var(--good);box-shadow:0 0 8px rgba(16,185,129,.5)}
+.auth-banner.warn .ab-dot{background:var(--bad);box-shadow:0 0 8px rgba(245,158,11,.5)}
+.auth-banner a{color:inherit;font-weight:600;text-decoration:underline;cursor:pointer}
+.auth-banner strong{font-weight:600}
 
-/* Applying overlay on card */
-.card.applying{border-color:var(--acc);position:relative}
-.card.applying::after{content:'';position:absolute;inset:0;background:rgba(59,130,246,.05);border-radius:var(--r);pointer-events:none}
-.card-progress{display:none;margin-top:8px;padding:8px;background:var(--accBg);border:1px solid rgba(59,130,246,.2);border-radius:6px;font-size:11px;color:var(--acc);text-align:center}
-.card-progress.show{display:flex;align-items:center;justify-content:center;gap:8px}
-.card-progress .cp-spinner{width:14px;height:14px;border:2px solid rgba(59,130,246,.2);border-top-color:var(--acc);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.pat-input-group{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--bd);border-radius:20px;padding:4px 12px}
+.pat-input-group label{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.pat-input-group input{background:none;border:none;color:var(--txb);font-size:11px;font-weight:600;width:180px;outline:none;font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+.pat-input-group input::placeholder{color:var(--mu2);font-family:inherit}
+.pat-input-group .pat-ok{color:var(--good);font-size:14px;display:none}
+.pat-input-group.valid .pat-ok{display:inline}
 
-/* Toasts */
 .toasts{position:fixed;bottom:16px;right:16px;z-index:200;display:flex;flex-direction:column;gap:6px}
 .toast{padding:10px 16px;border-radius:8px;font-size:12px;font-weight:500;animation:si .2s ease;max-width:400px;box-shadow:0 4px 20px rgba(0,0,0,.4);display:flex;align-items:flex-start;gap:8px}
 .toast.success{background:var(--good);color:#fff}
@@ -175,7 +150,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
   .hdr{padding:10px 16px}
   .main{padding:12px 16px 30px}
   .grid{grid-template-columns:1fr}
-  .kv-grid{grid-template-columns:1fr}
   .hdr-r{width:100%;justify-content:space-between}
 }
 </style>
@@ -191,7 +165,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
   <div class="hdr-r">
     <div class="user-sel">
       <label>You:</label>
-      <input type="text" id="userName" placeholder="Your name" oninput="saveUserName(this.value)">
+      <select id="userName" onchange="saveUserName(this.value)">
+        <option value="">-- select --</option>
+        <option value="taras.stomin@bolt.eu">Taras Stomin</option>
+        <option value="anna.tiurina@bolt.eu">Anna Tiurina</option>
+        <option value="nataliia.malakova@bolt.eu">Nataliia Malakova</option>
+      </select>
+    </div>
+    <div class="pat-input-group" id="patGroup">
+      <label>Token:</label>
+      <input type="password" id="patInput" placeholder="ghp_xxx..." oninput="savePat(this.value)">
+      <span class="pat-ok">&#10003;</span>
     </div>
     <div class="metric"><div class="metric-v" id="hCities">37</div><div class="metric-l">Cities</div></div>
     <div class="metric"><div class="metric-v" id="hTracked">0</div><div class="metric-l">Tracked</div></div>
@@ -215,39 +199,45 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
   <div class="sec closed" id="sec-howto">
     <div class="sec-h" onclick="toggleSec('sec-howto')">
       <span class="chv">&#9662;</span>
-      <h2>Setup &amp; How to Apply</h2>
+      <h2>Setup Instructions</h2>
     </div>
-    <div class="sec-b" style="max-height:1200px">
+    <div class="sec-b" style="max-height:2000px">
       <div class="setup-box">
-        <h3>One-time Setup — Install the Chrome Extension</h3>
+        <h3>Step 1 — Create a GitHub Personal Access Token (one-time)</h3>
         <ol>
-          <li><span class="step-num">1</span> Download the <code>extension</code> folder from the <a href="https://github.com/tarasstomin-ua/COps-work-automatization/tree/main/extension" target="_blank">GitHub repo</a> (or clone the repo)</li>
-          <li><span class="step-num">2</span> Open Chrome → <code>chrome://extensions</code> → enable <strong>Developer mode</strong> (top right toggle)</li>
-          <li><span class="step-num">3</span> Click <strong>Load unpacked</strong> → select the <code>extension</code> folder</li>
-          <li><span class="step-num">4</span> Make sure you're <strong>logged in</strong> to <a href="https://admin-panel.bolt.eu" target="_blank">admin-panel.bolt.eu</a> in the same browser</li>
-          <li><span class="step-num">5</span> Refresh this dashboard page — the green banner "Extension connected" should appear</li>
+          <li><span class="step-num">1</span> Go to <a href="https://github.com/settings/tokens?type=beta" target="_blank">GitHub → Settings → Developer settings → Fine-grained tokens</a></li>
+          <li><span class="step-num">2</span> Click <strong>Generate new token</strong></li>
+          <li><span class="step-num">3</span> Name: <code>COps Weather Dashboard</code>, Expiration: <strong>90 days</strong> (or custom)</li>
+          <li><span class="step-num">4</span> Repository access: <strong>Only select repositories</strong> → choose <code>COps-work-automatization</code></li>
+          <li><span class="step-num">5</span> Permissions → Repository: <strong>Actions</strong> → <code>Read and write</code>, <strong>Contents</strong> → <code>Read</code></li>
+          <li><span class="step-num">6</span> Click <strong>Generate token</strong> → copy and paste it in the <strong>Token</strong> field in the header above</li>
         </ol>
       </div>
       <div class="setup-box">
-        <h3>How Apply Works (with extension)</h3>
+        <h3>Step 2 — Set up Bolt Admin cookies (one-time, done by Taras)</h3>
         <ol>
-          <li><span class="step-num">1</span> Enter your name in the header</li>
-          <li><span class="step-num">2</span> Click a weather button (Good / Bad / Harsh) on any city card</li>
-          <li><span class="step-num">3</span> <strong>Done!</strong> The extension opens admin panel → waits for editor → fetches target settings from GitHub → deep merges → clicks Update → closes the tab → updates the status</li>
+          <li><span class="step-num">1</span> Log in to <a href="https://admin-panel.bolt.eu" target="_blank">admin-panel.bolt.eu</a></li>
+          <li><span class="step-num">2</span> <code>F12</code> → Network → click any request → right-click → <strong>Copy as cURL</strong></li>
+          <li><span class="step-num">3</span> Run locally: <code>python automation/parse_curl.py</code> → paste cURL → get base64 string</li>
+          <li><span class="step-num">4</span> Go to <a href="https://github.com/tarasstomin-ua/COps-work-automatization/settings/secrets/actions" target="_blank">GitHub repo → Settings → Secrets → Actions</a></li>
+          <li><span class="step-num">5</span> New repository secret: Name = <code>BOLT_COOKIES</code>, Value = the base64 string</li>
         </ol>
       </div>
       <div class="setup-box" style="border-color:var(--bd2)">
-        <h3>Fallback (without extension)</h3>
-        <ol>
-          <li><span class="step-num">1</span> Click Apply — admin panel opens, JS script is copied to clipboard</li>
-          <li><span class="step-num">2</span> On admin panel: <code>F12</code> → <code>Console</code> → <code>Ctrl+V</code> → <code>Enter</code></li>
-          <li><span class="step-num">3</span> Come back here and click <strong>Confirm Applied</strong></li>
-        </ol>
+        <h3>How it works</h3>
+        <ul>
+          <li>Select your name and paste your GitHub token in the header</li>
+          <li>Click a weather button (Good / Bad / Harsh) on any city card</li>
+          <li>This triggers a <strong>GitHub Actions</strong> workflow that runs Playwright (headless Chrome) on GitHub servers</li>
+          <li>Playwright opens the Bolt Admin panel → merges JSON settings → clicks Update</li>
+          <li>Status updates automatically when the workflow completes (~40-60 sec)</li>
+          <li>No extensions, no servers — everything runs on GitHub for free</li>
+        </ul>
       </div>
     </div>
   </div>
 
-  <div id="ext-banner"></div>
+  <div id="auth-banner"></div>
 
   <div class="search-bar">
     <span style="color:var(--mu);font-size:14px">&#128269;</span>
@@ -270,8 +260,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div class="toasts" id="ts"></div>
 
 <script>
-const REPO_RAW = 'https://raw.githubusercontent.com/tarasstomin-ua/COps-work-automatization/main/Bad%20weather%20settings';
-const STATUS_URL = 'https://raw.githubusercontent.com/tarasstomin-ua/COps-work-automatization/main/status.json';
+const OWNER = 'tarasstomin-ua';
+const REPO = 'COps-work-automatization';
+const WORKFLOW = 'apply-settings.yml';
+const REPO_RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/Bad%20weather%20settings`;
+const STATUS_URL = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/status.json`;
+const API = 'https://api.github.com';
+
+const ALLOWED_USERS = ['taras.stomin@bolt.eu','anna.tiurina@bolt.eu','nataliia.malakova@bolt.eu'];
 
 const CITIES = {
   "Kyiv":{"group":"TOP cities","order":0,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/158","base":"Kyiv","profiles":["good","bad","harsh"],"jsonName":"Kyiv"},
@@ -322,209 +318,185 @@ const PROFILE_META = {
 const P_LABELS = {good:"Good",bad:"Bad",harsh:"Harsh"};
 const P_FULL = {good:"Good Weather",bad:"Bad Weather",harsh:"Harsh Weather"};
 
-// ── Status management ────────────────────────────────────────────────────────
 const LS_STATUS = 'cops_weather_status';
 const LS_USER = 'cops_user_name';
+const LS_PAT = 'cops_gh_pat';
 
-function loadStatus() {
-  try { return JSON.parse(localStorage.getItem(LS_STATUS)) || {}; } catch(e) { return {}; }
+function getPat() { return localStorage.getItem(LS_PAT) || ''; }
+function savePat(v) {
+  localStorage.setItem(LS_PAT, v.trim());
+  updateAuthBanner();
+  const g = document.getElementById('patGroup');
+  g.classList.toggle('valid', v.trim().startsWith('ghp_') || v.trim().startsWith('github_pat_'));
 }
-function saveStatus(status) {
-  localStorage.setItem(LS_STATUS, JSON.stringify(status));
-}
-function setStatus(city, profile, user) {
-  const status = loadStatus();
-  status[city] = {profile, user: user || 'Unknown', timestamp: new Date().toISOString()};
-  if (!status._history) status._history = [];
-  status._history.unshift({city, profile, user: user || 'Unknown', timestamp: new Date().toISOString()});
-  if (status._history.length > 200) status._history = status._history.slice(0, 200);
-  saveStatus(status);
-}
-function getUserName() {
-  return document.getElementById('userName').value || localStorage.getItem(LS_USER) || '';
-}
-function saveUserName(v) {
-  localStorage.setItem(LS_USER, v);
-}
+function getUserName() { return document.getElementById('userName').value || ''; }
+function saveUserName(v) { localStorage.setItem(LS_USER, v); }
 
-// ── Fetch shared status from repo ────────────────────────────────────────────
 let sharedStatus = {};
 async function fetchSharedStatus() {
   try {
     const r = await fetch(STATUS_URL + '?t=' + Date.now());
-    if (r.ok) {
-      sharedStatus = await r.json();
-    }
+    if (r.ok) sharedStatus = await r.json();
   } catch(e) {}
 }
 
-function getMergedStatus() {
-  const local = loadStatus();
-  const merged = {};
-  for (const city of Object.keys(CITIES)) {
-    const s = sharedStatus.cities?.[city];
-    const l = local[city];
-    if (s && l) {
-      merged[city] = new Date(l.timestamp) > new Date(s.timestamp) ? l : s;
-    } else {
-      merged[city] = l || s || null;
-    }
-  }
-  return merged;
+function getStatus() {
+  return sharedStatus.cities || {};
 }
 
-// ── JSON URL builder ─────────────────────────────────────────────────────────
 function getJsonUrl(cityName, profile) {
   const c = CITIES[cityName], m = PROFILE_META[profile];
   return `${REPO_RAW}/${c.base}/${m.folder}/${m.prefix}%20${encodeURIComponent(c.jsonName)}.json`;
 }
 
-// ── Extension detection ──────────────────────────────────────────────────────
-let extensionReady = false;
+function ghHeaders() {
+  const pat = getPat();
+  return pat ? { 'Authorization': 'Bearer ' + pat, 'Accept': 'application/vnd.github+json' } : {};
+}
+
 let applyingCity = null;
+let pollingRunId = null;
 
-window.addEventListener('message', (e) => {
-  if (e.source !== window) return;
-  if (e.data?.type === 'cops-extension-ready') {
-    extensionReady = true;
-    renderExtBanner();
-  }
-  if (e.data?.type === 'cops-result') {
-    handleExtensionResult(e.data);
-  }
-});
-
-function renderExtBanner() {
-  const el = document.getElementById('ext-banner');
-  if (extensionReady) {
-    el.innerHTML = '<div class="ext-banner ok"><span class="ext-dot"></span><strong>Extension connected</strong> — Click any Apply button and settings will be applied automatically via Selenium-like automation</div>';
-  } else {
-    el.innerHTML = '<div class="ext-banner warn"><span class="ext-dot"></span><strong>Extension not detected</strong> — <a href="#" onclick="toggleSec(\'sec-howto\');document.getElementById(\'sec-howto\').scrollIntoView({behavior:\'smooth\'});return false">Install the COps Chrome Extension</a> for one-click automation, or use the manual fallback (Console paste)</div>';
-  }
-}
-
-function handleExtensionResult({ city, profile, success, message }) {
-  const cid = cardId(city);
-  const card = document.getElementById(cid);
-  if (card) {
-    card.classList.remove('applying');
-    const prog = card.querySelector('.card-progress');
-    if (prog) prog.classList.remove('show');
-  }
-  card?.querySelectorAll('.b').forEach(b => b.disabled = false);
-  applyingCity = null;
-
-  if (success) {
-    const user = getUserName();
-    setStatus(city, profile, user);
-    toast(`${city} → ${P_FULL[profile]} applied successfully by ${user}`, 'success', 6000);
-    renderAll();
-  } else {
-    toast(`Failed: ${city} — ${message || 'Unknown error'}`, 'error', 8000);
-  }
-}
-
-// ── Generate fallback automation script (for manual console paste) ───────────
-function generateScript(cityName, profile) {
-  const url = getJsonUrl(cityName, profile);
-  return `(async()=>{try{` +
-    `console.log('COps: Applying ${P_FULL[profile]} to ${cityName}...');` +
-    `const mb=document.querySelector('button.jsoneditor-modes');` +
-    `if(mb){mb.click();await new Promise(r=>setTimeout(r,400));` +
-    `const cm=[...document.querySelectorAll('.jsoneditor-type-modes div')].find(d=>d.textContent.trim()==='Code');` +
-    `if(cm){cm.click();await new Promise(r=>setTimeout(r,800));}` +
-    `else{const cm2=[...document.querySelectorAll('.jsoneditor-type-modes button')].find(d=>d.textContent.trim()==='Code');if(cm2){cm2.click();await new Promise(r=>setTimeout(r,800))}}}` +
-    `const ed=ace.edit(document.querySelector('.ace_editor'));` +
-    `const cur=JSON.parse(ed.getValue());` +
-    `const r=await fetch('${url}');if(!r.ok)throw new Error('HTTP '+r.status);` +
-    `const tgt=await r.json();` +
-    `function mg(t,s){for(const k of Object.keys(s)){` +
-    `if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])){` +
-    `if(!t[k]||typeof t[k]!=='object')t[k]={};mg(t[k],s[k]);}` +
-    `else{t[k]=s[k];}}return t;}` +
-    `mg(cur,tgt);ed.setValue(JSON.stringify(cur,null,2),-1);` +
-    `await new Promise(r=>setTimeout(r,500));` +
-    `const btn=[...document.querySelectorAll('button')].find(b=>b.textContent.trim()==='Update');` +
-    `if(btn){btn.click();console.log('Update clicked - ${cityName} ${P_FULL[profile]} applied!');}` +
-    `else{console.warn('Update button not found');}` +
-    `}catch(e){console.error('COps Error:',e.message);alert('COps Error: '+e.message)}})()`;
-}
-
-// ── Apply flow (dual mode: extension or manual fallback) ─────────────────────
 async function applySettings(cityName, profile) {
   const user = getUserName();
   if (!user) {
-    toast('Please enter your name in the header first', 'warn');
-    document.getElementById('userName').focus();
+    toast('Select your name in the header first', 'warn');
     return;
   }
-
+  const pat = getPat();
+  if (!pat) {
+    toast('Paste your GitHub token in the header first', 'warn');
+    document.getElementById('patInput').focus();
+    return;
+  }
   if (applyingCity) {
-    toast('Another task is already running — wait for it to finish', 'warn');
+    toast('Another task is running — wait for it to finish', 'warn');
     return;
   }
 
-  const city = CITIES[cityName];
+  applyingCity = cityName;
   const cid = cardId(cityName);
   const card = document.getElementById(cid);
+  card?.classList.add('applying');
+  card?.querySelectorAll('.b').forEach(b => b.disabled = true);
+  const prog = card?.querySelector('.card-progress');
+  if (prog) {
+    prog.classList.add('show');
+    prog.querySelector('.cp-msg').textContent = `Triggering GitHub Actions for ${cityName}...`;
+  }
 
-  if (extensionReady) {
-    applyingCity = cityName;
-    card?.classList.add('applying');
-    card?.querySelectorAll('.b').forEach(b => b.disabled = true);
-    const prog = card?.querySelector('.card-progress');
-    if (prog) {
-      prog.classList.add('show');
-      prog.querySelector('.cp-msg').textContent = `Applying ${P_FULL[profile]} to ${cityName}...`;
+  const beforeTime = new Date().toISOString();
+
+  try {
+    const res = await fetch(`${API}/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW}/dispatches`, {
+      method: 'POST',
+      headers: { ...ghHeaders(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ref: 'main', inputs: { city: cityName, profile, user } })
+    });
+
+    if (res.status === 204) {
+      toast(`Workflow triggered — applying ${P_FULL[profile]} to ${cityName}...`, 'info', 6000);
+      if (prog) prog.querySelector('.cp-msg').textContent = `Running automation for ${cityName}... (~40-60s)`;
+      pollWorkflow(cityName, profile, user, beforeTime, card, prog);
+    } else if (res.status === 404) {
+      throw new Error('Workflow not found. Check if apply-settings.yml exists in the repo.');
+    } else if (res.status === 403) {
+      throw new Error('Token lacks permissions. Make sure Actions: Read and Write is enabled.');
+    } else {
+      const body = await res.text();
+      throw new Error(`GitHub API error ${res.status}: ${body}`);
     }
-
-    window.postMessage({
-      type: 'cops-apply',
-      city: cityName,
-      profile,
-      adminUrl: city.url,
-      jsonUrl: getJsonUrl(cityName, profile),
-    }, '*');
-
-    toast(`Applying ${P_FULL[profile]} to ${cityName} via extension...`, 'info', 4000);
-  } else {
-    const script = generateScript(cityName, profile);
-    try { await navigator.clipboard.writeText(script); } catch(e) {}
-    window.open(city.url, '_blank');
-
-    const bar = card?.querySelector('.confirm-bar');
-    if (bar) {
-      bar.classList.add('show');
-      bar.dataset.city = cityName;
-      bar.dataset.profile = profile;
-      bar.querySelector('.cb-step').textContent = `${P_FULL[profile]} → ${cityName}`;
-    }
-    toast(`Admin panel opened. Script copied — paste in Console (F12 → Ctrl+V → Enter)`, 'info', 8000);
+  } catch(e) {
+    finishApply(card, prog);
+    toast('Failed: ' + e.message, 'error', 10000);
   }
 }
 
-function confirmApplied(btn) {
-  const bar = btn.closest('.confirm-bar');
-  const city = bar.dataset.city;
-  const profile = bar.dataset.profile;
-  const user = getUserName();
-  setStatus(city, profile, user);
-  bar.classList.remove('show');
-  toast(`${city} → ${P_FULL[profile]} confirmed by ${user}`, 'success');
-  renderAll();
+async function pollWorkflow(cityName, profile, user, beforeTime, card, prog) {
+  await sleep(4000);
+
+  let runId = null;
+  let attempts = 0;
+
+  while (!runId && attempts < 10) {
+    attempts++;
+    try {
+      const res = await fetch(`${API}/repos/${OWNER}/${REPO}/actions/runs?per_page=5&event=workflow_dispatch`, {
+        headers: ghHeaders()
+      });
+      const data = await res.json();
+      const run = data.workflow_runs?.find(r =>
+        new Date(r.created_at) >= new Date(beforeTime) &&
+        r.path?.includes(WORKFLOW)
+      );
+      if (run) {
+        runId = run.id;
+        break;
+      }
+    } catch(e) {}
+    await sleep(3000);
+  }
+
+  if (!runId) {
+    finishApply(card, prog);
+    toast(`Could not find the workflow run. Check Actions tab on GitHub.`, 'error', 10000);
+    return;
+  }
+
+  pollingRunId = runId;
+  let maxPolls = 40;
+  while (maxPolls-- > 0) {
+    await sleep(5000);
+    try {
+      const res = await fetch(`${API}/repos/${OWNER}/${REPO}/actions/runs/${runId}`, { headers: ghHeaders() });
+      const run = await res.json();
+
+      if (prog) {
+        const elapsed = Math.round((Date.now() - new Date(run.created_at).getTime()) / 1000);
+        prog.querySelector('.cp-msg').textContent = `Running... ${elapsed}s elapsed`;
+      }
+
+      if (run.status === 'completed') {
+        finishApply(card, prog);
+        if (run.conclusion === 'success') {
+          toast(`${cityName} → ${P_FULL[profile]} applied successfully!`, 'success', 8000);
+          await sleep(3000);
+          await fetchSharedStatus();
+          renderAll();
+        } else {
+          toast(`Workflow finished with: ${run.conclusion}. Check Actions tab for details.`, 'error', 10000);
+        }
+        return;
+      }
+    } catch(e) {}
+  }
+
+  finishApply(card, prog);
+  toast('Polling timed out. Check the Actions tab on GitHub for status.', 'warn', 10000);
 }
 
-function cancelApply(btn) {
-  btn.closest('.confirm-bar').classList.remove('show');
+function finishApply(card, prog) {
+  applyingCity = null;
+  pollingRunId = null;
+  if (card) {
+    card.classList.remove('applying');
+    card.querySelectorAll('.b').forEach(b => b.disabled = false);
+  }
+  if (prog) prog.classList.remove('show');
 }
 
-async function reCopyScript(btn) {
-  const bar = btn.closest('.confirm-bar');
-  const script = generateScript(bar.dataset.city, bar.dataset.profile);
-  try { await navigator.clipboard.writeText(script); toast('Script re-copied', 'info'); } catch(e) {}
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function updateAuthBanner() {
+  const el = document.getElementById('auth-banner');
+  const pat = getPat();
+  if (pat) {
+    el.innerHTML = '<div class="auth-banner ok"><span class="ab-dot"></span><strong>GitHub token set</strong> — Click any weather button to apply settings automatically via GitHub Actions</div>';
+  } else {
+    el.innerHTML = '<div class="auth-banner warn"><span class="ab-dot"></span><strong>GitHub token not set</strong> — <a onclick="toggleSec(\'sec-howto\');document.getElementById(\'sec-howto\').scrollIntoView({behavior:\'smooth\'})">Open setup instructions</a> to learn how to create a token</div>';
+  }
 }
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
 function toggleSec(id) { document.getElementById(id).classList.toggle('closed'); }
 function cardId(name) { return 'card-' + name.replace(/[^a-zA-Z0-9]/g, '_'); }
 function timeAgo(iso) {
@@ -537,7 +509,6 @@ function timeAgo(iso) {
   if (h < 24) return h + 'h ' + (m%60) + 'm ago';
   return d + 'd ' + (h%24) + 'h ago';
 }
-
 const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 
 function toast(msg, type='info', dur=5000) {
@@ -548,7 +519,6 @@ function toast(msg, type='info', dur=5000) {
   setTimeout(() => t.remove(), dur);
 }
 
-// ── JSON viewer ──────────────────────────────────────────────────────────────
 const jsonCache = {};
 async function fetchJson(cityName, profile) {
   const key = cityName + ':' + profile;
@@ -600,7 +570,6 @@ document.getElementById('jsonOverlay').addEventListener('click', e => {
   if (e.target === e.currentTarget) closeModal();
 });
 
-// ── Rendering ────────────────────────────────────────────────────────────────
 function buildGroups() {
   const g = {};
   for (const [n, c] of Object.entries(CITIES)) {
@@ -611,7 +580,7 @@ function buildGroups() {
 }
 
 function renderOverview() {
-  const status = getMergedStatus();
+  const status = getStatus();
   const groups = buildGroups();
   const el = document.getElementById('overview-body');
   let tracked = 0;
@@ -620,12 +589,12 @@ function renderOverview() {
     const pills = gd.cities.map(cn => {
       const s = status[cn];
       const prof = s?.profile || 'none';
-      const lbl = s ? P_LABELS[prof] : '—';
-      const meta = s ? `<span class="pmeta"><span class="puser">${s.user||'—'}</span> · ${timeAgo(s.timestamp)}</span>` : '';
+      const lbl = s ? P_LABELS[prof] : '\u2014';
+      const meta = s ? `<span class="pmeta"><span class="puser">${s.user||'\u2014'}</span> \u00b7 ${timeAgo(s.timestamp)}</span>` : '';
       if (s) tracked++;
       return `<span class="pill"><span class="dot ${prof}"></span><span class="pn">${cn}</span><span class="pp ${prof}">${lbl}</span>${meta}</span>`;
     }).join('');
-    return `<div class="ov-group"><div class="ov-group-h">${gn} · ${gd.cities.length}</div><div class="ov-pills">${pills}</div></div>`;
+    return `<div class="ov-group"><div class="ov-group-h">${gn} \u00b7 ${gd.cities.length}</div><div class="ov-pills">${pills}</div></div>`;
   }).join('');
 
   document.getElementById('ov-cnt').textContent = tracked + ' tracked';
@@ -634,7 +603,7 @@ function renderOverview() {
 
 function renderCitySections(filter) {
   const groups = buildGroups();
-  const status = getMergedStatus();
+  const status = getStatus();
   const wrap = document.getElementById('city-sections');
   const saved = {};
   wrap.querySelectorAll('.sec').forEach(s => { saved[s.id] = s.classList.contains('closed'); });
@@ -654,7 +623,7 @@ function renderCitySections(filter) {
 
       let statusHtml = '<div class="card-status" style="color:var(--mu2)">No profile set</div>';
       if (s) {
-        statusHtml = `<div class="card-status"><span class="dot ${s.profile}" style="width:6px;height:6px;border-radius:50%"></span><span class="cs-profile ${s.profile}">${P_FULL[s.profile]}</span><span>·</span><span class="cs-user">${s.user}</span><span>·</span><span class="cs-time">${timeAgo(s.timestamp)}</span></div>`;
+        statusHtml = `<div class="card-status"><span class="dot ${s.profile}" style="width:6px;height:6px;border-radius:50%"></span><span class="cs-profile ${s.profile}">${P_FULL[s.profile]}</span><span>\u00b7</span><span class="cs-user">${s.user}</span><span>\u00b7</span><span class="cs-time">${timeAgo(s.timestamp)}</span></div>`;
       }
 
       const btns = city.profiles.map(p => {
@@ -666,19 +635,7 @@ function renderCitySections(filter) {
         <div class="card-top"><span class="city-name">${cn}</span><a class="admin-link" href="${city.url}" target="_blank">Admin &#8599;</a></div>
         ${statusHtml}
         <div class="btns">${btns}</div>
-        <div class="card-progress" data-city="" data-profile="">
-          <div class="cp-spinner"></div>
-          <span class="cp-msg">Applying settings via extension...</span>
-        </div>
-        <div class="confirm-bar" data-city="" data-profile="">
-          <p>Applying <strong class="cb-step"></strong></p>
-          <p style="font-size:10px;color:var(--mu);margin-bottom:4px">Paste the script in admin panel Console (F12 → Console → Ctrl+V → Enter), then confirm:</p>
-          <div class="cb-btns">
-            <button class="cb cp" onclick="reCopyScript(this)">Re-copy Script</button>
-            <button class="cb cn" onclick="cancelApply(this)">Cancel</button>
-            <button class="cb ok" onclick="confirmApplied(this)">Confirm Applied</button>
-          </div>
-        </div>
+        <div class="card-progress"><div class="cp-spinner"></div><span class="cp-msg"></span></div>
         <button class="view-json-btn" onclick="openModal('${cn}','${city.profiles[0]}')">View JSON settings</button>
       </div>`;
     }).join('');
@@ -696,22 +653,29 @@ function renderAll() {
   renderCitySections(document.getElementById('searchInput').value);
 }
 
-function filterCities(val) {
-  renderCitySections(val);
-}
+function filterCities(val) { renderCitySections(val); }
 
-// ── Init ─────────────────────────────────────────────────────────────────────
 (async function init() {
   const savedUser = localStorage.getItem(LS_USER);
   if (savedUser) document.getElementById('userName').value = savedUser;
+
+  const savedPat = localStorage.getItem(LS_PAT);
+  if (savedPat) {
+    document.getElementById('patInput').value = savedPat;
+    const g = document.getElementById('patGroup');
+    g.classList.toggle('valid', savedPat.startsWith('ghp_') || savedPat.startsWith('github_pat_'));
+  }
+
   document.getElementById('hCities').textContent = Object.keys(CITIES).length;
 
   await fetchSharedStatus();
   renderAll();
+  updateAuthBanner();
 
-  setTimeout(() => renderExtBanner(), 500);
-
-  setInterval(() => renderOverview(), 30000);
+  setInterval(async () => {
+    await fetchSharedStatus();
+    if (!applyingCity) renderAll();
+  }, 30000);
 })();
 </script>
 </body>
