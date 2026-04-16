@@ -137,7 +137,7 @@
     }
   }
 
-  // ── CORE FIX: open popup SYNCHRONOUSLY on click, then do async work ────────
+  // ── AUTOMATION: script injection into popup ────────────────────────────────
 
   async function applySettings(cityName, profile) {
     const user = getU();
@@ -148,7 +148,6 @@
     const settingsUrl = `https://admin-panel.bolt.eu/delivery-courier/settings/city/${city.id}`;
     setCardState(cityName, 'working', `${PICON[profile]} Applying ${PF[profile]}...`);
 
-    // CRITICAL: open popup SYNCHRONOUSLY before any await
     if (!autoWin || autoWin.closed) {
       autoWin = window.open(settingsUrl, 'cops_auto', 'width=1300,height=900');
     } else {
@@ -164,54 +163,135 @@
     try {
       toast(`Fetching ${PF[profile]} settings for ${cityName}...`);
       const resp = await fetch(jsonUrl(cityName, profile));
-      if (!resp.ok) throw new Error('Failed to fetch settings from GitHub: HTTP ' + resp.status);
+      if (!resp.ok) throw new Error('GitHub fetch failed: HTTP ' + resp.status);
       const target = await resp.json();
 
-      toast('Waiting for admin panel to load...');
+      toast('Waiting for admin panel page to load...');
+      await waitForBody(autoWin, 15000);
+      injectBanner(autoWin, '\u23F3 COps: Waiting for JSON editor to load...');
+
       await waitForEditor(autoWin, 90000);
       await sleep(2000);
+      injectBanner(autoWin, '\u{1F527} COps: Running automation...');
 
-      toast('Switching to Code mode...');
-      try {
-        const mb = autoWin.document.querySelector('button.jsoneditor-modes');
-        if (mb) {
-          mb.click();
-          await sleep(500);
-          const items = autoWin.document.querySelectorAll('.jsoneditor-type-modes div, .jsoneditor-type-modes button');
-          for (const it of items) { if (it.textContent.trim() === 'Code') { it.click(); break; } }
-          await sleep(1000);
-        }
-      } catch(e) { throw new Error('Cannot switch to Code mode: ' + e.message); }
+      toast('Injecting automation into admin panel...');
+      autoWin.__copsTargetJSON = JSON.stringify(target);
 
-      toast('Reading current settings...');
-      let raw;
-      try {
-        raw = autoWin.ace.edit(autoWin.document.querySelector('.ace_editor')).getValue();
-      } catch(e) { throw new Error('Cannot read Ace editor: ' + e.message); }
-      const current = JSON.parse(raw);
+      const result = await runAutomationInPopup(autoWin);
+      if (!result.success) throw new Error(result.error || 'Unknown automation error');
 
-      toast(`Merging ${Object.keys(target).length} setting groups...`);
-      deepMerge(current, target);
-      autoWin.ace.edit(autoWin.document.querySelector('.ace_editor')).setValue(JSON.stringify(current, null, 2), -1);
-      await sleep(1000);
-
-      toast('Clicking Update...');
-      const clicked = autoWin.document.querySelectorAll('button');
-      let found = false;
-      for (const b of clicked) { if (b.textContent.trim() === 'Update') { b.click(); found = true; break; } }
-      if (!found) throw new Error('Update button not found on the page');
-
-      await sleep(3000);
       await setSt(cityName, profile, user);
       setCardState(cityName, 'success', `${PICON[profile]} ${PF[profile]} applied!`);
-      toast(`${cityName} \u2192 ${PF[profile]} applied by ${user.split('@')[0]}`, 'success');
+      toast(`\u2705 ${cityName} \u2192 ${PF[profile]} applied by ${user.split('@')[0]}`, 'success');
+
+      setTimeout(() => { try { autoWin.close(); } catch(e) {} }, 2000);
+      window.focus();
       renderAll();
     } catch(e) {
       setCardState(cityName, 'error', e.message);
       toast('ERROR: ' + e.message, 'error');
+      try { injectBanner(autoWin, '\u274C ERROR: ' + e.message, '#b91c1c'); } catch(x) {}
+      window.focus();
     } finally {
       busy = false;
     }
+  }
+
+  function waitForBody(win, timeout) {
+    return new Promise((resolve) => {
+      const deadline = Date.now() + timeout;
+      const iv = setInterval(() => {
+        try {
+          if (win.document && win.document.body) { clearInterval(iv); resolve(); return; }
+        } catch(e) { /* cross-origin during SSO redirect, keep polling */ }
+        if (Date.now() > deadline) { clearInterval(iv); resolve(); }
+      }, 200);
+    });
+  }
+
+  function injectBanner(win, text, bg) {
+    try {
+      let b = win.document.getElementById('cops-banner');
+      if (!b) {
+        b = win.document.createElement('div');
+        b.id = 'cops-banner';
+        b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999999;padding:18px 28px;font:700 18px/1.4 system-ui,sans-serif;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.6);transition:background .3s';
+        win.document.body.appendChild(b);
+      }
+      b.style.background = bg || '#1e40af';
+      b.textContent = text;
+    } catch(e) { /* couldn't inject, non-critical */ }
+  }
+
+  function runAutomationInPopup(win) {
+    return new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => {
+        window.removeEventListener('message', handler);
+        reject(new Error('Automation timed out (30s)'));
+      }, 30000);
+
+      const handler = function(e) {
+        if (e.data && e.data.type === 'cops-done') {
+          clearTimeout(timeout);
+          window.removeEventListener('message', handler);
+          resolve(e.data);
+        }
+      };
+      window.addEventListener('message', handler);
+
+      try {
+        const script = win.document.createElement('script');
+        script.textContent = [
+          '(async function(){',
+          '  var ban=document.getElementById("cops-banner");',
+          '  function p(t,bg){if(ban){ban.textContent=t;if(bg)ban.style.background=bg;}}',
+          '  try{',
+          '    p("\\u{1F504} Switching to Code mode...");',
+          '    var mb=document.querySelector("button.jsoneditor-modes");',
+          '    if(mb){',
+          '      mb.click();',
+          '      await new Promise(function(r){setTimeout(r,600)});',
+          '      var items=document.querySelectorAll(".jsoneditor-type-modes div,.jsoneditor-type-modes button");',
+          '      for(var i=0;i<items.length;i++){if(items[i].textContent.trim()==="Code"){items[i].click();break;}}',
+          '      await new Promise(function(r){setTimeout(r,1200)});',
+          '    }',
+          '    p("\\u{1F4D6} Reading current settings...");',
+          '    var aceEl=document.querySelector(".ace_editor");',
+          '    if(!aceEl)throw new Error("Ace editor element not found");',
+          '    if(typeof ace==="undefined")throw new Error("ace global not defined");',
+          '    var editor=ace.edit(aceEl);',
+          '    var raw=editor.getValue();',
+          '    if(!raw||raw.trim().length<10)throw new Error("Editor content empty or too short");',
+          '    var current=JSON.parse(raw);',
+          '    p("\\u{1F500} Merging settings...");',
+          '    var target=JSON.parse(window.__copsTargetJSON);',
+          '    function mg(d,s){for(var k in s){if(s.hasOwnProperty(k)){if(s[k]&&typeof s[k]==="object"&&!Array.isArray(s[k])){if(!d[k]||typeof d[k]!=="object")d[k]={};mg(d[k],s[k]);}else d[k]=s[k];}}}',
+          '    mg(current,target);',
+          '    p("\\u{1F4BE} Writing merged settings...");',
+          '    editor.setValue(JSON.stringify(current,null,2),-1);',
+          '    await new Promise(function(r){setTimeout(r,1000)});',
+          '    p("\\u{1F5B1} Clicking Update...");',
+          '    var btns=document.querySelectorAll("button");',
+          '    var found=false;',
+          '    for(var j=0;j<btns.length;j++){if(btns[j].textContent.trim()==="Update"){btns[j].click();found=true;break;}}',
+          '    if(!found)throw new Error("Update button not found");',
+          '    await new Promise(function(r){setTimeout(r,3000)});',
+          '    p("\\u2705 Settings updated successfully!","#047857");',
+          '    await new Promise(function(r){setTimeout(r,1000)});',
+          '    window.opener.postMessage({type:"cops-done",success:true},"*");',
+          '  }catch(e){',
+          '    p("\\u274C "+e.message,"#b91c1c");',
+          '    window.opener.postMessage({type:"cops-done",success:false,error:e.message||String(e)},"*");',
+          '  }',
+          '})();'
+        ].join('\n');
+        win.document.head.appendChild(script);
+      } catch(e) {
+        clearTimeout(timeout);
+        window.removeEventListener('message', handler);
+        reject(new Error('Could not inject script: ' + e.message));
+      }
+    });
   }
 
   function waitForEditor(win, timeout) {
@@ -219,7 +299,7 @@
       const deadline = Date.now() + timeout;
       const iv = setInterval(() => {
         try {
-          if (Date.now() > deadline) { clearInterval(iv); reject(new Error('Timeout waiting for editor')); return; }
+          if (Date.now() > deadline) { clearInterval(iv); reject(new Error('Timeout: editor did not load in 90s')); return; }
           if (win.closed) { clearInterval(iv); reject(new Error('Popup was closed')); return; }
           const ed = win.document.querySelector('.jsoneditor');
           if (ed) { clearInterval(iv); resolve(ed); }
@@ -234,83 +314,83 @@
 
   const css = document.createElement('style');
   css.textContent = `
-#cops-overlay{position:fixed;inset:0;z-index:999999;background:#06080d;overflow-y:auto;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#e2e5ea;font-size:15px;line-height:1.5}
+#cops-overlay{position:fixed;inset:0;z-index:999999;background:#06080d;overflow-y:auto;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#e2e5ea;font-size:16px;line-height:1.5}
 #cops-overlay *{box-sizing:border-box;margin:0;padding:0}
-.ch{background:linear-gradient(180deg,#0d1017 0%,#0a0d14 100%);border-bottom:1px solid #1a1f2e;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;flex-wrap:wrap;gap:12px;backdrop-filter:blur(12px)}
-.ch h1{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.4px}
-.ch .flag{font-size:24px;margin-right:8px}
-.ch .sub{font-size:12px;color:#6b7280;font-weight:500;margin-left:12px;letter-spacing:.5px;text-transform:uppercase}
-.chr{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.csel{background:#0d1017;border:1px solid #1e2536;border-radius:24px;padding:6px 16px;display:flex;align-items:center;gap:8px}
-.csel label{font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.6px;font-weight:600}
-.csel select,.csel input{background:none;border:none;color:#fff;font-size:14px;font-weight:600;outline:none}
+.ch{background:linear-gradient(180deg,#0d1017 0%,#0a0d14 100%);border-bottom:1px solid #1a1f2e;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;flex-wrap:wrap;gap:14px;backdrop-filter:blur(12px)}
+.ch h1{font-size:30px;font-weight:800;color:#fff;letter-spacing:-.5px}
+.ch .flag{font-size:38px;margin-right:10px}
+.ch .sub{font-size:13px;color:#6b7280;font-weight:500;margin-left:14px;letter-spacing:.5px;text-transform:uppercase}
+.chr{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.csel{background:#0d1017;border:1px solid #1e2536;border-radius:24px;padding:8px 18px;display:flex;align-items:center;gap:10px}
+.csel label{font-size:12px;color:#6b7280;text-transform:uppercase;letter-spacing:.6px;font-weight:600}
+.csel select,.csel input{background:none;border:none;color:#fff;font-size:15px;font-weight:600;outline:none}
 .csel select{cursor:pointer} .csel select option{background:#0d1017;color:#fff}
-.csel input{width:150px;font-family:monospace;font-size:12px}
+.csel input{width:160px;font-family:monospace;font-size:13px}
 .csel input::placeholder{color:#374151}
-.csel .tok{color:#10b981;font-size:14px;display:none}
+.csel .tok{color:#10b981;font-size:16px;display:none}
 .csel.v .tok{display:inline}
-.cbtn{background:none;border:1px solid #2d3548;border-radius:10px;color:#9ca3af;font-size:15px;padding:8px 18px;cursor:pointer;font-weight:600;transition:all .15s}
+.cbtn{background:none;border:1px solid #2d3548;border-radius:10px;color:#9ca3af;font-size:16px;padding:10px 22px;cursor:pointer;font-weight:600;transition:all .15s}
 .cbtn:hover{background:#111827;color:#fff;border-color:#4b5563}
-.cm{max-width:1600px;margin:0 auto;padding:24px 32px 50px}
-.cov{background:linear-gradient(135deg,#0d1017 0%,#111827 100%);border:1px solid #1e2536;border-radius:16px;padding:20px 24px;margin-bottom:20px}
-.cov h3{font-size:14px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.7px;margin-bottom:14px}
-.cpills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.cpill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:8px;background:#080b12;border:1px solid #1a1f2e;font-size:13px;transition:all .15s}
+.cm{padding:28px 40px 60px}
+.cov{background:linear-gradient(135deg,#0d1017 0%,#111827 100%);border:1px solid #1e2536;border-radius:18px;padding:24px 28px;margin-bottom:24px}
+.cov h3{font-size:16px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.7px;margin-bottom:16px}
+.cpills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.cpill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:#080b12;border:1px solid #1a1f2e;font-size:14px;transition:all .15s}
 .cpill:hover{border-color:#2d3548;background:#0d1017}
-.cpill .ico{font-size:16px}
-.cpill .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.cpill .dot.good{background:#10b981;box-shadow:0 0 8px #10b98155}.cpill .dot.bad{background:#f59e0b;box-shadow:0 0 8px #f59e0b55}.cpill .dot.harsh{background:#ef4444;box-shadow:0 0 8px #ef444455}.cpill .dot.none{background:#374151}
-.cpill .pn{font-weight:700;color:#fff;font-size:14px}
-.cpill .pp{font-weight:600;font-size:13px}
+.cpill .ico{font-size:28px}
+.cpill .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.cpill .dot.good{background:#10b981;box-shadow:0 0 10px #10b98155}.cpill .dot.bad{background:#f59e0b;box-shadow:0 0 10px #f59e0b55}.cpill .dot.harsh{background:#ef4444;box-shadow:0 0 10px #ef444455}.cpill .dot.none{background:#374151}
+.cpill .pn{font-weight:700;color:#fff;font-size:15px}
+.cpill .pp{font-weight:600;font-size:14px}
 .cpill .pp.good{color:#10b981}.cpill .pp.bad{color:#f59e0b}.cpill .pp.harsh{color:#ef4444}.cpill .pp.none{color:#6b7280}
-.cpill .pm{color:#6b7280;font-size:11px}
-.chist{background:#0d1017;border:1px solid #1e2536;border-radius:16px;padding:16px 20px;margin-bottom:20px}
-.chist h3{font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px;cursor:pointer;user-select:none}
-.chist-list{max-height:220px;overflow-y:auto}
-.chist-row{display:flex;align-items:center;gap:12px;padding:7px 0;border-bottom:1px solid #151b28;font-size:13px}
+.cpill .pm{color:#6b7280;font-size:12px}
+.chist{background:#0d1017;border:1px solid #1e2536;border-radius:18px;padding:20px 24px;margin-bottom:24px}
+.chist h3{font-size:15px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.7px;margin-bottom:12px;cursor:pointer;user-select:none}
+.chist-list{max-height:260px;overflow-y:auto}
+.chist-row{display:flex;align-items:center;gap:14px;padding:8px 0;border-bottom:1px solid #151b28;font-size:14px}
 .chist-row:last-child{border-bottom:none}
-.chist-row .hc{font-weight:700;color:#fff;min-width:130px;font-size:14px}
-.chist-row .hp{font-weight:600;min-width:100px}
+.chist-row .hc{font-weight:700;color:#fff;min-width:140px;font-size:15px}
+.chist-row .hp{font-weight:600;min-width:110px}
 .chist-row .hp.good{color:#10b981}.chist-row .hp.bad{color:#f59e0b}.chist-row .hp.harsh{color:#ef4444}
-.chist-row .hu{color:#3b82f6;font-weight:500;min-width:110px}
-.chist-row .ht{color:#6b7280;font-size:12px;font-family:monospace}
-.csearch{display:flex;align-items:center;gap:12px;margin-bottom:20px;background:#0d1017;border:1px solid #1e2536;border-radius:12px;padding:10px 18px}
-.csearch input{flex:1;background:none;border:none;color:#fff;font-size:15px;outline:none;font-weight:500}
+.chist-row .hu{color:#3b82f6;font-weight:500;min-width:120px}
+.chist-row .ht{color:#6b7280;font-size:13px;font-family:monospace}
+.csearch{display:flex;align-items:center;gap:14px;margin-bottom:24px;background:#0d1017;border:1px solid #1e2536;border-radius:14px;padding:12px 20px}
+.csearch input{flex:1;background:none;border:none;color:#fff;font-size:16px;outline:none;font-weight:500}
 .csearch input::placeholder{color:#374151}
-.csec{margin-bottom:20px;background:#0d1017;border:1px solid #1e2536;border-radius:16px;overflow:hidden}
-.csec-h{display:flex;align-items:center;gap:12px;padding:14px 20px;cursor:pointer;user-select:none;transition:background .15s}
+.csec{margin-bottom:24px;background:#0d1017;border:1px solid #1e2536;border-radius:18px;overflow:hidden}
+.csec-h{display:flex;align-items:center;gap:14px;padding:16px 24px;cursor:pointer;user-select:none;transition:background .15s}
 .csec-h:hover{background:#111827}
-.csec-h .chv{font-size:12px;color:#6b7280;transition:transform .2s;width:16px}
+.csec-h .chv{font-size:14px;color:#6b7280;transition:transform .2s;width:18px}
 .csec.closed .chv{transform:rotate(-90deg)}
-.csec-h h2{font-size:15px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px}
-.csec-h .cnt{font-size:12px;color:#6b7280;background:#080b12;padding:3px 10px;border-radius:12px;font-weight:700;margin-left:auto}
+.csec-h h2{font-size:18px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px}
+.csec-h .cnt{font-size:13px;color:#6b7280;background:#080b12;padding:4px 12px;border-radius:12px;font-weight:700;margin-left:auto}
 .csec.closed .csec-b{display:none}
-.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;padding:4px 20px 18px}
-.ccard{background:#080b12;border:1px solid #1a1f2e;border-radius:12px;padding:16px;transition:all .2s}
-.ccard:hover{border-color:#2d3548;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
-.ccard-top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.ccard .ico{font-size:24px}
-.ccard .cn{font-size:17px;font-weight:700;color:#fff}
-.ccard .cst{font-size:13px;color:#6b7280;margin-bottom:12px;min-height:22px;display:flex;align-items:center;gap:6px}
-.ccard .cst .dot{width:8px;height:8px;border-radius:50%}
-.ccard .cst .sp{font-weight:600;font-size:14px}.ccard .cst .sp.good{color:#10b981}.ccard .cst .sp.bad{color:#f59e0b}.ccard .cst .sp.harsh{color:#ef4444}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px;padding:6px 24px 22px}
+.ccard{background:#080b12;border:1px solid #1a1f2e;border-radius:14px;padding:22px 26px;transition:all .2s}
+.ccard:hover{border-color:#2d3548;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.ccard-top{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.ccard .ico{font-size:48px;line-height:1}
+.ccard .cn{font-size:22px;font-weight:700;color:#fff}
+.ccard .cst{font-size:14px;color:#6b7280;margin-bottom:14px;min-height:24px;display:flex;align-items:center;gap:8px}
+.ccard .cst .dot{width:10px;height:10px;border-radius:50%}
+.ccard .cst .sp{font-weight:600;font-size:15px}.ccard .cst .sp.good{color:#10b981}.ccard .cst .sp.bad{color:#f59e0b}.ccard .cst .sp.harsh{color:#ef4444}
 .ccard .cst .su{color:#3b82f6;font-weight:500}
-.cbtns{display:flex;gap:8px}
-.cb{flex:1;padding:11px 0;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;color:#fff;letter-spacing:.3px;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:6px}
+.cbtns{display:flex;gap:10px}
+.cb{flex:1;padding:14px 0;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;color:#fff;letter-spacing:.3px;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:7px}
 .cb:disabled{opacity:.3;cursor:not-allowed}
 .cb.good{background:linear-gradient(135deg,#059669,#10b981)}.cb.good:hover:not(:disabled){background:linear-gradient(135deg,#047857,#059669);transform:scale(1.03)}
 .cb.bad{background:linear-gradient(135deg,#d97706,#f59e0b);color:#1a1a2e}.cb.bad:hover:not(:disabled){background:linear-gradient(135deg,#b45309,#d97706);transform:scale(1.03)}
 .cb.harsh{background:linear-gradient(135deg,#dc2626,#ef4444)}.cb.harsh:hover:not(:disabled){background:linear-gradient(135deg,#b91c1c,#dc2626);transform:scale(1.03)}
 .cb.on{box-shadow:0 0 0 3px #fff;transform:scale(1.04)}
-.ccard .cprog{display:none;margin-top:10px;padding:8px 12px;border-radius:8px;font-size:13px;font-weight:600;text-align:center}
+.ccard .cprog{display:none;margin-top:12px;padding:10px 14px;border-radius:10px;font-size:14px;font-weight:600;text-align:center}
 .ccard.working .cprog{display:block;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);color:#60a5fa}
 .ccard.success .cprog{display:block;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:#34d399}
 .ccard.error .cprog{display:block;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#f87171}
-#cops-log{position:fixed;bottom:20px;right:20px;z-index:1000000;display:flex;flex-direction:column;gap:6px;max-width:450px}
-.tst{padding:12px 18px;border-radius:12px;font-size:14px;font-weight:600;animation:tsin .25s ease;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+#cops-log{position:fixed;bottom:24px;right:24px;z-index:1000000;display:flex;flex-direction:column;gap:8px;max-width:500px}
+.tst{padding:14px 20px;border-radius:14px;font-size:15px;font-weight:600;animation:tsin .25s ease;box-shadow:0 8px 30px rgba(0,0,0,.5)}
 .tst.info{background:#1e40af;color:#fff}.tst.success{background:#047857;color:#fff}.tst.error{background:#b91c1c;color:#fff}.tst.warn{background:#b45309;color:#fff}
 @keyframes tsin{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
-@media(max-width:700px){.cgrid{grid-template-columns:1fr}.ch{padding:12px 16px}.cm{padding:16px 16px 40px}}
+@media(max-width:700px){.cgrid{grid-template-columns:1fr}.ch{padding:14px 18px}.cm{padding:18px 18px 40px}}
 `;
   document.head.appendChild(css);
 
@@ -359,7 +439,7 @@
         if (s) tracked++;
         return `<span class="cpill"><span class="ico">${c.icon}</span><span class="dot ${prof}"></span><span class="pn">${cn}</span><span class="pp ${prof}">${lbl}</span>${meta}</span>`;
       }).join('');
-      return `<div style="margin-bottom:10px"><div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6b7280;margin-bottom:6px">${gn} \u00b7 ${gd.cs.length}</div><div class="cpills">${pills}</div></div>`;
+      return `<div style="margin-bottom:12px"><div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6b7280;margin-bottom:8px">${gn} \u00b7 ${gd.cs.length}</div><div class="cpills">${pills}</div></div>`;
     }).join('');
     const cnt = document.getElementById('c-cnt');
     if (cnt) cnt.textContent = tracked;
@@ -410,14 +490,14 @@
   <div class="chr">
     <div class="csel"><label>You</label><select onchange="localStorage.setItem('cops2_user',this.value)"><option value="">-- select --</option>${uOpts}</select></div>
     <div class="csel${pv?' v':''}" id="c-pat"><label>Token</label><input type="password" placeholder="ghp_..." value="${sp}" oninput="window.__sp(this.value)"><span class="tok">\u2713</span></div>
-    <div style="text-align:center"><div style="font-size:24px;font-weight:800;color:#fff" id="c-cnt">0</div><div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.8px;font-weight:600">Tracked</div></div>
+    <div style="text-align:center"><div style="font-size:28px;font-weight:800;color:#fff" id="c-cnt">0</div><div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.8px;font-weight:600">Tracked</div></div>
     <button class="cbtn" onclick="document.getElementById('cops-overlay').remove();document.getElementById('cops-log')?.remove()">Close</button>
   </div>
 </div>
 <div class="cm">
   <div class="cov" id="c-ov"></div>
   <div class="chist" id="c-hist" style="display:none"><h3 onclick="var l=document.getElementById('c-hist-list');l.style.display=l.style.display==='none'?'block':'none'">\u{1F4CB} Recent Changes \u25BE</h3><div class="chist-list" id="c-hist-list"></div></div>
-  <div class="csearch"><span style="font-size:18px">\u{1F50D}</span><input type="text" id="c-search" placeholder="Search cities..." oninput="window.__cf(this.value)"></div>
+  <div class="csearch"><span style="font-size:20px">\u{1F50D}</span><input type="text" id="c-search" placeholder="Search cities..." oninput="window.__cf(this.value)"></div>
   <div id="c-cities"></div>
 </div>`;
 
