@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Courier Ops — Ukraine Weather Settings</title>
+<title>Courier Ops — Ukraine Weather Control</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -17,21 +17,29 @@
 }
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;font-size:13px}
 
+/* Header */
 .hdr{background:var(--sf);border-bottom:1px solid var(--bd);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;flex-wrap:wrap;gap:10px}
 .hdr-l{display:flex;align-items:center;gap:14px}
 .hdr h1{font-size:16px;font-weight:700;color:var(--txb);letter-spacing:-.3px}
-.hdr .pipe{width:1px;height:20px;background:var(--bd2)}
+.pipe{width:1px;height:20px;background:var(--bd2)}
 .hdr .sub{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.8px;font-weight:500}
-.hdr-r{display:flex;align-items:center;gap:16px}
+.hdr-r{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .metric{text-align:center}
 .metric-v{font-size:18px;font-weight:700;color:var(--txb)}
 .metric-l{font-size:9px;color:var(--mu);text-transform:uppercase;letter-spacing:.6px;margin-top:1px}
+
+.user-sel{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--bd);border-radius:20px;padding:4px 12px}
+.user-sel label{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px}
+.user-sel input{background:none;border:none;color:var(--txb);font-size:12px;font-weight:600;width:120px;outline:none}
+.user-sel input::placeholder{color:var(--mu2)}
+
 .gh-link{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--acc);padding:5px 12px;background:var(--accBg);border-radius:20px;border:1px solid rgba(59,130,246,.15);text-decoration:none;transition:all .15s}
 .gh-link:hover{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.3)}
 .gh-link svg{width:14px;height:14px;fill:currentColor}
 
-.main{max-width:1440px;margin:0 auto;padding:20px 28px 40px}
+.main{max-width:1500px;margin:0 auto;padding:20px 28px 40px}
 
+/* Sections */
 .sec{margin-bottom:16px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r2);overflow:hidden}
 .sec-h{display:flex;align-items:center;gap:10px;padding:12px 18px;cursor:pointer;user-select:none;transition:background .15s}
 .sec-h:hover{background:var(--sf2)}
@@ -42,37 +50,78 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .sec-b{transition:max-height .35s ease,padding .2s ease;overflow:hidden;padding:0 18px 16px}
 .sec.closed .sec-b{max-height:0!important;padding-top:0;padding-bottom:0}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+/* Status Overview */
+.ov-group{margin-bottom:12px}
+.ov-group:last-child{margin-bottom:0}
+.ov-group-h{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--mu);margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid var(--bd)}
+.ov-pills{display:flex;flex-wrap:wrap;gap:5px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:6px;background:var(--bg);border:1px solid var(--bd);font-size:11px;transition:all .15s;cursor:default;min-width:0}
+.pill:hover{border-color:var(--bd2)}
+.pill .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.pill .dot.good{background:var(--good);box-shadow:0 0 6px rgba(16,185,129,.4)}
+.pill .dot.bad{background:var(--bad);box-shadow:0 0 6px rgba(245,158,11,.4)}
+.pill .dot.harsh{background:var(--harsh);box-shadow:0 0 6px rgba(239,68,68,.4)}
+.pill .dot.none{background:var(--mu2)}
+.pill .pn{font-weight:600;color:var(--txb);white-space:nowrap}
+.pill .pp{font-weight:500;white-space:nowrap}
+.pill .pp.good{color:var(--good)}.pill .pp.bad{color:var(--bad)}.pill .pp.harsh{color:var(--harsh)}.pill .pp.none{color:var(--mu)}
+.pill .pmeta{font-size:10px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
+.pill .puser{color:var(--acc);font-weight:500}
+
+/* City cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
 .card{background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:14px;transition:border-color .15s}
 .card:hover{border-color:var(--bd2)}
-.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
 .city-name{font-size:14px;font-weight:600;color:var(--txb)}
 .admin-link{font-size:10px;color:var(--acc);text-decoration:none;opacity:.6;transition:opacity .15s}
 .admin-link:hover{opacity:1}
-.profile-tabs{display:flex;gap:4px;margin-bottom:10px}
-.ptab{flex:1;padding:7px 0;border:1px solid var(--bd);border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;text-align:center;transition:all .12s;background:transparent;color:var(--mu)}
-.ptab:hover{border-color:var(--bd2);color:var(--tx)}
-.ptab.active.good{background:var(--goodBg);border-color:var(--good);color:var(--good)}
-.ptab.active.bad{background:var(--badBg);border-color:var(--bad);color:var(--bad)}
-.ptab.active.harsh{background:var(--harshBg);border-color:var(--harsh);color:var(--harsh)}
-.card-body{min-height:60px}
-.card-loading{display:flex;align-items:center;justify-content:center;padding:20px;color:var(--mu);font-size:11px}
-.card-loading .spinner{width:14px;height:14px;border:2px solid var(--bd2);border-top-color:var(--acc);border-radius:50%;animation:spin .7s linear infinite;margin-right:8px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.card-error{padding:10px;text-align:center;color:var(--harsh);font-size:11px}
+.card-status{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--mu);margin-bottom:10px;min-height:18px}
+.card-status .dot{width:6px;height:6px;border-radius:50%}
+.card-status .cs-profile{font-weight:500}
+.card-status .cs-profile.good{color:var(--good)}.card-status .cs-profile.bad{color:var(--bad)}.card-status .cs-profile.harsh{color:var(--harsh)}
+.card-status .cs-user{color:var(--acc)}
+.card-status .cs-time{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;font-size:9px}
 
-.kv-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.btns{display:flex;gap:6px}
+.b{flex:1;padding:9px 0;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:all .12s;color:#fff;letter-spacing:.2px;position:relative}
+.b:disabled{opacity:.35;cursor:not-allowed}
+.b.good{background:var(--good)}.b.good:hover:not(:disabled){background:var(--goodH)}
+.b.bad{background:var(--bad);color:#1a1a2e}.b.bad:hover:not(:disabled){background:var(--badH)}
+.b.harsh{background:var(--harsh)}.b.harsh:hover:not(:disabled){background:var(--harshH)}
+.b .sp{display:none;width:12px;height:12px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto}
+.b.ld .lb{display:none}.b.ld .sp{display:block}
+.b.active-prof{box-shadow:0 0 0 2px var(--txb);transform:scale(1.02)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Confirm bar */
+.confirm-bar{display:none;margin-top:8px;padding:8px;background:var(--sf);border:1px solid var(--acc);border-radius:6px;text-align:center}
+.confirm-bar.show{display:block}
+.confirm-bar p{font-size:11px;color:var(--tx);margin-bottom:6px}
+.confirm-bar code{display:block;font-size:10px;color:var(--mu);margin-bottom:8px;word-break:break-all;font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+.cb-btns{display:flex;gap:6px;justify-content:center}
+.cb{padding:6px 16px;border-radius:6px;border:none;font-size:11px;font-weight:600;cursor:pointer}
+.cb.ok{background:var(--acc);color:#fff}.cb.ok:hover{background:var(--accH)}
+.cb.cn{background:var(--bg);color:var(--tx);border:1px solid var(--bd)}.cb.cn:hover{background:var(--sf2)}
+.cb.cp{background:var(--sf2);color:var(--txb);border:1px solid var(--bd2)}.cb.cp:hover{background:var(--bd)}
+
+/* Key metrics */
+.kv-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
 .kv{background:var(--sf);border-radius:6px;padding:8px 10px}
 .kv-label{font-size:9px;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
-.kv-val{font-size:13px;font-weight:600;color:var(--txb);font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
-.kv.full{grid-column:1/-1}
-.kv-row{display:flex;gap:8px;flex-wrap:wrap}
+.kv-val{font-size:12px;font-weight:600;color:var(--txb);font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+.kv-row{display:flex;gap:6px;flex-wrap:wrap}
 .kv-chip{font-size:10px;padding:2px 6px;background:var(--bg);border:1px solid var(--bd);border-radius:4px;color:var(--tx)}
 .kv-chip b{color:var(--txb);margin-right:3px}
-
 .view-json-btn{display:block;width:100%;margin-top:8px;padding:6px;border:1px solid var(--bd);border-radius:6px;background:transparent;color:var(--mu);font-size:10px;cursor:pointer;transition:all .12s;text-align:center}
 .view-json-btn:hover{border-color:var(--bd2);color:var(--tx);background:var(--sf)}
 
+/* Search */
+.search-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:8px 14px}
+.search-bar input{flex:1;background:none;border:none;color:var(--txb);font-size:13px;outline:none}
+.search-bar input::placeholder{color:var(--mu2)}
+
+/* Modal */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;justify-content:center;align-items:center;backdrop-filter:blur(4px)}
 .overlay.open{display:flex}
 .modal{background:var(--sf);border:1px solid var(--bd2);border-radius:var(--r2);padding:0;max-width:800px;width:95%;max-height:85vh;display:flex;flex-direction:column}
@@ -80,41 +129,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .modal-hdr h3{font-size:14px;color:var(--txb)}
 .modal-close{background:none;border:none;color:var(--mu);font-size:18px;cursor:pointer;padding:4px 8px;border-radius:4px}
 .modal-close:hover{background:var(--bg);color:var(--tx)}
-.modal-body{overflow-y:auto;padding:16px 20px;flex:1}
-.modal-body pre{font-size:12px;line-height:1.6;color:var(--tx);font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word}
-.modal-body .json-key{color:var(--acc)}
-.modal-body .json-str{color:var(--good)}
-.modal-body .json-num{color:var(--bad)}
-.modal-body .json-bool{color:#c084fc}
-.modal-body .json-null{color:var(--mu)}
 .modal-tabs{display:flex;gap:4px;padding:12px 20px 0;flex-wrap:wrap}
 .modal-tab{padding:5px 14px;border:1px solid var(--bd);border-bottom:none;border-radius:6px 6px 0 0;background:transparent;color:var(--mu);font-size:11px;font-weight:600;cursor:pointer;transition:all .12s}
 .modal-tab.active{background:var(--sf2);color:var(--txb);border-color:var(--bd2)}
 .modal-tab.good.active{color:var(--good)}.modal-tab.bad.active{color:var(--bad)}.modal-tab.harsh.active{color:var(--harsh)}
+.modal-body{overflow-y:auto;padding:16px 20px;flex:1}
+.modal-body pre{font-size:12px;line-height:1.6;color:var(--tx);font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word}
+.json-key{color:var(--acc)}.json-str{color:var(--good)}.json-num{color:var(--bad)}.json-bool{color:#c084fc}.json-null{color:var(--mu)}
 
-.compare-grid{display:grid;gap:1px;background:var(--bd)}
-.compare-grid>div{background:var(--sf);padding:6px 10px;font-size:11px}
-.compare-hdr{font-weight:600;color:var(--txb);text-transform:uppercase;font-size:9px;letter-spacing:.4px;position:sticky;top:0;z-index:1;background:var(--sf2)!important}
-.compare-label{color:var(--mu);font-weight:500}
-.compare-val{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;color:var(--txb)}
-.compare-diff{background:rgba(245,158,11,.05)!important}
+/* Setup instructions */
+.setup-box{background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:14px;margin-bottom:10px}
+.setup-box h3{font-size:12px;color:var(--txb);margin-bottom:8px}
+.setup-box ol{padding-left:20px;font-size:12px;line-height:1.8;color:var(--tx)}
+.setup-box code{background:var(--sf2);padding:1px 5px;border-radius:3px;font-size:11px;color:var(--accH)}
+.setup-box .step-num{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--acc);color:#fff;font-size:10px;font-weight:700;margin-right:4px}
 
-.ov-pills{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:16px}
-.pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px 4px 8px;border-radius:6px;background:var(--bg);border:1px solid var(--bd);font-size:11px;cursor:pointer;transition:all .15s}
-.pill:hover{border-color:var(--bd2);background:var(--sf2)}
-.pill .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.pill .pn{font-weight:600;color:var(--txb)}
-
-.search-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:8px 14px}
-.search-bar input{flex:1;background:none;border:none;color:var(--txb);font-size:13px;outline:none}
-.search-bar input::placeholder{color:var(--mu2)}
-.search-icon{color:var(--mu);font-size:14px}
+/* Toasts */
+.toasts{position:fixed;bottom:16px;right:16px;z-index:200;display:flex;flex-direction:column;gap:6px}
+.toast{padding:10px 16px;border-radius:8px;font-size:12px;font-weight:500;animation:si .2s ease;max-width:400px;box-shadow:0 4px 20px rgba(0,0,0,.4);display:flex;align-items:flex-start;gap:8px}
+.toast.success{background:var(--good);color:#fff}
+.toast.error{background:var(--harsh);color:#fff}
+.toast.info{background:var(--acc);color:#fff}
+.toast.warn{background:var(--bad);color:#1a1a2e}
+.toast .tmsg{flex:1}
+@keyframes si{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
 
 @media(max-width:640px){
   .hdr{padding:10px 16px}
   .main{padding:12px 16px 30px}
   .grid{grid-template-columns:1fr}
   .kv-grid{grid-template-columns:1fr}
+  .hdr-r{width:100%;justify-content:space-between}
 }
 </style>
 </head>
@@ -124,11 +169,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
   <div class="hdr-l">
     <h1>Courier Ops</h1>
     <div class="pipe"></div>
-    <span class="sub">Ukraine Weather Settings</span>
+    <span class="sub">Ukraine Weather Control</span>
   </div>
   <div class="hdr-r">
+    <div class="user-sel">
+      <label>You:</label>
+      <input type="text" id="userName" placeholder="Your name" oninput="saveUserName(this.value)">
+    </div>
     <div class="metric"><div class="metric-v" id="hCities">37</div><div class="metric-l">Cities</div></div>
-    <div class="metric"><div class="metric-v" id="hProfiles">0</div><div class="metric-l">Configs</div></div>
+    <div class="metric"><div class="metric-v" id="hTracked">0</div><div class="metric-l">Tracked</div></div>
     <a class="gh-link" href="https://github.com/tarasstomin-ua/COps-work-automatization" target="_blank">
       <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
       Repo
@@ -137,10 +186,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 </div>
 
 <div class="main">
+  <div class="sec" id="sec-overview">
+    <div class="sec-h" onclick="toggleSec('sec-overview')">
+      <span class="chv">&#9662;</span>
+      <h2>Active Weather Status</h2>
+      <span class="cnt" id="ov-cnt">0 tracked</span>
+    </div>
+    <div class="sec-b" style="max-height:800px" id="overview-body"></div>
+  </div>
+
+  <div class="sec closed" id="sec-howto">
+    <div class="sec-h" onclick="toggleSec('sec-howto')">
+      <span class="chv">&#9662;</span>
+      <h2>How to Apply Settings</h2>
+    </div>
+    <div class="sec-b" style="max-height:800px">
+      <div class="setup-box">
+        <h3>Quick Apply — 3 steps</h3>
+        <ol>
+          <li><span class="step-num">1</span> Click an <strong>Apply</strong> button below — admin panel opens in a new tab, and the automation script is <strong>copied to your clipboard</strong></li>
+          <li><span class="step-num">2</span> On the admin panel page, press <code>F12</code> → click <code>Console</code> tab → press <code>Ctrl+V</code> (paste) → press <code>Enter</code></li>
+          <li><span class="step-num">3</span> The script automatically loads target settings from GitHub, merges them, and clicks <strong>Update</strong>. Come back here and click <strong>Confirm Applied</strong></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
   <div class="search-bar">
-    <span class="search-icon">&#128269;</span>
+    <span style="color:var(--mu);font-size:14px">&#128269;</span>
     <input type="text" id="searchInput" placeholder="Search cities..." oninput="filterCities(this.value)">
   </div>
+
   <div id="city-sections"></div>
 </div>
 
@@ -154,279 +230,390 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
     <div class="modal-body"><pre id="modalJson"></pre></div>
   </div>
 </div>
+<div class="toasts" id="ts"></div>
 
 <script>
 const REPO_RAW = 'https://raw.githubusercontent.com/tarasstomin-ua/COps-work-automatization/main/Bad%20weather%20settings';
+const STATUS_URL = 'https://raw.githubusercontent.com/tarasstomin-ua/COps-work-automatization/main/status.json';
 
 const CITIES = {
-  "Kyiv": { group: "TOP cities", order: 0, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/158", base: "Kyiv", profiles: ["good","bad","harsh"], jsonName: "Kyiv" },
-  "Lviv": { group: "TOP cities", order: 0, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/496", base: "Lviv", profiles: ["good","bad","harsh"], jsonName: "Lviv" },
-  "Dnipro": { group: "TOP cities", order: 0, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/499", base: "Dnipro", profiles: ["good","bad","harsh"], jsonName: "Dnipro" },
-  "Kharkiv": { group: "TOP cities", order: 0, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/491", base: "Kharkiv", profiles: ["good","bad","harsh"], jsonName: "Kharkiv" },
-  "Vinnytsia": { group: "TOP cities", order: 0, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/501", base: "Vinnytsia", profiles: ["good","bad","harsh"], jsonName: "Vinnytsia" },
-  "Odesa": { group: "Tier 2", order: 1, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/498", base: "Secondary%20cities/Tier2%20cities/Odesa", profiles: ["good","harsh"], jsonName: "Odesa" },
-  "Kryvyi Rih": { group: "Tier 2", order: 1, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/504", base: "Secondary%20cities/Tier2%20cities/Kryvyi%20Rih", profiles: ["good","harsh"], jsonName: "Kryvyi Rih" },
-  "Poltava": { group: "Tier 2", order: 1, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/506", base: "Secondary%20cities/Tier2%20cities/Poltava", profiles: ["good","harsh"], jsonName: "Poltava" },
-  "Ivano-Frankivsk": { group: "Tier 2", order: 1, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/990", base: "Secondary%20cities/Tier2%20cities/Ivano-Frankivsk", profiles: ["good","harsh"], jsonName: "Ivano-Frankivsk" },
-  "Chernivtsi": { group: "Tier 2", order: 1, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1084", base: "Secondary%20cities/Tier2%20cities/Chernivtsi", profiles: ["good","harsh"], jsonName: "Chernivtsi" },
-  "Irpin": { group: "Tier 2", order: 1, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1261", base: "Secondary%20cities/Tier2%20cities/Irpin", profiles: ["good","harsh"], jsonName: "Irpin" },
-  "Cherkasy": { group: "Tier 2", order: 1, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1087", base: "Secondary%20cities/Tier2%20cities/Cherkasy", profiles: ["good","harsh"], jsonName: "Cherkasy" },
-  "Zaporizhia": { group: "Tier 3", order: 2, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/500", base: "Secondary%20cities/Tier3%20cities/Zaporizhia", profiles: ["good","harsh"], jsonName: "Zaporizhia" },
-  "Bila Tserkva": { group: "Tier 3", order: 2, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1079", base: "Secondary%20cities/Tier3%20cities/Bila%20Tserkva", profiles: ["good","harsh"], jsonName: "Bila Tserkva" },
-  "Khmelnytskyi": { group: "Tier 3", order: 2, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1081", base: "Secondary%20cities/Tier3%20cities/Khmelnytskyi", profiles: ["good","harsh"], jsonName: "Khmelnytskyi" },
-  "Rivne": { group: "Tier 3", order: 2, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1086", base: "Secondary%20cities/Tier3%20cities/Rivne", profiles: ["good","harsh"], jsonName: "Rivne" },
-  "Uzhhorod": { group: "Tier 3", order: 2, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1131", base: "Secondary%20cities/Tier3%20cities/Uzhhorod", profiles: ["good","harsh"], jsonName: "Uzhhorod" },
-  "Brovary": { group: "Tier 3", order: 2, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1259", base: "Secondary%20cities/Tier3%20cities/Brovary", profiles: ["good","harsh"], jsonName: "Brovary" },
-  "Zhytomyr": { group: "Tier 3", order: 2, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1083", base: "Secondary%20cities/Tier3%20cities/Zhytomyr", profiles: ["good","harsh"], jsonName: "Zhytomyr" },
-  "Mykolaiv": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/503", base: "Secondary%20cities/Rest%20of%20the%20cities/Mykolaiv", profiles: ["good","harsh"], jsonName: "Mykolaiv" },
-  "Chernihiv": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1076", base: "Secondary%20cities/Rest%20of%20the%20cities/Chenihiv", profiles: ["good","harsh"], jsonName: "Chernihiv" },
-  "Sumy": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1078", base: "Secondary%20cities/Rest%20of%20the%20cities/Sumy", profiles: ["good","harsh"], jsonName: "Sumy" },
-  "Ternopil": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1080", base: "Secondary%20cities/Rest%20of%20the%20cities/Ternopil", profiles: ["good","harsh"], jsonName: "Ternopil" },
-  "Lutsk": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1082", base: "Secondary%20cities/Rest%20of%20the%20cities/Lutsk", profiles: ["good","harsh"], jsonName: "Lutsk" },
-  "Kropyvnytskyi": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1085", base: "Secondary%20cities/Rest%20of%20the%20cities/Kropyvnytskyi", profiles: ["good","harsh"], jsonName: "Kropyvnytskyi" },
-  "Kremenchuk": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1088", base: "Secondary%20cities/Rest%20of%20the%20cities/Kremenchuk", profiles: ["good","harsh"], jsonName: "Kremenchuk" },
-  "Kamianets-Podilskyi": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1132", base: "Secondary%20cities/Rest%20of%20the%20cities/Kamianets-Podilskyi", profiles: ["good","harsh"], jsonName: "Kamianets-Podilskyi" },
-  "Pavlohrad": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1176", base: "Secondary%20cities/Rest%20of%20the%20cities/Pavlohrad", profiles: ["good","harsh"], jsonName: "Pavlohrad" },
-  "Kamianske": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1178", base: "Secondary%20cities/Rest%20of%20the%20cities/Kamianske", profiles: ["good","harsh"], jsonName: "Kamianske" },
-  "Mukachevo": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1179", base: "Secondary%20cities/Rest%20of%20the%20cities/Mukachevo", profiles: ["good","harsh"], jsonName: "Mukachevo" },
-  "Boryspil": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1220", base: "Secondary%20cities/Rest%20of%20the%20cities/Boryspil", profiles: ["good","harsh"], jsonName: "Boryspil" },
-  "Vyshhorod": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1262", base: "Secondary%20cities/Rest%20of%20the%20cities/Vyshhorod", profiles: ["good","harsh"], jsonName: "Vyshhorod" },
-  "Drohobych": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1348", base: "Secondary%20cities/Rest%20of%20the%20cities/Drohobych", profiles: ["good","harsh"], jsonName: "Drohobych" },
-  "Truskavets": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/1357", base: "Secondary%20cities/Rest%20of%20the%20cities/Truskavets", profiles: ["good","harsh"], jsonName: "Truskavets" },
-  "Kovel": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/2170", base: "Secondary%20cities/Rest%20of%20the%20cities/Kovel", profiles: ["good","harsh"], jsonName: "Kovel" },
-  "Oleksandriia": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/2171", base: "Secondary%20cities/Rest%20of%20the%20cities/Oleksandriia", profiles: ["good","harsh"], jsonName: "Oleksandriia" },
-  "Kolomyia": { group: "Rest of cities", order: 3, url: "https://admin-panel.bolt.eu/delivery-courier/settings/city/2499", base: "Secondary%20cities/Rest%20of%20the%20cities/Kolomyia", profiles: ["good","harsh"], jsonName: "Kolomyia" }
+  "Kyiv":{"group":"TOP cities","order":0,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/158","base":"Kyiv","profiles":["good","bad","harsh"],"jsonName":"Kyiv"},
+  "Lviv":{"group":"TOP cities","order":0,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/496","base":"Lviv","profiles":["good","bad","harsh"],"jsonName":"Lviv"},
+  "Dnipro":{"group":"TOP cities","order":0,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/499","base":"Dnipro","profiles":["good","bad","harsh"],"jsonName":"Dnipro"},
+  "Kharkiv":{"group":"TOP cities","order":0,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/491","base":"Kharkiv","profiles":["good","bad","harsh"],"jsonName":"Kharkiv"},
+  "Vinnytsia":{"group":"TOP cities","order":0,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/501","base":"Vinnytsia","profiles":["good","bad","harsh"],"jsonName":"Vinnytsia"},
+  "Odesa":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/498","base":"Secondary%20cities/Tier2%20cities/Odesa","profiles":["good","harsh"],"jsonName":"Odesa"},
+  "Kryvyi Rih":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/504","base":"Secondary%20cities/Tier2%20cities/Kryvyi%20Rih","profiles":["good","harsh"],"jsonName":"Kryvyi Rih"},
+  "Poltava":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/506","base":"Secondary%20cities/Tier2%20cities/Poltava","profiles":["good","harsh"],"jsonName":"Poltava"},
+  "Ivano-Frankivsk":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/990","base":"Secondary%20cities/Tier2%20cities/Ivano-Frankivsk","profiles":["good","harsh"],"jsonName":"Ivano-Frankivsk"},
+  "Chernivtsi":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1084","base":"Secondary%20cities/Tier2%20cities/Chernivtsi","profiles":["good","harsh"],"jsonName":"Chernivtsi"},
+  "Irpin":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1261","base":"Secondary%20cities/Tier2%20cities/Irpin","profiles":["good","harsh"],"jsonName":"Irpin"},
+  "Cherkasy":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1087","base":"Secondary%20cities/Tier2%20cities/Cherkasy","profiles":["good","harsh"],"jsonName":"Cherkasy"},
+  "Zaporizhia":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/500","base":"Secondary%20cities/Tier3%20cities/Zaporizhia","profiles":["good","harsh"],"jsonName":"Zaporizhia"},
+  "Bila Tserkva":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1079","base":"Secondary%20cities/Tier3%20cities/Bila%20Tserkva","profiles":["good","harsh"],"jsonName":"Bila Tserkva"},
+  "Khmelnytskyi":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1081","base":"Secondary%20cities/Tier3%20cities/Khmelnytskyi","profiles":["good","harsh"],"jsonName":"Khmelnytskyi"},
+  "Rivne":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1086","base":"Secondary%20cities/Tier3%20cities/Rivne","profiles":["good","harsh"],"jsonName":"Rivne"},
+  "Uzhhorod":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1131","base":"Secondary%20cities/Tier3%20cities/Uzhhorod","profiles":["good","harsh"],"jsonName":"Uzhhorod"},
+  "Brovary":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1259","base":"Secondary%20cities/Tier3%20cities/Brovary","profiles":["good","harsh"],"jsonName":"Brovary"},
+  "Zhytomyr":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1083","base":"Secondary%20cities/Tier3%20cities/Zhytomyr","profiles":["good","harsh"],"jsonName":"Zhytomyr"},
+  "Mykolaiv":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/503","base":"Secondary%20cities/Rest%20of%20the%20cities/Mykolaiv","profiles":["good","harsh"],"jsonName":"Mykolaiv"},
+  "Chernihiv":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1076","base":"Secondary%20cities/Rest%20of%20the%20cities/Chenihiv","profiles":["good","harsh"],"jsonName":"Chernihiv"},
+  "Sumy":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1078","base":"Secondary%20cities/Rest%20of%20the%20cities/Sumy","profiles":["good","harsh"],"jsonName":"Sumy"},
+  "Ternopil":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1080","base":"Secondary%20cities/Rest%20of%20the%20cities/Ternopil","profiles":["good","harsh"],"jsonName":"Ternopil"},
+  "Lutsk":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1082","base":"Secondary%20cities/Rest%20of%20the%20cities/Lutsk","profiles":["good","harsh"],"jsonName":"Lutsk"},
+  "Kropyvnytskyi":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1085","base":"Secondary%20cities/Rest%20of%20the%20cities/Kropyvnytskyi","profiles":["good","harsh"],"jsonName":"Kropyvnytskyi"},
+  "Kremenchuk":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1088","base":"Secondary%20cities/Rest%20of%20the%20cities/Kremenchuk","profiles":["good","harsh"],"jsonName":"Kremenchuk"},
+  "Kamianets-Podilskyi":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1132","base":"Secondary%20cities/Rest%20of%20the%20cities/Kamianets-Podilskyi","profiles":["good","harsh"],"jsonName":"Kamianets-Podilskyi"},
+  "Pavlohrad":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1176","base":"Secondary%20cities/Rest%20of%20the%20cities/Pavlohrad","profiles":["good","harsh"],"jsonName":"Pavlohrad"},
+  "Kamianske":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1178","base":"Secondary%20cities/Rest%20of%20the%20cities/Kamianske","profiles":["good","harsh"],"jsonName":"Kamianske"},
+  "Mukachevo":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1179","base":"Secondary%20cities/Rest%20of%20the%20cities/Mukachevo","profiles":["good","harsh"],"jsonName":"Mukachevo"},
+  "Boryspil":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1220","base":"Secondary%20cities/Rest%20of%20the%20cities/Boryspil","profiles":["good","harsh"],"jsonName":"Boryspil"},
+  "Vyshhorod":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1262","base":"Secondary%20cities/Rest%20of%20the%20cities/Vyshhorod","profiles":["good","harsh"],"jsonName":"Vyshhorod"},
+  "Drohobych":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1348","base":"Secondary%20cities/Rest%20of%20the%20cities/Drohobych","profiles":["good","harsh"],"jsonName":"Drohobych"},
+  "Truskavets":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1357","base":"Secondary%20cities/Rest%20of%20the%20cities/Truskavets","profiles":["good","harsh"],"jsonName":"Truskavets"},
+  "Kovel":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/2170","base":"Secondary%20cities/Rest%20of%20the%20cities/Kovel","profiles":["good","harsh"],"jsonName":"Kovel"},
+  "Oleksandriia":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/2171","base":"Secondary%20cities/Rest%20of%20the%20cities/Oleksandriia","profiles":["good","harsh"],"jsonName":"Oleksandriia"},
+  "Kolomyia":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/2499","base":"Secondary%20cities/Rest%20of%20the%20cities/Kolomyia","profiles":["good","harsh"],"jsonName":"Kolomyia"}
 };
 
 const PROFILE_META = {
-  good:  { folder: "Good%20weather",  prefix: "Good%20Weather%20Settings"  },
-  bad:   { folder: "Bad%20weather",   prefix: "Bad%20Weather%20Settings"   },
-  harsh: { folder: "Harsh%20weather", prefix: "Harsh%20Weather%20Settings" }
+  good:  {folder:"Good%20weather",  prefix:"Good%20Weather%20Settings"},
+  bad:   {folder:"Bad%20weather",   prefix:"Bad%20Weather%20Settings"},
+  harsh: {folder:"Harsh%20weather", prefix:"Harsh%20Weather%20Settings"}
 };
 
-const PROFILE_LABELS = { good: "Good", bad: "Bad", harsh: "Harsh" };
-const PROFILE_LABELS_FULL = { good: "Good Weather", bad: "Bad Weather", harsh: "Harsh Weather" };
+const P_LABELS = {good:"Good",bad:"Bad",harsh:"Harsh"};
+const P_FULL = {good:"Good Weather",bad:"Bad Weather",harsh:"Harsh Weather"};
 
-const cache = {};
+// ── Status management ────────────────────────────────────────────────────────
+const LS_STATUS = 'cops_weather_status';
+const LS_USER = 'cops_user_name';
 
-function jsonUrl(cityName) {
-  const c = CITIES[cityName];
-  return function(profile) {
-    const m = PROFILE_META[profile];
-    return `${REPO_RAW}/${c.base}/${m.folder}/${m.prefix}%20${encodeURIComponent(c.jsonName)}.json`;
-  };
+function loadStatus() {
+  try { return JSON.parse(localStorage.getItem(LS_STATUS)) || {}; } catch(e) { return {}; }
+}
+function saveStatus(status) {
+  localStorage.setItem(LS_STATUS, JSON.stringify(status));
+}
+function setStatus(city, profile, user) {
+  const status = loadStatus();
+  status[city] = {profile, user: user || 'Unknown', timestamp: new Date().toISOString()};
+  if (!status._history) status._history = [];
+  status._history.unshift({city, profile, user: user || 'Unknown', timestamp: new Date().toISOString()});
+  if (status._history.length > 200) status._history = status._history.slice(0, 200);
+  saveStatus(status);
+}
+function getUserName() {
+  return document.getElementById('userName').value || localStorage.getItem(LS_USER) || '';
+}
+function saveUserName(v) {
+  localStorage.setItem(LS_USER, v);
 }
 
-async function fetchSettings(cityName, profile) {
-  const key = cityName + ':' + profile;
-  if (cache[key]) return cache[key];
-  const url = jsonUrl(cityName)(profile);
+// ── Fetch shared status from repo ────────────────────────────────────────────
+let sharedStatus = {};
+async function fetchSharedStatus() {
   try {
-    const r = await fetch(url);
-    if (!r.ok) throw new Error(r.status);
-    const data = await r.json();
-    cache[key] = data;
-    return data;
-  } catch(e) {
-    return null;
-  }
-}
-
-function extractKeyMetrics(data) {
-  if (!data) return null;
-  const ms = data.matching_settings || {};
-  const dist = ms.matching_distance_limit_km || {};
-  const dur = ms.target_order_duration_seconds || {};
-  const batch = (data.batching || {}).food || {};
-  const dm = data.dynamic_multiplier || {};
-  const df = dm.delivery_fee || {};
-  const ce = dm.courier_earning || {};
-  const eta = data.eta_settings || {};
-  const avail = data.availability || {};
-  const rs = avail.radius_shrinkage || {};
-  return {
-    dist_bicycle: dist.bicycle, dist_car: dist.car, dist_moto: dist.motorbike, dist_ped: dist.pedestrian,
-    dur_bicycle: dur.bicycle, dur_car: dur.car, dur_moto: dur.motorbike, dur_ped: dur.pedestrian,
-    batch_enabled: batch.is_enabled, batch_max: batch.max_batch_size,
-    batch_min_delay: batch.min_delay_seconds, batch_max_delay: batch.max_delay_seconds,
-    df_enabled: df.is_enabled, df_min_br: df.min_busy_ratio, df_max_br: df.max_busy_ratio,
-    df_min_mult: df.min_multiplier, df_max_mult: df.max_multiplier,
-    ce_enabled: ce.is_enabled,
-    eta_arrive_before: eta.arrive_before_order_is_ready_seconds,
-    rs_max_ratio: rs.ratio_where_radius_is_maximum, rs_min_ratio: rs.ratio_where_radius_is_minimum,
-    parallel_max_dist: ((ms.parallel || {}).food || {}).max_distance_courier_to_provider_km,
-    parallel_max_delay: ((ms.parallel || {}).food || {}).matching_maximum_delay_seconds
-  };
-}
-
-function renderMetrics(m) {
-  if (!m) return '<div class="card-error">Failed to load settings</div>';
-  return `
-    <div class="kv-grid">
-      <div class="kv"><div class="kv-label">Matching distance (km)</div><div class="kv-row">
-        <span class="kv-chip"><b>Ped</b>${m.dist_ped ?? '—'}</span>
-        <span class="kv-chip"><b>Bike</b>${m.dist_bicycle ?? '—'}</span>
-        <span class="kv-chip"><b>Moto</b>${m.dist_moto ?? '—'}</span>
-        <span class="kv-chip"><b>Car</b>${m.dist_car ?? '—'}</span>
-      </div></div>
-      <div class="kv"><div class="kv-label">Target duration (sec)</div><div class="kv-row">
-        <span class="kv-chip"><b>Ped</b>${m.dur_ped ?? '—'}</span>
-        <span class="kv-chip"><b>Bike</b>${m.dur_bicycle ?? '—'}</span>
-        <span class="kv-chip"><b>Moto</b>${m.dur_moto ?? '—'}</span>
-        <span class="kv-chip"><b>Car</b>${m.dur_car ?? '—'}</span>
-      </div></div>
-      <div class="kv"><div class="kv-label">Batching</div><div class="kv-val">${m.batch_enabled ? 'ON' : 'OFF'} &middot; max ${m.batch_max ?? '—'} &middot; ${m.batch_min_delay ?? '—'}–${m.batch_max_delay ?? '—'}s</div></div>
-      <div class="kv"><div class="kv-label">Delivery fee surge</div><div class="kv-val">${m.df_enabled ? 'ON' : 'OFF'} &middot; BR ${m.df_min_br ?? '—'}–${m.df_max_br ?? '—'} &middot; ×${m.df_min_mult ?? '—'}–${m.df_max_mult ?? '—'}</div></div>
-      <div class="kv"><div class="kv-label">ETA arrive before</div><div class="kv-val">${m.eta_arrive_before ?? '—'}s</div></div>
-      <div class="kv"><div class="kv-label">Radius shrinkage</div><div class="kv-val">${m.rs_max_ratio ?? '—'} → ${m.rs_min_ratio ?? '—'}</div></div>
-    </div>`;
-}
-
-function syntaxHighlight(json) {
-  const str = JSON.stringify(json, null, 2);
-  return str.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?|null)/g, function(match) {
-    let cls = 'json-num';
-    if (/^"/.test(match)) {
-      cls = /:$/.test(match) ? 'json-key' : 'json-str';
-    } else if (/true|false/.test(match)) {
-      cls = 'json-bool';
-    } else if (/null/.test(match)) {
-      cls = 'json-null';
+    const r = await fetch(STATUS_URL + '?t=' + Date.now());
+    if (r.ok) {
+      sharedStatus = await r.json();
     }
-    return '<span class="' + cls + '">' + match + '</span>';
-  });
+  } catch(e) {}
 }
 
-function toggleSec(id) { document.getElementById(id).classList.toggle('closed'); }
+function getMergedStatus() {
+  const local = loadStatus();
+  const merged = {};
+  for (const city of Object.keys(CITIES)) {
+    const s = sharedStatus.cities?.[city];
+    const l = local[city];
+    if (s && l) {
+      merged[city] = new Date(l.timestamp) > new Date(s.timestamp) ? l : s;
+    } else {
+      merged[city] = l || s || null;
+    }
+  }
+  return merged;
+}
 
-function cardId(name) { return 'card-' + name.replace(/[^a-zA-Z0-9]/g, '_'); }
+// ── JSON URL builder ─────────────────────────────────────────────────────────
+function getJsonUrl(cityName, profile) {
+  const c = CITIES[cityName], m = PROFILE_META[profile];
+  return `${REPO_RAW}/${c.base}/${m.folder}/${m.prefix}%20${encodeURIComponent(c.jsonName)}.json`;
+}
 
-async function selectProfile(cityName, profile) {
-  const card = document.getElementById(cardId(cityName));
-  if (!card) return;
-  card.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
-  const tab = card.querySelector(`.ptab[data-prof="${profile}"]`);
-  if (tab) tab.classList.add('active');
+// ── Generate automation script ───────────────────────────────────────────────
+function generateScript(cityName, profile) {
+  const url = getJsonUrl(cityName, profile);
+  return `(async()=>{try{` +
+    `console.log('COps: Applying ${P_FULL[profile]} to ${cityName}...');` +
+    `const mb=document.querySelector('button.jsoneditor-modes');` +
+    `if(mb){mb.click();await new Promise(r=>setTimeout(r,400));` +
+    `const cm=[...document.querySelectorAll('.jsoneditor-type-modes div')].find(d=>d.textContent.trim()==='Code');` +
+    `if(cm){cm.click();await new Promise(r=>setTimeout(r,800));}` +
+    `else{const cm2=[...document.querySelectorAll('.jsoneditor-type-modes button')].find(d=>d.textContent.trim()==='Code');if(cm2){cm2.click();await new Promise(r=>setTimeout(r,800))}}}` +
+    `const ed=ace.edit(document.querySelector('.ace_editor'));` +
+    `const cur=JSON.parse(ed.getValue());` +
+    `console.log('Current settings read from editor');` +
+    `const r=await fetch('${url}');` +
+    `if(!r.ok)throw new Error('Failed to fetch: HTTP '+r.status);` +
+    `const tgt=await r.json();` +
+    `console.log('Target settings fetched from GitHub');` +
+    `function mg(t,s){for(const k of Object.keys(s)){` +
+    `if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])){` +
+    `if(!t[k]||typeof t[k]!=='object')t[k]={};mg(t[k],s[k]);}` +
+    `else{t[k]=s[k];}}return t;}` +
+    `mg(cur,tgt);` +
+    `ed.setValue(JSON.stringify(cur,null,2),-1);` +
+    `console.log('Settings merged and applied to editor');` +
+    `await new Promise(r=>setTimeout(r,500));` +
+    `const btn=[...document.querySelectorAll('button')].find(b=>b.textContent.trim()==='Update');` +
+    `if(btn){btn.click();console.log('Update clicked - ${cityName} ${P_FULL[profile]} applied!');}` +
+    `else{console.warn('Update button not found - please click it manually');}` +
+    `}catch(e){console.error('COps Error:',e.message);alert('COps Error: '+e.message)}})()`;
+}
 
-  const body = card.querySelector('.card-body');
-  body.innerHTML = '<div class="card-loading"><div class="spinner"></div>Loading settings...</div>';
+// ── Apply flow ───────────────────────────────────────────────────────────────
+async function applySettings(cityName, profile) {
+  const user = getUserName();
+  if (!user) {
+    toast('Please enter your name in the header first', 'warn');
+    document.getElementById('userName').focus();
+    return;
+  }
 
-  const data = await fetchSettings(cityName, profile);
-  const metrics = extractKeyMetrics(data);
-  body.innerHTML = renderMetrics(metrics);
+  const city = CITIES[cityName];
+  const script = generateScript(cityName, profile);
 
-  if (data) {
-    body.innerHTML += `<button class="view-json-btn" onclick="openModal('${cityName}','${profile}')">View full JSON</button>`;
+  try {
+    await navigator.clipboard.writeText(script);
+  } catch(e) {
+    toast('Could not copy to clipboard — see confirm bar below', 'error');
+  }
+
+  window.open(city.url, '_blank');
+
+  const cid = cardId(cityName);
+  const bar = document.querySelector(`#${cid} .confirm-bar`);
+  if (bar) {
+    bar.classList.add('show');
+    bar.dataset.city = cityName;
+    bar.dataset.profile = profile;
+    bar.querySelector('.cb-step').textContent = `${P_FULL[profile]} → ${cityName}`;
+  }
+
+  toast(`Admin panel opened for ${cityName}. Script copied — paste in Console (F12 → Console → Ctrl+V → Enter)`, 'info', 8000);
+}
+
+function confirmApplied(btn) {
+  const bar = btn.closest('.confirm-bar');
+  const city = bar.dataset.city;
+  const profile = bar.dataset.profile;
+  const user = getUserName();
+  setStatus(city, profile, user);
+  bar.classList.remove('show');
+  toast(`${city} → ${P_FULL[profile]} confirmed by ${user}`, 'success');
+  renderAll();
+}
+
+function cancelApply(btn) {
+  btn.closest('.confirm-bar').classList.remove('show');
+}
+
+async function reCopyScript(btn) {
+  const bar = btn.closest('.confirm-bar');
+  const script = generateScript(bar.dataset.city, bar.dataset.profile);
+  try {
+    await navigator.clipboard.writeText(script);
+    toast('Script re-copied to clipboard', 'info');
+  } catch(e) {
+    toast('Copy failed', 'error');
   }
 }
 
-let currentModalCity = null;
-let currentModalProfile = null;
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function toggleSec(id) { document.getElementById(id).classList.toggle('closed'); }
+function cardId(name) { return 'card-' + name.replace(/[^a-zA-Z0-9]/g, '_'); }
+function timeAgo(iso) {
+  if (!iso) return '';
+  const ms = Date.now() - new Date(iso).getTime();
+  if (ms < 0) return 'just now';
+  const m = Math.floor(ms/60000), h = Math.floor(m/60), d = Math.floor(h/24);
+  if (m < 1) return 'just now';
+  if (m < 60) return m + 'm ago';
+  if (h < 24) return h + 'h ' + (m%60) + 'm ago';
+  return d + 'd ' + (h%24) + 'h ago';
+}
+
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+function toast(msg, type='info', dur=5000) {
+  const c = document.getElementById('ts'), t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.innerHTML = '<span class="tmsg">' + msg + '</span>';
+  c.appendChild(t);
+  setTimeout(() => t.remove(), dur);
+}
+
+// ── JSON viewer ──────────────────────────────────────────────────────────────
+const jsonCache = {};
+async function fetchJson(cityName, profile) {
+  const key = cityName + ':' + profile;
+  if (jsonCache[key]) return jsonCache[key];
+  try {
+    const r = await fetch(getJsonUrl(cityName, profile));
+    if (!r.ok) return null;
+    const data = await r.json();
+    jsonCache[key] = data;
+    return data;
+  } catch(e) { return null; }
+}
+
+function syntaxHL(json) {
+  return JSON.stringify(json, null, 2).replace(
+    /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?|null)/g,
+    function(m) {
+      let c = 'json-num';
+      if (/^"/.test(m)) c = /:$/.test(m) ? 'json-key' : 'json-str';
+      else if (/true|false/.test(m)) c = 'json-bool';
+      else if (/null/.test(m)) c = 'json-null';
+      return '<span class="' + c + '">' + m + '</span>';
+    }
+  );
+}
 
 async function openModal(cityName, profile) {
-  currentModalCity = cityName;
-  currentModalProfile = profile;
   const city = CITIES[cityName];
   document.getElementById('modalTitle').textContent = cityName + ' — Settings';
-
-  const tabs = document.getElementById('modalTabs');
-  tabs.innerHTML = city.profiles.map(p =>
-    `<button class="modal-tab ${p} ${p === profile ? 'active' : ''}" onclick="switchModalTab('${cityName}','${p}')">${PROFILE_LABELS_FULL[p]}</button>`
+  document.getElementById('modalTabs').innerHTML = city.profiles.map(p =>
+    `<button class="modal-tab ${p} ${p===profile?'active':''}" onclick="showModalTab('${cityName}','${p}')">${P_FULL[p]}</button>`
   ).join('');
-
-  await renderModalJson(cityName, profile);
+  await showModalTab(cityName, profile);
   document.getElementById('jsonOverlay').classList.add('open');
 }
 
-async function switchModalTab(cityName, profile) {
-  currentModalProfile = profile;
+async function showModalTab(cityName, profile) {
   document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
-  document.querySelector(`.modal-tab.${profile}`).classList.add('active');
-  await renderModalJson(cityName, profile);
-}
-
-async function renderModalJson(cityName, profile) {
+  document.querySelector(`.modal-tab.${profile}`)?.classList.add('active');
   const pre = document.getElementById('modalJson');
-  pre.innerHTML = '<div class="card-loading"><div class="spinner"></div>Loading...</div>';
-  const data = await fetchSettings(cityName, profile);
-  if (data) {
-    pre.innerHTML = syntaxHighlight(data);
-  } else {
-    pre.innerHTML = '<span style="color:var(--harsh)">Failed to load settings file</span>';
-  }
+  pre.innerHTML = '<div style="text-align:center;padding:20px;color:var(--mu)">Loading...</div>';
+  const data = await fetchJson(cityName, profile);
+  pre.innerHTML = data ? syntaxHL(data) : '<span style="color:var(--harsh)">Failed to load</span>';
 }
 
-function closeModal() {
-  document.getElementById('jsonOverlay').classList.remove('open');
-}
+function closeModal() { document.getElementById('jsonOverlay').classList.remove('open'); }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 document.getElementById('jsonOverlay').addEventListener('click', e => {
   if (e.target === e.currentTarget) closeModal();
 });
 
+// ── Rendering ────────────────────────────────────────────────────────────────
 function buildGroups() {
-  const groups = {};
-  for (const [name, cfg] of Object.entries(CITIES)) {
-    if (!groups[cfg.group]) groups[cfg.group] = { order: cfg.order, cities: [] };
-    groups[cfg.group].cities.push(name);
+  const g = {};
+  for (const [n, c] of Object.entries(CITIES)) {
+    if (!g[c.group]) g[c.group] = {order: c.order, cities: []};
+    g[c.group].cities.push(n);
   }
-  return Object.entries(groups).sort((a, b) => a[1].order - b[1].order);
+  return Object.entries(g).sort((a,b) => a[1].order - b[1].order);
+}
+
+function renderOverview() {
+  const status = getMergedStatus();
+  const groups = buildGroups();
+  const el = document.getElementById('overview-body');
+  let tracked = 0;
+
+  el.innerHTML = groups.map(([gn, gd]) => {
+    const pills = gd.cities.map(cn => {
+      const s = status[cn];
+      const prof = s?.profile || 'none';
+      const lbl = s ? P_LABELS[prof] : '—';
+      const meta = s ? `<span class="pmeta"><span class="puser">${s.user||'—'}</span> · ${timeAgo(s.timestamp)}</span>` : '';
+      if (s) tracked++;
+      return `<span class="pill"><span class="dot ${prof}"></span><span class="pn">${cn}</span><span class="pp ${prof}">${lbl}</span>${meta}</span>`;
+    }).join('');
+    return `<div class="ov-group"><div class="ov-group-h">${gn} · ${gd.cities.length}</div><div class="ov-pills">${pills}</div></div>`;
+  }).join('');
+
+  document.getElementById('ov-cnt').textContent = tracked + ' tracked';
+  document.getElementById('hTracked').textContent = tracked;
 }
 
 function renderCitySections(filter) {
   const groups = buildGroups();
+  const status = getMergedStatus();
   const wrap = document.getElementById('city-sections');
   const saved = {};
   wrap.querySelectorAll('.sec').forEach(s => { saved[s.id] = s.classList.contains('closed'); });
+  const fl = (filter || '').toLowerCase();
 
   let html = '';
-  let totalConfigs = 0;
-  const filterLower = (filter || '').toLowerCase();
-
-  groups.forEach(([ groupName, groupData ], i) => {
-    const filteredCities = filterLower
-      ? groupData.cities.filter(c => c.toLowerCase().includes(filterLower))
-      : groupData.cities;
-    if (filteredCities.length === 0) return;
-
-    totalConfigs += filteredCities.reduce((s, c) => s + CITIES[c].profiles.length, 0);
+  groups.forEach(([gn, gd], i) => {
+    const cities = fl ? gd.cities.filter(c => c.toLowerCase().includes(fl)) : gd.cities;
+    if (!cities.length) return;
     const id = 'sec-g-' + i;
-    const closed = id in saved ? saved[id] : (i > 0 && !filterLower);
+    const closed = id in saved ? saved[id] : (i > 0 && !fl);
 
-    const cards = filteredCities.map(cityName => {
-      const city = CITIES[cityName];
-      const tabs = city.profiles.map(p =>
-        `<button class="ptab ${p}" data-prof="${p}" onclick="selectProfile('${cityName}','${p}')">${PROFILE_LABELS[p]}</button>`
-      ).join('');
-      return `<div class="card" id="${cardId(cityName)}">
-        <div class="card-top">
-          <span class="city-name">${cityName}</span>
-          <a class="admin-link" href="${city.url}" target="_blank" title="Open admin panel">Admin &#8599;</a>
+    const cards = cities.map(cn => {
+      const city = CITIES[cn];
+      const s = status[cn];
+      const cid = cardId(cn);
+
+      let statusHtml = '<div class="card-status" style="color:var(--mu2)">No profile set</div>';
+      if (s) {
+        statusHtml = `<div class="card-status"><span class="dot ${s.profile}" style="width:6px;height:6px;border-radius:50%"></span><span class="cs-profile ${s.profile}">${P_FULL[s.profile]}</span><span>·</span><span class="cs-user">${s.user}</span><span>·</span><span class="cs-time">${timeAgo(s.timestamp)}</span></div>`;
+      }
+
+      const btns = city.profiles.map(p => {
+        const isActive = s?.profile === p;
+        return `<button class="b ${p} ${isActive ? 'active-prof' : ''}" onclick="applySettings('${cn}','${p}')"><span class="lb">${cap(p)}</span><div class="sp"></div></button>`;
+      }).join('');
+
+      return `<div class="card" id="${cid}">
+        <div class="card-top"><span class="city-name">${cn}</span><a class="admin-link" href="${city.url}" target="_blank">Admin &#8599;</a></div>
+        ${statusHtml}
+        <div class="btns">${btns}</div>
+        <div class="confirm-bar" data-city="" data-profile="">
+          <p>Applying <strong class="cb-step"></strong></p>
+          <p style="font-size:10px;color:var(--mu);margin-bottom:4px">Paste the script in admin panel Console (F12 → Console → Ctrl+V → Enter), then confirm:</p>
+          <div class="cb-btns">
+            <button class="cb cp" onclick="reCopyScript(this)">Re-copy Script</button>
+            <button class="cb cn" onclick="cancelApply(this)">Cancel</button>
+            <button class="cb ok" onclick="confirmApplied(this)">Confirm Applied</button>
+          </div>
         </div>
-        <div class="profile-tabs">${tabs}</div>
-        <div class="card-body"><div style="padding:16px;text-align:center;color:var(--mu);font-size:11px">Select a weather profile above</div></div>
+        <button class="view-json-btn" onclick="openModal('${cn}','${city.profiles[0]}')">View JSON settings</button>
       </div>`;
     }).join('');
 
-    html += `<div class="sec ${closed ? 'closed' : ''}" id="${id}">
-      <div class="sec-h" onclick="toggleSec('${id}')">
-        <span class="chv">&#9662;</span><h2>${groupName}</h2>
-        <span class="cnt">${filteredCities.length} cities</span>
-      </div>
+    html += `<div class="sec ${closed?'closed':''}" id="${id}">
+      <div class="sec-h" onclick="toggleSec('${id}')"><span class="chv">&#9662;</span><h2>${gn}</h2><span class="cnt">${cities.length} cities</span></div>
       <div class="sec-b" style="max-height:8000px"><div class="grid">${cards}</div></div>
     </div>`;
   });
-
   wrap.innerHTML = html;
-  document.getElementById('hProfiles').textContent = totalConfigs;
+}
+
+function renderAll() {
+  renderOverview();
+  renderCitySections(document.getElementById('searchInput').value);
 }
 
 function filterCities(val) {
   renderCitySections(val);
 }
 
-renderCitySections();
-document.getElementById('hCities').textContent = Object.keys(CITIES).length;
+// ── Init ─────────────────────────────────────────────────────────────────────
+(async function init() {
+  const savedUser = localStorage.getItem(LS_USER);
+  if (savedUser) document.getElementById('userName').value = savedUser;
+  document.getElementById('hCities').textContent = Object.keys(CITIES).length;
+
+  await fetchSharedStatus();
+  renderAll();
+
+  setInterval(() => renderOverview(), 30000);
+})();
 </script>
 </body>
 </html>
