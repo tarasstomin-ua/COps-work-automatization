@@ -669,6 +669,7 @@ tr:last-child td{border-bottom:none}
       <option value="nataliia.malakova@bolt.eu">Nataliia Malakova</option>
     </select>
     <span id="patStatus" style="font-size:10px;color:var(--mu);padding:4px 10px;background:var(--bg);border:1px solid var(--bd);border-radius:6px"></span>
+    <input id="patIn" type="password" placeholder="Вставте GitHub PAT" style="display:none;background:var(--bg);border:1px solid var(--bd);color:var(--txb);padding:5px 10px;border-radius:6px;font-size:11px;width:180px;font-family:monospace" />
     <div class="metric"><div class="metric-v" id="hCities">37</div><div class="metric-l">Cities</div></div>
     <div class="metric"><div class="metric-v" id="hActive">0</div><div class="metric-l">Active</div></div>
     <div class="live" id="liveStatus"><span class="live-dot"></span><span id="liveText">Live</span></div>
@@ -738,12 +739,17 @@ function toggleOvTier(el){el.closest('.ov-tier').classList.toggle('cl')}
 async function loadConfig(){
   const r=await fetch('/api/config');const d=await r.json();
   if(d.user) document.getElementById('userSel').value=d.user;
-  const ps=document.getElementById('patStatus');
-  if(d.has_pat){ps.textContent='\u2713 GitHub: '+d.pat_source;ps.style.color='var(--good)';}
-  else{ps.textContent='\u2717 No GitHub token';ps.style.color='var(--harsh)';}
+  const ps=document.getElementById('patStatus'),pi=document.getElementById('patIn');
+  if(d.has_pat){ps.textContent='\u2713 GitHub: '+d.pat_source;ps.style.color='var(--good)';pi.style.display='none';}
+  else{ps.textContent='\u2717 No token';ps.style.color='var(--harsh)';pi.style.display='';}
 }
 document.getElementById('userSel').onchange=function(){
   fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user:this.value})});
+};
+document.getElementById('patIn').onchange=async function(){
+  if(!this.value)return;
+  await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pat:this.value})});
+  this.value='';loadConfig();toast('GitHub token saved!','success');
 };
 loadConfig();
 
