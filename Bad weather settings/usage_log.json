@@ -1,0 +1,2256 @@
+[
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 16.0,
+    "timestamp": "2026-04-07T16:15:42.671228"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 10.6,
+    "timestamp": "2026-04-07T16:35:53.792250"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 8.8,
+    "timestamp": "2026-04-07T16:36:09.948702"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 8.5,
+    "timestamp": "2026-04-07T16:36:24.298543"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 8.7,
+    "timestamp": "2026-04-07T16:36:38.014357"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 8.8,
+    "timestamp": "2026-04-07T16:46:42.164567"
+  },
+  {
+    "city": "Lviv",
+    "profile": "bad",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-07T16:47:07.913381"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-07T16:47:26.296063"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-07T16:49:10.636230"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 16.9,
+    "timestamp": "2026-04-07T16:49:31.933305"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-07T16:49:49.486274"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 14.6,
+    "timestamp": "2026-04-07T20:05:33.695585"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-07T20:32:01.835991"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "bad",
+    "status": "success",
+    "duration_seconds": 13.0,
+    "timestamp": "2026-04-07T20:52:52.843968"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "bad",
+    "status": "success",
+    "duration_seconds": 14.2,
+    "timestamp": "2026-04-07T20:53:28.396745"
+  },
+  {
+    "city": "Odesa",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 10.8,
+    "timestamp": "2026-04-07T21:08:25.451083"
+  },
+  {
+    "city": "Odesa",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 9.0,
+    "timestamp": "2026-04-07T21:08:42.897038"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-07T21:09:06.492070"
+  },
+  {
+    "city": "Kryvyi Rih",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-07T21:09:25.162016"
+  },
+  {
+    "city": "Poltava",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-07T21:09:44.670684"
+  },
+  {
+    "city": "Ivano-Frankivsk",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-07T21:10:06.256332"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.6,
+    "timestamp": "2026-04-07T21:10:26.991891"
+  },
+  {
+    "city": "Odesa",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 9.4,
+    "timestamp": "2026-04-07T21:12:11.445196"
+  },
+  {
+    "city": "Chernivtsi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 26.7,
+    "timestamp": "2026-04-07T21:12:47.887757"
+  },
+  {
+    "city": "Irpin",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.3,
+    "timestamp": "2026-04-07T21:13:08.752162"
+  },
+  {
+    "city": "Cherkasy",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.3,
+    "timestamp": "2026-04-07T21:13:30.791974"
+  },
+  {
+    "city": "Odesa",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-07T21:13:50.803734"
+  },
+  {
+    "city": "Odesa",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-07T21:14:11.209834"
+  },
+  {
+    "city": "Zaporizhia",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 15.1,
+    "timestamp": "2026-04-07T21:14:41.753270"
+  },
+  {
+    "city": "Bila Tserkva",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-07T21:15:52.552567"
+  },
+  {
+    "city": "Khmelnytskyi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.8,
+    "timestamp": "2026-04-07T21:16:11.489223"
+  },
+  {
+    "city": "Rivne",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-07T21:16:29.747710"
+  },
+  {
+    "city": "Uzhhorod",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-07T21:16:49.149612"
+  },
+  {
+    "city": "Brovary",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 15.0,
+    "timestamp": "2026-04-07T21:17:13.194911"
+  },
+  {
+    "city": "Zhytomyr",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 31.8,
+    "timestamp": "2026-04-07T21:17:58.425177"
+  },
+  {
+    "city": "Mykolaiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 14.1,
+    "timestamp": "2026-04-07T21:18:30.849126"
+  },
+  {
+    "city": "Chernihiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-07T21:18:50.290694"
+  },
+  {
+    "city": "Sumy",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 23.9,
+    "timestamp": "2026-04-07T21:19:41.359800"
+  },
+  {
+    "city": "Ternopil",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.8,
+    "timestamp": "2026-04-07T21:20:11.974421"
+  },
+  {
+    "city": "Lutsk",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-07T21:20:31.879763"
+  },
+  {
+    "city": "Kropyvnytskyi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-07T21:20:57.260261"
+  },
+  {
+    "city": "Kremenchuk",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.0,
+    "timestamp": "2026-04-07T21:21:15.387923"
+  },
+  {
+    "city": "Kamianets-Podilskyi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 70.4,
+    "timestamp": "2026-04-07T21:22:33.469664"
+  },
+  {
+    "city": "Pavlohrad",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.6,
+    "timestamp": "2026-04-07T21:24:41.277863"
+  },
+  {
+    "city": "Kamianske",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.8,
+    "timestamp": "2026-04-07T21:25:02.458269"
+  },
+  {
+    "city": "Mukachevo",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-07T21:25:20.906291"
+  },
+  {
+    "city": "Boryspil",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-07T21:25:39.323535"
+  },
+  {
+    "city": "Vyshhorod",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-07T21:26:00.637686"
+  },
+  {
+    "city": "Drohobych",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-07T21:26:19.813780"
+  },
+  {
+    "city": "Truskavets",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-07T21:26:37.931817"
+  },
+  {
+    "city": "Kovel",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.1,
+    "timestamp": "2026-04-07T21:26:56.546563"
+  },
+  {
+    "city": "Oleksandriia",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-07T21:27:18.287047"
+  },
+  {
+    "city": "Kolomyia",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.1,
+    "timestamp": "2026-04-07T21:27:35.748610"
+  },
+  {
+    "city": "Odesa",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-07T21:29:06.582753"
+  },
+  {
+    "city": "Sumy",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-07T21:34:27.868221"
+  },
+  {
+    "city": "Sumy",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-07T21:34:44.529195"
+  },
+  {
+    "city": "Chernihiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-07T21:36:06.463361"
+  },
+  {
+    "city": "Lutsk",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-07T21:37:25.980440"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 14.2,
+    "timestamp": "2026-04-07T22:20:22.497735"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-07T22:20:42.331613"
+  },
+  {
+    "city": "Odesa",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-07T22:20:59.108688"
+  },
+  {
+    "city": "Lutsk",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.2,
+    "timestamp": "2026-04-07T22:22:56.287225"
+  },
+  {
+    "city": "Chernihiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.4,
+    "timestamp": "2026-04-07T22:23:21.390900"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.8,
+    "timestamp": "2026-04-07T22:32:21.024938"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "bad",
+    "status": "success",
+    "duration_seconds": 20.2,
+    "timestamp": "2026-04-08T09:11:34.438483"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-08T10:03:56.428875"
+  },
+  {
+    "city": "Brovary",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 17.0,
+    "timestamp": "2026-04-08T10:05:14.509211"
+  },
+  {
+    "city": "Ternopil",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-08T10:05:42.511720"
+  },
+  {
+    "city": "Irpin",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-08T10:06:11.594887"
+  },
+  {
+    "city": "Cherkasy",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.4,
+    "timestamp": "2026-04-08T10:14:11.292626"
+  },
+  {
+    "city": "Kropyvnytskyi",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.4,
+    "timestamp": "2026-04-08T10:38:31.693323"
+  },
+  {
+    "city": "Lutsk",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 20.4,
+    "timestamp": "2026-04-08T10:39:18.280400"
+  },
+  {
+    "city": "Irpin",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 16.3,
+    "timestamp": "2026-04-08T11:09:18.132602"
+  },
+  {
+    "city": "Irpin",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 14.0,
+    "timestamp": "2026-04-08T11:09:51.891759"
+  },
+  {
+    "city": "Lviv",
+    "profile": "bad",
+    "status": "success",
+    "duration_seconds": 13.6,
+    "timestamp": "2026-04-08T11:17:08.885229"
+  },
+  {
+    "city": "Vyshhorod",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-08T11:40:46.707405"
+  },
+  {
+    "city": "Cherkasy",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-08T12:09:27.830137"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "bad",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-08T12:09:49.815418"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 22.2,
+    "timestamp": "2026-04-08T12:10:16.741749"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 24.9,
+    "timestamp": "2026-04-08T12:20:39.190256"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-08T12:20:53.844571"
+  },
+  {
+    "city": "Lviv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 14.5,
+    "timestamp": "2026-04-08T12:22:11.428414"
+  },
+  {
+    "city": "Chernivtsi",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.0,
+    "timestamp": "2026-04-08T12:48:20.422457"
+  },
+  {
+    "city": "Poltava",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-08T12:49:31.283851"
+  },
+  {
+    "city": "Ivano-Frankivsk",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.6,
+    "timestamp": "2026-04-08T13:27:29.251407"
+  },
+  {
+    "city": "Rivne",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-08T13:28:38.308084"
+  },
+  {
+    "city": "Uzhhorod",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.0,
+    "timestamp": "2026-04-08T13:29:02.390842"
+  },
+  {
+    "city": "Chernivtsi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-08T13:29:41.926099"
+  },
+  {
+    "city": "Poltava",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.8,
+    "timestamp": "2026-04-08T13:30:24.678354"
+  },
+  {
+    "city": "Ternopil",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.5,
+    "timestamp": "2026-04-08T13:31:35.131391"
+  },
+  {
+    "city": "Kropyvnytskyi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-08T13:31:57.358711"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.9,
+    "timestamp": "2026-04-08T14:44:16.772294"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-08T14:44:33.941106"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-08T14:45:04.931522"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-08T14:45:21.110996"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 8.4,
+    "timestamp": "2026-04-08T14:45:32.988204"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-08T14:55:23.209201"
+  },
+  {
+    "city": "Ivano-Frankivsk",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.6,
+    "timestamp": "2026-04-08T14:56:55.301200"
+  },
+  {
+    "city": "Lutsk",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-08T14:57:59.626946"
+  },
+  {
+    "city": "Brovary",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 17.0,
+    "timestamp": "2026-04-08T14:58:40.508319"
+  },
+  {
+    "city": "Uzhhorod",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-08T14:58:56.451972"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "bad",
+    "status": "success",
+    "duration_seconds": 16.7,
+    "timestamp": "2026-04-08T15:22:53.234885"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-08T15:23:43.129292"
+  },
+  {
+    "city": "Ivano-Frankivsk",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-08T15:39:23.945513"
+  },
+  {
+    "city": "Boryspil",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-08T15:39:50.194697"
+  },
+  {
+    "city": "Uzhhorod",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 14.4,
+    "timestamp": "2026-04-08T15:40:42.744048"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 21.7,
+    "timestamp": "2026-04-08T15:59:14.450968"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 47.3,
+    "timestamp": "2026-04-08T17:26:54.107898"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "bad",
+    "status": "success",
+    "duration_seconds": 14.7,
+    "timestamp": "2026-04-08T17:27:27.043327"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 14.1,
+    "timestamp": "2026-04-08T17:29:58.363689"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-08T18:36:04.842765"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.8,
+    "timestamp": "2026-04-08T18:38:38.806054"
+  },
+  {
+    "city": "Ivano-Frankivsk",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-08T18:55:14.946894"
+  },
+  {
+    "city": "Irpin",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-08T18:55:57.214040"
+  },
+  {
+    "city": "Boryspil",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 15.0,
+    "timestamp": "2026-04-08T18:56:50.723507"
+  },
+  {
+    "city": "Khmelnytskyi",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-08T18:57:25.093977"
+  },
+  {
+    "city": "Ivano-Frankivsk",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 11.7,
+    "timestamp": "2026-04-08T18:57:43.461918"
+  },
+  {
+    "city": "Mukachevo",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-08T18:58:12.199448"
+  },
+  {
+    "city": "Odesa",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.3,
+    "timestamp": "2026-04-08T19:47:10.707994"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-08T20:04:21.972161"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.8,
+    "timestamp": "2026-04-08T20:14:32.830415"
+  },
+  {
+    "city": "Poltava",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-08T20:24:03.468208"
+  },
+  {
+    "city": "Ternopil",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-08T20:24:34.904849"
+  },
+  {
+    "city": "Lviv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-08T20:39:58.019443"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 7.6,
+    "timestamp": "2026-04-08T20:46:48.356177"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 18.8,
+    "timestamp": "2026-04-09T10:48:16.810490"
+  },
+  {
+    "city": "Brovary",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.5,
+    "timestamp": "2026-04-09T12:23:43.340131"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 8.3,
+    "timestamp": "2026-04-09T12:31:06.123610"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 8.3,
+    "timestamp": "2026-04-09T12:31:19.081585"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 6.7,
+    "timestamp": "2026-04-09T12:31:29.320924"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 5.9,
+    "timestamp": "2026-04-09T12:31:49.522590"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 81.8,
+    "timestamp": "2026-04-09T12:33:15.397137"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 9.8,
+    "timestamp": "2026-04-09T12:35:56.113872"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 8.6,
+    "timestamp": "2026-04-09T12:36:16.554547"
+  },
+  {
+    "city": "Lviv",
+    "profile": "bad",
+    "status": "success",
+    "duration_seconds": 14.0,
+    "timestamp": "2026-04-09T12:36:34.440653"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-09T12:36:51.286282"
+  },
+  {
+    "city": "Mykolaiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-09T12:37:34.302902"
+  },
+  {
+    "city": "Pavlohrad",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-09T12:38:55.767728"
+  },
+  {
+    "city": "Zaporizhia",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 14.4,
+    "timestamp": "2026-04-09T12:39:31.789061"
+  },
+  {
+    "city": "Lviv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-09T12:57:23.283888"
+  },
+  {
+    "city": "Kropyvnytskyi",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.0,
+    "timestamp": "2026-04-09T13:03:45.231314"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "error",
+    "duration_seconds": 9.4,
+    "timestamp": "2026-04-09T15:49:12.788858"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "bad",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-09T15:49:34.304237"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-09T15:49:50.986025"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-09T15:50:08.162218"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-09T15:50:26.309063"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-09T15:50:57.334484"
+  },
+  {
+    "city": "Odesa",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.8,
+    "timestamp": "2026-04-09T15:56:40.206423"
+  },
+  {
+    "city": "Irpin",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 14.7,
+    "timestamp": "2026-04-09T16:48:19.617991"
+  },
+  {
+    "city": "Poltava",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-09T16:49:03.820206"
+  },
+  {
+    "city": "Ivano-Frankivsk",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.8,
+    "timestamp": "2026-04-09T16:49:22.745974"
+  },
+  {
+    "city": "Zaporizhia",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.1,
+    "timestamp": "2026-04-09T16:49:45.224575"
+  },
+  {
+    "city": "Khmelnytskyi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-09T16:50:13.096722"
+  },
+  {
+    "city": "Uzhhorod",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-09T16:50:33.612293"
+  },
+  {
+    "city": "Brovary",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 17.0,
+    "timestamp": "2026-04-09T16:50:56.019318"
+  },
+  {
+    "city": "Cherkasy",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 35.0,
+    "timestamp": "2026-04-09T17:15:20.146447"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.4,
+    "timestamp": "2026-04-09T18:48:23.525496"
+  },
+  {
+    "city": "Irpin",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-09T18:49:42.014883"
+  },
+  {
+    "city": "Khmelnytskyi",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-09T18:50:10.747156"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-09T18:50:37.969512"
+  },
+  {
+    "city": "Mukachevo",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-09T18:52:02.332240"
+  },
+  {
+    "city": "Kryvyi Rih",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-09T19:01:02.567168"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-09T19:01:47.202142"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-09T19:43:29.063536"
+  },
+  {
+    "city": "Odesa",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 86.4,
+    "timestamp": "2026-04-09T20:49:55.115048"
+  },
+  {
+    "city": "Boryspil",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-09T20:55:20.649511"
+  },
+  {
+    "city": "Kamianets-Podilskyi",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-09T20:55:51.651267"
+  },
+  {
+    "city": "Lutsk",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 29.1,
+    "timestamp": "2026-04-09T20:56:51.482763"
+  },
+  {
+    "city": "Lviv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.5,
+    "timestamp": "2026-04-09T20:57:10.137606"
+  },
+  {
+    "city": "Poltava",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-09T20:57:28.654907"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 19.5,
+    "timestamp": "2026-04-10T11:09:32.407969"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-10T11:10:01.421351"
+  },
+  {
+    "city": "Irpin",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.8,
+    "timestamp": "2026-04-10T11:12:41.749802"
+  },
+  {
+    "city": "Sumy",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-10T11:13:48.200821"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "bad",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-10T11:52:41.654250"
+  },
+  {
+    "city": "Brovary",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.3,
+    "timestamp": "2026-04-10T13:56:46.542294"
+  },
+  {
+    "city": "Mukachevo",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-10T13:57:57.555101"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 14.3,
+    "timestamp": "2026-04-10T16:11:25.269434"
+  },
+  {
+    "city": "Poltava",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 16.2,
+    "timestamp": "2026-04-10T16:13:03.694160"
+  },
+  {
+    "city": "Ternopil",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-10T16:14:14.335967"
+  },
+  {
+    "city": "Lutsk",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-10T16:14:43.653243"
+  },
+  {
+    "city": "Kropyvnytskyi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.3,
+    "timestamp": "2026-04-10T16:15:10.626224"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 21.5,
+    "timestamp": "2026-04-10T20:21:24.928152"
+  },
+  {
+    "city": "Lviv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 20.9,
+    "timestamp": "2026-04-11T11:01:58.648901"
+  },
+  {
+    "city": "Boryspil",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.2,
+    "timestamp": "2026-04-11T15:16:52.225342"
+  },
+  {
+    "city": "Mukachevo",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-11T15:17:09.970449"
+  },
+  {
+    "city": "Vyshhorod",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-11T15:17:25.631147"
+  },
+  {
+    "city": "Pavlohrad",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-11T15:17:50.341565"
+  },
+  {
+    "city": "Lutsk",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-11T15:18:09.595097"
+  },
+  {
+    "city": "Uzhhorod",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.1,
+    "timestamp": "2026-04-11T15:18:25.255787"
+  },
+  {
+    "city": "Rivne",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.1,
+    "timestamp": "2026-04-11T15:18:42.299182"
+  },
+  {
+    "city": "Brovary",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-11T15:19:02.592232"
+  },
+  {
+    "city": "Khmelnytskyi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-11T15:19:19.373253"
+  },
+  {
+    "city": "Kryvyi Rih",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.0,
+    "timestamp": "2026-04-11T15:19:38.476624"
+  },
+  {
+    "city": "Cherkasy",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.6,
+    "timestamp": "2026-04-11T15:19:54.966856"
+  },
+  {
+    "city": "Odesa",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-11T15:20:12.655874"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-11T15:20:32.416947"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-11T15:20:48.492883"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-11T15:21:11.708612"
+  },
+  {
+    "city": "Sumy",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-11T15:21:34.165194"
+  },
+  {
+    "city": "Mykolaiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-11T15:21:50.202026"
+  },
+  {
+    "city": "Kamianets-Podilskyi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-11T15:22:05.870991"
+  },
+  {
+    "city": "Khmelnytskyi",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-11T15:31:34.210111"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-11T16:39:04.488249"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-11T16:39:43.101099"
+  },
+  {
+    "city": "Cherkasy",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 19.0,
+    "timestamp": "2026-04-11T19:12:11.965209"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.3,
+    "timestamp": "2026-04-11T19:12:30.544827"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.0,
+    "timestamp": "2026-04-11T19:12:47.119204"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-11T19:13:04.065232"
+  },
+  {
+    "city": "Brovary",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-11T19:13:47.853966"
+  },
+  {
+    "city": "Boryspil",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.8,
+    "timestamp": "2026-04-11T19:14:11.470329"
+  },
+  {
+    "city": "Chernihiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 35.5,
+    "timestamp": "2026-04-11T19:14:57.974361"
+  },
+  {
+    "city": "Ternopil",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-11T19:42:30.851622"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-11T20:28:57.001668"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.1,
+    "timestamp": "2026-04-11T20:29:14.276124"
+  },
+  {
+    "city": "Lviv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-11T20:58:25.296524"
+  },
+  {
+    "city": "Bila Tserkva",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-11T21:20:10.329310"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.2,
+    "timestamp": "2026-04-11T22:30:58.606850"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-11T22:31:15.899696"
+  },
+  {
+    "city": "Odesa",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 17.7,
+    "timestamp": "2026-04-11T22:31:42.810499"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 20.5,
+    "timestamp": "2026-04-12T14:40:34.041910"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 16.0,
+    "timestamp": "2026-04-12T14:41:15.419642"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-12T14:43:37.525391"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-12T14:43:55.612522"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-12T14:44:13.102210"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.8,
+    "timestamp": "2026-04-12T16:44:31.111975"
+  },
+  {
+    "city": "Kropyvnytskyi",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.8,
+    "timestamp": "2026-04-12T16:45:42.403409"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.3,
+    "timestamp": "2026-04-12T17:48:12.647239"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-12T17:48:33.187135"
+  },
+  {
+    "city": "Ivano-Frankivsk",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.4,
+    "timestamp": "2026-04-12T17:48:52.865358"
+  },
+  {
+    "city": "Lviv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 19.8,
+    "timestamp": "2026-04-13T00:11:35.460637"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-13T00:11:53.793068"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 19.5,
+    "timestamp": "2026-04-13T11:34:46.566470"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 14.4,
+    "timestamp": "2026-04-13T11:35:05.610144"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-13T11:35:22.843737"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 16.4,
+    "timestamp": "2026-04-13T11:35:43.650987"
+  },
+  {
+    "city": "Odesa",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-13T11:36:01.195627"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "bad",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-13T11:48:22.421350"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.0,
+    "timestamp": "2026-04-13T13:21:33.101339"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.0,
+    "timestamp": "2026-04-13T13:21:53.090861"
+  },
+  {
+    "city": "Ivano-Frankivsk",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-13T13:22:22.536847"
+  },
+  {
+    "city": "Poltava",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-13T13:24:14.011151"
+  },
+  {
+    "city": "Bila Tserkva",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.0,
+    "timestamp": "2026-04-13T13:24:27.365302"
+  },
+  {
+    "city": "Pavlohrad",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.0,
+    "timestamp": "2026-04-13T13:24:42.280102"
+  },
+  {
+    "city": "Chernihiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-13T13:25:29.302516"
+  },
+  {
+    "city": "Khmelnytskyi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.1,
+    "timestamp": "2026-04-13T13:26:03.339666"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.7,
+    "timestamp": "2026-04-13T15:18:49.847356"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 20.4,
+    "timestamp": "2026-04-13T19:47:09.578535"
+  },
+  {
+    "city": "Poltava",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-13T19:49:00.472241"
+  },
+  {
+    "city": "Irpin",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-13T19:49:18.508210"
+  },
+  {
+    "city": "Cherkasy",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-13T19:49:34.733084"
+  },
+  {
+    "city": "Uzhhorod",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.3,
+    "timestamp": "2026-04-13T19:49:54.940208"
+  },
+  {
+    "city": "Brovary",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.0,
+    "timestamp": "2026-04-13T19:50:09.871496"
+  },
+  {
+    "city": "Lutsk",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.1,
+    "timestamp": "2026-04-13T19:50:35.498021"
+  },
+  {
+    "city": "Kropyvnytskyi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-13T19:50:51.998157"
+  },
+  {
+    "city": "Pavlohrad",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 11.9,
+    "timestamp": "2026-04-13T19:51:06.284508"
+  },
+  {
+    "city": "Boryspil",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.1,
+    "timestamp": "2026-04-13T19:51:22.390815"
+  },
+  {
+    "city": "Khmelnytskyi",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-13T20:16:07.052951"
+  },
+  {
+    "city": "Bila Tserkva",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-13T20:17:07.031223"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.9,
+    "timestamp": "2026-04-13T21:18:45.885865"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-13T21:19:02.019240"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 20.5,
+    "timestamp": "2026-04-14T11:44:19.138412"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-14T11:44:34.814079"
+  },
+  {
+    "city": "Bila Tserkva",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 14.0,
+    "timestamp": "2026-04-14T16:59:29.955608"
+  },
+  {
+    "city": "Khmelnytskyi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-14T16:59:47.316010"
+  },
+  {
+    "city": "Ternopil",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-14T17:00:04.364414"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-14T19:28:06.332823"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 21.3,
+    "timestamp": "2026-04-15T10:04:24.812278"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-15T10:50:09.787691"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-15T10:50:36.955757"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.0,
+    "timestamp": "2026-04-15T11:03:15.773585"
+  },
+  {
+    "city": "Lviv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.3,
+    "timestamp": "2026-04-15T11:07:42.741878"
+  },
+  {
+    "city": "Odesa",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.8,
+    "timestamp": "2026-04-15T11:08:38.121786"
+  },
+  {
+    "city": "Odesa",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-15T12:18:06.940369"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.4,
+    "timestamp": "2026-04-15T12:58:43.872516"
+  },
+  {
+    "city": "Kryvyi Rih",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.7,
+    "timestamp": "2026-04-15T15:50:17.752363"
+  },
+  {
+    "city": "Poltava",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-15T15:50:34.041682"
+  },
+  {
+    "city": "Ivano-Frankivsk",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-15T15:50:50.453622"
+  },
+  {
+    "city": "Chernivtsi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 17.8,
+    "timestamp": "2026-04-15T15:51:15.177535"
+  },
+  {
+    "city": "Irpin",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-15T15:51:30.706891"
+  },
+  {
+    "city": "Cherkasy",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-15T15:51:50.712710"
+  },
+  {
+    "city": "Zaporizhia",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-15T15:52:32.562328"
+  },
+  {
+    "city": "Bila Tserkva",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.1,
+    "timestamp": "2026-04-15T15:52:51.442594"
+  },
+  {
+    "city": "Khmelnytskyi",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.5,
+    "timestamp": "2026-04-15T15:53:07.669137"
+  },
+  {
+    "city": "Rivne",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.2,
+    "timestamp": "2026-04-15T15:53:23.708999"
+  },
+  {
+    "city": "Uzhhorod",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-15T15:53:41.961682"
+  },
+  {
+    "city": "Brovary",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-15T15:54:01.207496"
+  },
+  {
+    "city": "Zhytomyr",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-15T15:54:19.217243"
+  },
+  {
+    "city": "Mykolaiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.4,
+    "timestamp": "2026-04-15T15:54:54.681381"
+  },
+  {
+    "city": "Mukachevo",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 32.4,
+    "timestamp": "2026-04-15T15:55:33.606413"
+  },
+  {
+    "city": "Kovel",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-15T15:55:48.762658"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 14.6,
+    "timestamp": "2026-04-15T16:02:07.772401"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.7,
+    "timestamp": "2026-04-15T16:02:25.215254"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.2,
+    "timestamp": "2026-04-15T16:02:40.968561"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 31.1,
+    "timestamp": "2026-04-15T18:23:42.722453"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 16.7,
+    "timestamp": "2026-04-15T18:25:35.499287"
+  },
+  {
+    "city": "Khmelnytskyi",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-15T18:29:35.406195"
+  },
+  {
+    "city": "Uzhhorod",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-15T18:30:56.791504"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 14.6,
+    "timestamp": "2026-04-15T20:17:45.923089"
+  },
+  {
+    "city": "Odesa",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.1,
+    "timestamp": "2026-04-15T20:18:03.402735"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-15T20:18:19.711604"
+  },
+  {
+    "city": "Lviv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.8,
+    "timestamp": "2026-04-15T21:10:25.701971"
+  },
+  {
+    "city": "Cherkasy",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.6,
+    "timestamp": "2026-04-15T21:20:49.868503"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-15T21:56:46.251142"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.4,
+    "timestamp": "2026-04-15T21:57:55.907905"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 26.1,
+    "timestamp": "2026-04-16T11:47:27.086089"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.9,
+    "timestamp": "2026-04-16T11:47:52.816164"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.4,
+    "timestamp": "2026-04-16T12:08:56.263890"
+  },
+  {
+    "city": "Bila Tserkva",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.1,
+    "timestamp": "2026-04-16T12:31:25.265030"
+  },
+  {
+    "city": "Chernihiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 14.4,
+    "timestamp": "2026-04-16T12:31:46.576551"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.2,
+    "timestamp": "2026-04-16T12:32:16.391097"
+  },
+  {
+    "city": "Lviv",
+    "profile": "bad",
+    "status": "success",
+    "duration_seconds": 17.5,
+    "timestamp": "2026-04-16T12:32:39.409154"
+  },
+  {
+    "city": "Poltava",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.0,
+    "timestamp": "2026-04-16T12:32:59.721113"
+  },
+  {
+    "city": "Zhytomyr",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.1,
+    "timestamp": "2026-04-16T12:33:15.047563"
+  },
+  {
+    "city": "Zaporizhia",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 12.9,
+    "timestamp": "2026-04-16T12:33:48.422876"
+  },
+  {
+    "city": "Kharkiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 15.6,
+    "timestamp": "2026-04-16T14:11:57.249288"
+  },
+  {
+    "city": "Vinnytsia",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.0,
+    "timestamp": "2026-04-16T14:12:13.444354"
+  },
+  {
+    "city": "Odesa",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 12.3,
+    "timestamp": "2026-04-16T14:12:29.974299"
+  },
+  {
+    "city": "Kyiv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 14.1,
+    "timestamp": "2026-04-16T14:28:13.244516"
+  },
+  {
+    "city": "Lviv",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 30.1,
+    "timestamp": "2026-04-16T14:28:53.685346"
+  },
+  {
+    "city": "Dnipro",
+    "profile": "good",
+    "status": "success",
+    "duration_seconds": 13.8,
+    "timestamp": "2026-04-16T14:29:12.653565"
+  },
+  {
+    "city": "Kryvyi Rih",
+    "profile": "harsh",
+    "status": "success",
+    "duration_seconds": 13.3,
+    "timestamp": "2026-04-16T14:32:12.438168"
+  }
+]

@@ -1,0 +1,201 @@
+{
+  "matching_settings": {
+    "enable_alcohol_check_on_matching_and_dropoff": 1,
+    "max_long_delivery_prevention_duration_seconds": 420,
+    "parallel": {
+      "food": {
+        "matching_maximum_delay_seconds": 1800,
+        "max_distance_courier_to_provider_km": 6
+      }
+    },
+    "matching_distance_limit_km": {
+      "bicycle": 4,
+      "car": 17,
+      "motorbike": 17,
+      "pedestrian": 2
+    },
+    "target_order_duration_seconds": {
+      "pedestrian": 600,
+      "bicycle": 750,
+      "motorbike": 1200,
+      "car": 1500
+    }
+  },
+  "food_courier_rates": {
+    "model": "v2",
+    "dual_legs": true,
+    "enable_single_multiplier_for_courier_rates": true
+  },
+  "business_courier_rates": {
+    "model": "v2",
+    "dual_legs": true
+  },
+  "eta_settings": {
+    "arrive_before_order_is_ready_seconds": 320,
+    "parking_buffer_seconds": {
+      "car": 90,
+      "motorbike": 60
+    },
+    "courier_arrival_time_model_coefficients": {
+      "minute_imbalance_coefficient": 1.1,
+      "allowed_left_deviation_seconds": 600,
+      "allowed_right_deviation_seconds": 600
+    },
+    "eta_inflation": {
+      "is_enabled": true,
+      "busy_ratio_min": 0.9,
+      "busy_ratio_max": 1.5,
+      "eta_multiplier_min": 1.3,
+      "eta_multiplier_max": 1.3,
+      "dynamic_radius_max": 3000,
+      "base_radius": 1000,
+      "ab_test_type": "regular"
+    }
+  },
+  "batching": {
+    "food": {
+      "batch_only_same_provider": false,
+      "is_enabled": 1,
+      "max_batch_size": 2,
+      "min_delay_seconds": 300,
+      "max_delay_seconds": 840,
+      "max_delay_time_in_the_bag_seconds": 750,
+      "max_wait_time_between_orders_at_same_provider_seconds": 750,
+      "is_enabled_for_cash": 1,
+      "min_delay_ratio_value": 0.5,
+      "max_delay_ratio_value": 1.2
+    },
+    "disable_second_batched_order_auto_acceptance": true
+  },
+  "availability": {
+    "cash_disabling": {
+      "is_enabled": true,
+      "is_analyzer_enabled": true,
+      "needed_cash_couriers": 1,
+      "cash_available_providers_threshold_percentage": 20
+    },
+    "radius_shrinkage": {
+      "ratio_where_radius_is_maximum": 1.1,
+      "ratio_where_radius_is_minimum": 2.0,
+      "use_orders_per_distance_histogram": false,
+      "orders_per_distance_histogram_type": "route_distance"
+    },
+    "set_courier_offline_on_did_not_respond": true,
+    "per_provider_closing": {
+      "dry_computation": true,
+      "use_in_search": true,
+      "needed_couriers": 0.9,
+      "max_allowed_courier_delay_seconds": 900,
+      "min_flight_distance_in_km": {
+        "car": 3,
+        "motorbike": 2,
+        "bicycle": 1,
+        "pedestrian": 1
+      },
+      "max_flight_distance_in_km": {
+        "car": 6,
+        "motorbike": 6,
+        "bicycle": 4,
+        "pedestrian": 2
+      },
+      "courier_acceptance_probability_strategy": "linear",
+      "is_future_orders_verification_enabled": false
+    }
+  },
+  "balance": {
+    "is_bolt_payment_enabled": true,
+    "balance_threshold_for_payment": 0
+  },
+  "courier_settings": {
+    "max_allowed_rejects": 5,
+    "prevent_redispatch_after_arriving_and_order_ready": true,
+    "earnings_schedule": {
+      "distances": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "multiplier_levels": [
+        2.2,
+        2.4,
+        2.6
+      ],
+      "apply_traits": true,
+      "apply_dynamic_multipliers": true
+    }
+  },
+  "courier_availability_score": {
+    "is_enabled": false,
+    "courier_acceptance_probability_strategy": "predicted"
+  },
+  "campaigns_bypassing": {
+    "is_enabled": true,
+    "busy_ratio_threshold": 1.1,
+    "busy_ratio_type": "smoothed_15min"
+  },
+  "schedule_slots": {
+    "is_enabled": true,
+    "availability_duration_minutes": 2790,
+    "availability_offset_minutes": 90,
+    "interval_size_minutes": 30,
+    "interval_step_minutes": 15
+  },
+  "dynamic_multiplier": {
+    "courier_earning": {
+      "is_enabled": false,
+      "is_generation_enabled": false,
+      "min_busy_ratio": 1.3,
+      "max_busy_ratio": 1.4,
+      "min_multiplier": 1.05,
+      "max_multiplier": 1.1,
+      "strategy_type": "current_busy_ratio",
+      "notification_settings": {
+        "is_enabled": false,
+        "upper_threshold": 1.1,
+        "minimum_notification_window_seconds": 900,
+        "minimum_surge_window_seconds": 180,
+        "courier_perc": 1,
+        "notification_period_start_minutes_from_midnight": 540,
+        "notification_period_end_minutes_from_midnight": 1320
+      }
+    },
+    "delivery_fee": {
+      "is_enabled": true,
+      "is_generation_enabled": true,
+      "min_busy_ratio": 1,
+      "max_busy_ratio": 1.9,
+      "min_multiplier": 1.3,
+      "max_multiplier": 2.4,
+      "strategy_type": "current_busy_ratio",
+      "is_surcharge_applicable_only": false
+    }
+  },
+  "busy_mode": {
+    "is_enabled": true,
+    "buffer_seconds": 600
+  },
+  "validation_settings": {
+    "courier_rates_multiplier_max_value": 6
+  },
+  "user_prioritization": {
+    "subscribed_user_matrix_dispatch_prioritization_percentage": 100
+  },
+  "vehicle_type_settings": {
+    "available_vehicle_types": [
+      "bicycle",
+      "car",
+      "motorbike",
+      "pedestrian"
+    ]
+  },
+  "order_settings": {
+    "arrival_distance_threshold_in_meters": {
+      "provider_warning": 300,
+      "eater_warning": 300,
+      "provider_error": 400,
+      "eater_error": 400
+    }
+  }
+}
