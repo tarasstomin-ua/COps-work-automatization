@@ -3,680 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Courier Ops — Ukraine Weather Control</title>
+<title>Courier Ops — Weather Control Setup</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#080a0f;--sf:#0f1218;--sf2:#151a22;--bd:#1c2230;--bd2:#252d3b;
-  --tx:#d1d5db;--txb:#f0f2f5;--mu:#5c6370;--mu2:#3d4452;
-  --good:#10b981;--goodH:#34d399;--goodBg:rgba(16,185,129,.08);
-  --bad:#f59e0b;--badH:#fbbf24;--badBg:rgba(245,158,11,.08);
-  --harsh:#ef4444;--harshH:#f87171;--harshBg:rgba(239,68,68,.08);
-  --acc:#3b82f6;--accH:#60a5fa;--accBg:rgba(59,130,246,.06);
-  --r:8px;--r2:12px;
-}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;font-size:13px}
+:root{--bg:#080a0f;--sf:#0f1218;--sf2:#151a22;--bd:#1c2230;--bd2:#252d3b;--tx:#d1d5db;--txb:#f0f2f5;--mu:#5c6370;--acc:#3b82f6;--accH:#60a5fa;--good:#10b981;--r:8px;--r2:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px}
 
-.hdr{background:var(--sf);border-bottom:1px solid var(--bd);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;flex-wrap:wrap;gap:10px}
-.hdr-l{display:flex;align-items:center;gap:14px}
-.hdr h1{font-size:16px;font-weight:700;color:var(--txb);letter-spacing:-.3px}
-.pipe{width:1px;height:20px;background:var(--bd2)}
-.hdr .sub{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.8px;font-weight:500}
-.hdr-r{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.metric{text-align:center}
-.metric-v{font-size:18px;font-weight:700;color:var(--txb)}
-.metric-l{font-size:9px;color:var(--mu);text-transform:uppercase;letter-spacing:.6px;margin-top:1px}
+.hero{text-align:center;max-width:700px;margin-bottom:40px}
+.hero h1{font-size:28px;font-weight:700;color:var(--txb);margin-bottom:8px;letter-spacing:-.5px}
+.hero p{font-size:14px;color:var(--mu);line-height:1.7}
 
-.user-sel{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--bd);border-radius:20px;padding:4px 12px}
-.user-sel label{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px}
-.user-sel select{background:none;border:none;color:var(--txb);font-size:12px;font-weight:600;outline:none;cursor:pointer;-webkit-appearance:none;appearance:none;padding-right:12px}
-.user-sel select option{background:var(--sf);color:var(--txb)}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r2);padding:28px;max-width:700px;width:100%;margin-bottom:20px}
+.card h2{font-size:16px;font-weight:700;color:var(--txb);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.card h2 .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
 
-.gh-link{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--acc);padding:5px 12px;background:var(--accBg);border-radius:20px;border:1px solid rgba(59,130,246,.15);text-decoration:none;transition:all .15s}
-.gh-link:hover{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.3)}
-.gh-link svg{width:14px;height:14px;fill:currentColor}
+.steps{list-style:none;padding:0}
+.steps li{padding:10px 0;border-bottom:1px solid var(--bd);font-size:13px;line-height:1.8;display:flex;gap:10px}
+.steps li:last-child{border-bottom:none}
+.steps .sn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--sf2);color:var(--acc);font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px}
+.steps code{background:var(--sf2);padding:1px 6px;border-radius:4px;font-size:12px;color:var(--accH);font-family:"SF Mono",SFMono-Regular,Menlo,monospace}
 
-.main{max-width:1500px;margin:0 auto;padding:20px 28px 40px}
+.bm-box{background:var(--bg);border:2px dashed var(--acc);border-radius:var(--r);padding:20px;text-align:center;margin:16px 0}
+.bm-box p{font-size:12px;color:var(--mu);margin-bottom:12px}
+.bm-link{display:inline-block;padding:12px 28px;background:var(--acc);color:#fff;font-size:14px;font-weight:700;border-radius:8px;text-decoration:none;cursor:grab;transition:all .15s;letter-spacing:.2px}
+.bm-link:hover{background:var(--accH);transform:scale(1.03)}
+.bm-link:active{cursor:grabbing}
 
-.sec{margin-bottom:16px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r2);overflow:hidden}
-.sec-h{display:flex;align-items:center;gap:10px;padding:12px 18px;cursor:pointer;user-select:none;transition:background .15s}
-.sec-h:hover{background:var(--sf2)}
-.chv{font-size:11px;color:var(--mu);transition:transform .2s;width:16px;text-align:center}
-.sec.closed .chv{transform:rotate(-90deg)}
-.sec-h h2{font-size:13px;font-weight:600;color:var(--txb);text-transform:uppercase;letter-spacing:.5px}
-.cnt{font-size:10px;color:var(--mu);background:var(--bg);padding:2px 8px;border-radius:10px;font-weight:600;margin-left:auto}
-.sec-b{transition:max-height .35s ease,padding .2s ease;overflow:hidden;padding:0 18px 16px}
-.sec.closed .sec-b{max-height:0!important;padding-top:0;padding-bottom:0}
+.note{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:var(--r);padding:14px;font-size:12px;color:var(--good);line-height:1.7;margin-top:16px}
+.note strong{font-weight:700}
 
-.ov-group{margin-bottom:12px}
-.ov-group:last-child{margin-bottom:0}
-.ov-group-h{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--mu);margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid var(--bd)}
-.ov-pills{display:flex;flex-wrap:wrap;gap:5px}
-.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:6px;background:var(--bg);border:1px solid var(--bd);font-size:11px;transition:all .15s;cursor:default;min-width:0}
-.pill:hover{border-color:var(--bd2)}
-.pill .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.pill .dot.good{background:var(--good);box-shadow:0 0 6px rgba(16,185,129,.4)}
-.pill .dot.bad{background:var(--bad);box-shadow:0 0 6px rgba(245,158,11,.4)}
-.pill .dot.harsh{background:var(--harsh);box-shadow:0 0 6px rgba(239,68,68,.4)}
-.pill .dot.none{background:var(--mu2)}
-.pill .pn{font-weight:600;color:var(--txb);white-space:nowrap}
-.pill .pp{font-weight:500;white-space:nowrap}
-.pill .pp.good{color:var(--good)}.pill .pp.bad{color:var(--bad)}.pill .pp.harsh{color:var(--harsh)}.pill .pp.none{color:var(--mu)}
-.pill .pmeta{font-size:10px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
-.pill .puser{color:var(--acc);font-weight:500}
+.how{margin-top:16px}
+.how h3{font-size:13px;font-weight:600;color:var(--txb);margin-bottom:8px}
+.how ul{padding-left:20px;font-size:12px;line-height:1.9;color:var(--tx)}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
-.card{background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:14px;transition:border-color .15s}
-.card:hover{border-color:var(--bd2)}
-.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
-.city-name{font-size:14px;font-weight:600;color:var(--txb)}
-.admin-link{font-size:10px;color:var(--acc);text-decoration:none;opacity:.6;transition:opacity .15s}
-.admin-link:hover{opacity:1}
-.card-status{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--mu);margin-bottom:10px;min-height:18px}
-.card-status .dot{width:6px;height:6px;border-radius:50%}
-.card-status .cs-profile{font-weight:500}
-.card-status .cs-profile.good{color:var(--good)}.card-status .cs-profile.bad{color:var(--bad)}.card-status .cs-profile.harsh{color:var(--harsh)}
-.card-status .cs-user{color:var(--acc)}
-.card-status .cs-time{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;font-size:9px}
-
-.btns{display:flex;gap:6px}
-.b{flex:1;padding:9px 0;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:all .12s;color:#fff;letter-spacing:.2px;position:relative}
-.b:disabled{opacity:.35;cursor:not-allowed}
-.b.good{background:var(--good)}.b.good:hover:not(:disabled){background:var(--goodH)}
-.b.bad{background:var(--bad);color:#1a1a2e}.b.bad:hover:not(:disabled){background:var(--badH)}
-.b.harsh{background:var(--harsh)}.b.harsh:hover:not(:disabled){background:var(--harshH)}
-.b .sp{display:none;width:12px;height:12px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto}
-.b.ld .lb{display:none}.b.ld .sp{display:block}
-.b.active-prof{box-shadow:0 0 0 2px var(--txb);transform:scale(1.02)}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-.card.applying{border-color:var(--acc);position:relative}
-.card.applying::after{content:'';position:absolute;inset:0;background:rgba(59,130,246,.05);border-radius:var(--r);pointer-events:none}
-.card-progress{display:none;margin-top:8px;padding:8px;background:var(--accBg);border:1px solid rgba(59,130,246,.2);border-radius:6px;font-size:11px;color:var(--acc);text-align:center}
-.card-progress.show{display:flex;align-items:center;justify-content:center;gap:8px}
-.card-progress .cp-spinner{width:14px;height:14px;border:2px solid rgba(59,130,246,.2);border-top-color:var(--acc);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
-
-.search-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:8px 14px}
-.search-bar input{flex:1;background:none;border:none;color:var(--txb);font-size:13px;outline:none}
-.search-bar input::placeholder{color:var(--mu2)}
-
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;justify-content:center;align-items:center;backdrop-filter:blur(4px)}
-.overlay.open{display:flex}
-.modal{background:var(--sf);border:1px solid var(--bd2);border-radius:var(--r2);padding:0;max-width:800px;width:95%;max-height:85vh;display:flex;flex-direction:column}
-.modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--bd)}
-.modal-hdr h3{font-size:14px;color:var(--txb)}
-.modal-close{background:none;border:none;color:var(--mu);font-size:18px;cursor:pointer;padding:4px 8px;border-radius:4px}
-.modal-close:hover{background:var(--bg);color:var(--tx)}
-.modal-tabs{display:flex;gap:4px;padding:12px 20px 0;flex-wrap:wrap}
-.modal-tab{padding:5px 14px;border:1px solid var(--bd);border-bottom:none;border-radius:6px 6px 0 0;background:transparent;color:var(--mu);font-size:11px;font-weight:600;cursor:pointer;transition:all .12s}
-.modal-tab.active{background:var(--sf2);color:var(--txb);border-color:var(--bd2)}
-.modal-tab.good.active{color:var(--good)}.modal-tab.bad.active{color:var(--bad)}.modal-tab.harsh.active{color:var(--harsh)}
-.modal-body{overflow-y:auto;padding:16px 20px;flex:1}
-.modal-body pre{font-size:12px;line-height:1.6;color:var(--tx);font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word}
-.json-key{color:var(--acc)}.json-str{color:var(--good)}.json-num{color:var(--bad)}.json-bool{color:#c084fc}.json-null{color:var(--mu)}
-
-.setup-box{background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:14px;margin-bottom:10px}
-.setup-box h3{font-size:12px;color:var(--txb);margin-bottom:8px}
-.setup-box ol,.setup-box ul{padding-left:20px;font-size:12px;line-height:1.8;color:var(--tx)}
-.setup-box code{background:var(--sf2);padding:1px 5px;border-radius:3px;font-size:11px;color:var(--accH)}
-.setup-box .step-num{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--acc);color:#fff;font-size:10px;font-weight:700;margin-right:4px}
-
-.auth-banner{padding:10px 18px;border-radius:var(--r);margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:12px}
-.auth-banner.ok{background:var(--goodBg);border:1px solid rgba(16,185,129,.2);color:var(--good)}
-.auth-banner.warn{background:var(--badBg);border:1px solid rgba(245,158,11,.2);color:var(--bad)}
-.auth-banner .ab-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.auth-banner.ok .ab-dot{background:var(--good);box-shadow:0 0 8px rgba(16,185,129,.5)}
-.auth-banner.warn .ab-dot{background:var(--bad);box-shadow:0 0 8px rgba(245,158,11,.5)}
-.auth-banner a{color:inherit;font-weight:600;text-decoration:underline;cursor:pointer}
-.auth-banner strong{font-weight:600}
-
-.pat-input-group{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--bd);border-radius:20px;padding:4px 12px}
-.pat-input-group label{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
-.pat-input-group input{background:none;border:none;color:var(--txb);font-size:11px;font-weight:600;width:180px;outline:none;font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
-.pat-input-group input::placeholder{color:var(--mu2);font-family:inherit}
-.pat-input-group .pat-ok{color:var(--good);font-size:14px;display:none}
-.pat-input-group.valid .pat-ok{display:inline}
-
-.toasts{position:fixed;bottom:16px;right:16px;z-index:200;display:flex;flex-direction:column;gap:6px}
-.toast{padding:10px 16px;border-radius:8px;font-size:12px;font-weight:500;animation:si .2s ease;max-width:400px;box-shadow:0 4px 20px rgba(0,0,0,.4);display:flex;align-items:flex-start;gap:8px}
-.toast.success{background:var(--good);color:#fff}
-.toast.error{background:var(--harsh);color:#fff}
-.toast.info{background:var(--acc);color:#fff}
-.toast.warn{background:var(--bad);color:#1a1a2e}
-.toast .tmsg{flex:1}
-@keyframes si{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
-
-@media(max-width:640px){
-  .hdr{padding:10px 16px}
-  .main{padding:12px 16px 30px}
-  .grid{grid-template-columns:1fr}
-  .hdr-r{width:100%;justify-content:space-between}
-}
+.footer{margin-top:40px;text-align:center;font-size:11px;color:var(--mu)}
+.footer a{color:var(--acc);text-decoration:none}
+.footer a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
 
-<div class="hdr">
-  <div class="hdr-l">
-    <h1>Courier Ops</h1>
-    <div class="pipe"></div>
-    <span class="sub">Ukraine Weather Control</span>
+<div class="hero">
+  <h1>Courier Ops — Weather Control</h1>
+  <p>One-click weather settings automation for Bolt Admin Panel.<br>No extensions, no servers — works directly in your browser via bookmarklet.</p>
+</div>
+
+<div class="card">
+  <h2><span class="num">1</span> Set up the Bookmarklet (one-time, 30 sec)</h2>
+  <ol class="steps">
+    <li><span class="sn">1</span><span>Show the <strong>Bookmarks Bar</strong> in Chrome: <code>Cmd+Shift+B</code> (Mac) or <code>Ctrl+Shift+B</code> (Windows)</span></li>
+    <li><span class="sn">2</span><span>Drag the blue button below <strong>onto your Bookmarks Bar</strong>:</span></li>
+  </ol>
+
+  <div class="bm-box">
+    <p>Drag this button to your Bookmarks Bar:</p>
+    <a class="bm-link" href="javascript:void((()=>{const s=document.createElement('script');s.src='https://tarasstomin-ua.github.io/COps-work-automatization/dashboard.js?v='+Date.now();document.head.appendChild(s)})())">COps Weather Dashboard</a>
   </div>
-  <div class="hdr-r">
-    <div class="user-sel">
-      <label>You:</label>
-      <select id="userName" onchange="saveUserName(this.value)">
-        <option value="">-- select --</option>
-        <option value="taras.stomin@bolt.eu">Taras Stomin</option>
-        <option value="anna.tiurina@bolt.eu">Anna Tiurina</option>
-        <option value="nataliia.malakova@bolt.eu">Nataliia Malakova</option>
-      </select>
-    </div>
-    <div class="pat-input-group" id="patGroup">
-      <label>Token:</label>
-      <input type="password" id="patInput" placeholder="ghp_xxx..." oninput="savePat(this.value)">
-      <span class="pat-ok">&#10003;</span>
-    </div>
-    <div class="metric"><div class="metric-v" id="hCities">37</div><div class="metric-l">Cities</div></div>
-    <div class="metric"><div class="metric-v" id="hTracked">0</div><div class="metric-l">Tracked</div></div>
-    <a class="gh-link" href="https://github.com/tarasstomin-ua/COps-work-automatization" target="_blank">
-      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-      Repo
-    </a>
+
+  <div class="note">
+    <strong>Done!</strong> The bookmarklet is now saved in your browser. No installation, no extension, no admin rights needed. Works even with managed Chrome.
   </div>
 </div>
 
-<div class="main">
-  <div class="sec" id="sec-overview">
-    <div class="sec-h" onclick="toggleSec('sec-overview')">
-      <span class="chv">&#9662;</span>
-      <h2>Active Weather Status</h2>
-      <span class="cnt" id="ov-cnt">0 tracked</span>
-    </div>
-    <div class="sec-b" style="max-height:800px" id="overview-body"></div>
-  </div>
+<div class="card">
+  <h2><span class="num">2</span> How to use</h2>
+  <ol class="steps">
+    <li><span class="sn">1</span><span>Open <a href="https://admin-panel.bolt.eu" target="_blank" style="color:var(--acc)">admin-panel.bolt.eu</a> and make sure you're logged in</span></li>
+    <li><span class="sn">2</span><span>Click <strong>"COps Weather Dashboard"</strong> in your Bookmarks Bar</span></li>
+    <li><span class="sn">3</span><span>A full dashboard overlay appears with all 37 cities</span></li>
+    <li><span class="sn">4</span><span>Select your name, then click <strong>Good</strong> / <strong>Bad</strong> / <strong>Harsh</strong> on any city</span></li>
+    <li><span class="sn">5</span><span>The bookmarklet opens the city settings page, merges JSON, and clicks Update — automatically!</span></li>
+  </ol>
 
-  <div class="sec closed" id="sec-howto">
-    <div class="sec-h" onclick="toggleSec('sec-howto')">
-      <span class="chv">&#9662;</span>
-      <h2>Setup Instructions</h2>
-    </div>
-    <div class="sec-b" style="max-height:2000px">
-      <div class="setup-box">
-        <h3>Step 1 — Create a GitHub Personal Access Token (one-time)</h3>
-        <ol>
-          <li><span class="step-num">1</span> Go to <a href="https://github.com/settings/tokens?type=beta" target="_blank">GitHub → Settings → Developer settings → Fine-grained tokens</a></li>
-          <li><span class="step-num">2</span> Click <strong>Generate new token</strong></li>
-          <li><span class="step-num">3</span> Name: <code>COps Weather Dashboard</code>, Expiration: <strong>90 days</strong> (or custom)</li>
-          <li><span class="step-num">4</span> Repository access: <strong>Only select repositories</strong> → choose <code>COps-work-automatization</code></li>
-          <li><span class="step-num">5</span> Permissions → Repository: <strong>Actions</strong> → <code>Read and write</code>, <strong>Contents</strong> → <code>Read</code></li>
-          <li><span class="step-num">6</span> Click <strong>Generate token</strong> → copy and paste it in the <strong>Token</strong> field in the header above</li>
-        </ol>
-      </div>
-      <div class="setup-box">
-        <h3>Step 2 — Set up Bolt Admin cookies (one-time, done by Taras)</h3>
-        <ol>
-          <li><span class="step-num">1</span> Log in to <a href="https://admin-panel.bolt.eu" target="_blank">admin-panel.bolt.eu</a></li>
-          <li><span class="step-num">2</span> <code>F12</code> → Network → click any request → right-click → <strong>Copy as cURL</strong></li>
-          <li><span class="step-num">3</span> Run locally: <code>python automation/parse_curl.py</code> → paste cURL → get base64 string</li>
-          <li><span class="step-num">4</span> Go to <a href="https://github.com/tarasstomin-ua/COps-work-automatization/settings/secrets/actions" target="_blank">GitHub repo → Settings → Secrets → Actions</a></li>
-          <li><span class="step-num">5</span> New repository secret: Name = <code>BOLT_COOKIES</code>, Value = the base64 string</li>
-        </ol>
-      </div>
-      <div class="setup-box" style="border-color:var(--bd2)">
-        <h3>How it works</h3>
-        <ul>
-          <li>Select your name and paste your GitHub token in the header</li>
-          <li>Click a weather button (Good / Bad / Harsh) on any city card</li>
-          <li>This triggers a <strong>GitHub Actions</strong> workflow that runs Playwright (headless Chrome) on GitHub servers</li>
-          <li>Playwright opens the Bolt Admin panel → merges JSON settings → clicks Update</li>
-          <li>Status updates automatically when the workflow completes (~40-60 sec)</li>
-          <li>No extensions, no servers — everything runs on GitHub for free</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div id="auth-banner"></div>
-
-  <div class="search-bar">
-    <span style="color:var(--mu);font-size:14px">&#128269;</span>
-    <input type="text" id="searchInput" placeholder="Search cities..." oninput="filterCities(this.value)">
-  </div>
-
-  <div id="city-sections"></div>
-</div>
-
-<div class="overlay" id="jsonOverlay">
-  <div class="modal">
-    <div class="modal-hdr">
-      <h3 id="modalTitle">Settings</h3>
-      <button class="modal-close" onclick="closeModal()">&times;</button>
-    </div>
-    <div class="modal-tabs" id="modalTabs"></div>
-    <div class="modal-body"><pre id="modalJson"></pre></div>
+  <div class="how">
+    <h3>How it works under the hood</h3>
+    <ul>
+      <li>Bookmarklet injects a dashboard overlay on top of the admin panel page</li>
+      <li>When you click Apply, it opens the city settings in a popup window (same domain = full access)</li>
+      <li>Fetches target settings from the GitHub repo, deep-merges with current settings</li>
+      <li>Writes merged JSON to the editor and clicks Update — same as the local Selenium scripts</li>
+      <li>Your browser handles the SSL certificate and authentication automatically</li>
+      <li>Status is tracked locally and shared via the GitHub repo</li>
+    </ul>
   </div>
 </div>
-<div class="toasts" id="ts"></div>
 
-<script>
-const OWNER = 'tarasstomin-ua';
-const REPO = 'COps-work-automatization';
-const WORKFLOW = 'apply-settings.yml';
-const REPO_RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/Bad%20weather%20settings`;
-const STATUS_URL = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/status.json`;
-const API = 'https://api.github.com';
+<div class="card">
+  <h2><span class="num">3</span> Access</h2>
+  <ol class="steps">
+    <li><span class="sn"></span><span><strong>Taras Stomin</strong> — taras.stomin@bolt.eu</span></li>
+    <li><span class="sn"></span><span><strong>Anna Tiurina</strong> — anna.tiurina@bolt.eu</span></li>
+    <li><span class="sn"></span><span><strong>Nataliia Malakova</strong> — nataliia.malakova@bolt.eu</span></li>
+  </ol>
+  <p style="font-size:11px;color:var(--mu);margin-top:10px">Anyone with access to admin-panel.bolt.eu can use the bookmarklet. Name selection is for tracking purposes.</p>
+</div>
 
-const ALLOWED_USERS = ['taras.stomin@bolt.eu','anna.tiurina@bolt.eu','nataliia.malakova@bolt.eu'];
+<div class="footer">
+  <a href="https://github.com/tarasstomin-ua/COps-work-automatization" target="_blank">GitHub Repository</a> &middot; All city JSON settings are stored in the repo
+</div>
 
-const CITIES = {
-  "Kyiv":{"group":"TOP cities","order":0,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/158","base":"Kyiv","profiles":["good","bad","harsh"],"jsonName":"Kyiv"},
-  "Lviv":{"group":"TOP cities","order":0,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/496","base":"Lviv","profiles":["good","bad","harsh"],"jsonName":"Lviv"},
-  "Dnipro":{"group":"TOP cities","order":0,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/499","base":"Dnipro","profiles":["good","bad","harsh"],"jsonName":"Dnipro"},
-  "Kharkiv":{"group":"TOP cities","order":0,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/491","base":"Kharkiv","profiles":["good","bad","harsh"],"jsonName":"Kharkiv"},
-  "Vinnytsia":{"group":"TOP cities","order":0,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/501","base":"Vinnytsia","profiles":["good","bad","harsh"],"jsonName":"Vinnytsia"},
-  "Odesa":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/498","base":"Secondary%20cities/Tier2%20cities/Odesa","profiles":["good","harsh"],"jsonName":"Odesa"},
-  "Kryvyi Rih":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/504","base":"Secondary%20cities/Tier2%20cities/Kryvyi%20Rih","profiles":["good","harsh"],"jsonName":"Kryvyi Rih"},
-  "Poltava":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/506","base":"Secondary%20cities/Tier2%20cities/Poltava","profiles":["good","harsh"],"jsonName":"Poltava"},
-  "Ivano-Frankivsk":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/990","base":"Secondary%20cities/Tier2%20cities/Ivano-Frankivsk","profiles":["good","harsh"],"jsonName":"Ivano-Frankivsk"},
-  "Chernivtsi":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1084","base":"Secondary%20cities/Tier2%20cities/Chernivtsi","profiles":["good","harsh"],"jsonName":"Chernivtsi"},
-  "Irpin":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1261","base":"Secondary%20cities/Tier2%20cities/Irpin","profiles":["good","harsh"],"jsonName":"Irpin"},
-  "Cherkasy":{"group":"Tier 2","order":1,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1087","base":"Secondary%20cities/Tier2%20cities/Cherkasy","profiles":["good","harsh"],"jsonName":"Cherkasy"},
-  "Zaporizhia":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/500","base":"Secondary%20cities/Tier3%20cities/Zaporizhia","profiles":["good","harsh"],"jsonName":"Zaporizhia"},
-  "Bila Tserkva":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1079","base":"Secondary%20cities/Tier3%20cities/Bila%20Tserkva","profiles":["good","harsh"],"jsonName":"Bila Tserkva"},
-  "Khmelnytskyi":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1081","base":"Secondary%20cities/Tier3%20cities/Khmelnytskyi","profiles":["good","harsh"],"jsonName":"Khmelnytskyi"},
-  "Rivne":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1086","base":"Secondary%20cities/Tier3%20cities/Rivne","profiles":["good","harsh"],"jsonName":"Rivne"},
-  "Uzhhorod":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1131","base":"Secondary%20cities/Tier3%20cities/Uzhhorod","profiles":["good","harsh"],"jsonName":"Uzhhorod"},
-  "Brovary":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1259","base":"Secondary%20cities/Tier3%20cities/Brovary","profiles":["good","harsh"],"jsonName":"Brovary"},
-  "Zhytomyr":{"group":"Tier 3","order":2,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1083","base":"Secondary%20cities/Tier3%20cities/Zhytomyr","profiles":["good","harsh"],"jsonName":"Zhytomyr"},
-  "Mykolaiv":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/503","base":"Secondary%20cities/Rest%20of%20the%20cities/Mykolaiv","profiles":["good","harsh"],"jsonName":"Mykolaiv"},
-  "Chernihiv":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1076","base":"Secondary%20cities/Rest%20of%20the%20cities/Chenihiv","profiles":["good","harsh"],"jsonName":"Chernihiv"},
-  "Sumy":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1078","base":"Secondary%20cities/Rest%20of%20the%20cities/Sumy","profiles":["good","harsh"],"jsonName":"Sumy"},
-  "Ternopil":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1080","base":"Secondary%20cities/Rest%20of%20the%20cities/Ternopil","profiles":["good","harsh"],"jsonName":"Ternopil"},
-  "Lutsk":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1082","base":"Secondary%20cities/Rest%20of%20the%20cities/Lutsk","profiles":["good","harsh"],"jsonName":"Lutsk"},
-  "Kropyvnytskyi":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1085","base":"Secondary%20cities/Rest%20of%20the%20cities/Kropyvnytskyi","profiles":["good","harsh"],"jsonName":"Kropyvnytskyi"},
-  "Kremenchuk":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1088","base":"Secondary%20cities/Rest%20of%20the%20cities/Kremenchuk","profiles":["good","harsh"],"jsonName":"Kremenchuk"},
-  "Kamianets-Podilskyi":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1132","base":"Secondary%20cities/Rest%20of%20the%20cities/Kamianets-Podilskyi","profiles":["good","harsh"],"jsonName":"Kamianets-Podilskyi"},
-  "Pavlohrad":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1176","base":"Secondary%20cities/Rest%20of%20the%20cities/Pavlohrad","profiles":["good","harsh"],"jsonName":"Pavlohrad"},
-  "Kamianske":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1178","base":"Secondary%20cities/Rest%20of%20the%20cities/Kamianske","profiles":["good","harsh"],"jsonName":"Kamianske"},
-  "Mukachevo":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1179","base":"Secondary%20cities/Rest%20of%20the%20cities/Mukachevo","profiles":["good","harsh"],"jsonName":"Mukachevo"},
-  "Boryspil":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1220","base":"Secondary%20cities/Rest%20of%20the%20cities/Boryspil","profiles":["good","harsh"],"jsonName":"Boryspil"},
-  "Vyshhorod":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1262","base":"Secondary%20cities/Rest%20of%20the%20cities/Vyshhorod","profiles":["good","harsh"],"jsonName":"Vyshhorod"},
-  "Drohobych":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1348","base":"Secondary%20cities/Rest%20of%20the%20cities/Drohobych","profiles":["good","harsh"],"jsonName":"Drohobych"},
-  "Truskavets":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/1357","base":"Secondary%20cities/Rest%20of%20the%20cities/Truskavets","profiles":["good","harsh"],"jsonName":"Truskavets"},
-  "Kovel":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/2170","base":"Secondary%20cities/Rest%20of%20the%20cities/Kovel","profiles":["good","harsh"],"jsonName":"Kovel"},
-  "Oleksandriia":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/2171","base":"Secondary%20cities/Rest%20of%20the%20cities/Oleksandriia","profiles":["good","harsh"],"jsonName":"Oleksandriia"},
-  "Kolomyia":{"group":"Rest of cities","order":3,"url":"https://admin-panel.bolt.eu/delivery-courier/settings/city/2499","base":"Secondary%20cities/Rest%20of%20the%20cities/Kolomyia","profiles":["good","harsh"],"jsonName":"Kolomyia"}
-};
-
-const PROFILE_META = {
-  good:  {folder:"Good%20weather",  prefix:"Good%20Weather%20Settings"},
-  bad:   {folder:"Bad%20weather",   prefix:"Bad%20Weather%20Settings"},
-  harsh: {folder:"Harsh%20weather", prefix:"Harsh%20Weather%20Settings"}
-};
-
-const P_LABELS = {good:"Good",bad:"Bad",harsh:"Harsh"};
-const P_FULL = {good:"Good Weather",bad:"Bad Weather",harsh:"Harsh Weather"};
-
-const LS_STATUS = 'cops_weather_status';
-const LS_USER = 'cops_user_name';
-const LS_PAT = 'cops_gh_pat';
-
-function getPat() { return localStorage.getItem(LS_PAT) || ''; }
-function savePat(v) {
-  localStorage.setItem(LS_PAT, v.trim());
-  updateAuthBanner();
-  const g = document.getElementById('patGroup');
-  g.classList.toggle('valid', v.trim().startsWith('ghp_') || v.trim().startsWith('github_pat_'));
-}
-function getUserName() { return document.getElementById('userName').value || ''; }
-function saveUserName(v) { localStorage.setItem(LS_USER, v); }
-
-let sharedStatus = {};
-async function fetchSharedStatus() {
-  try {
-    const r = await fetch(STATUS_URL + '?t=' + Date.now());
-    if (r.ok) sharedStatus = await r.json();
-  } catch(e) {}
-}
-
-function getStatus() {
-  return sharedStatus.cities || {};
-}
-
-function getJsonUrl(cityName, profile) {
-  const c = CITIES[cityName], m = PROFILE_META[profile];
-  return `${REPO_RAW}/${c.base}/${m.folder}/${m.prefix}%20${encodeURIComponent(c.jsonName)}.json`;
-}
-
-function ghHeaders() {
-  const pat = getPat();
-  return pat ? { 'Authorization': 'Bearer ' + pat, 'Accept': 'application/vnd.github+json' } : {};
-}
-
-let applyingCity = null;
-let pollingRunId = null;
-
-async function applySettings(cityName, profile) {
-  const user = getUserName();
-  if (!user) {
-    toast('Select your name in the header first', 'warn');
-    return;
-  }
-  const pat = getPat();
-  if (!pat) {
-    toast('Paste your GitHub token in the header first', 'warn');
-    document.getElementById('patInput').focus();
-    return;
-  }
-  if (applyingCity) {
-    toast('Another task is running — wait for it to finish', 'warn');
-    return;
-  }
-
-  applyingCity = cityName;
-  const cid = cardId(cityName);
-  const card = document.getElementById(cid);
-  card?.classList.add('applying');
-  card?.querySelectorAll('.b').forEach(b => b.disabled = true);
-  const prog = card?.querySelector('.card-progress');
-  if (prog) {
-    prog.classList.add('show');
-    prog.querySelector('.cp-msg').textContent = `Triggering GitHub Actions for ${cityName}...`;
-  }
-
-  const beforeTime = new Date().toISOString();
-
-  try {
-    const res = await fetch(`${API}/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW}/dispatches`, {
-      method: 'POST',
-      headers: { ...ghHeaders(), 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ref: 'main', inputs: { city: cityName, profile, user } })
-    });
-
-    if (res.status === 204) {
-      toast(`Workflow triggered — applying ${P_FULL[profile]} to ${cityName}...`, 'info', 6000);
-      if (prog) prog.querySelector('.cp-msg').textContent = `Running automation for ${cityName}... (~40-60s)`;
-      pollWorkflow(cityName, profile, user, beforeTime, card, prog);
-    } else if (res.status === 404) {
-      throw new Error('Workflow not found. Check if apply-settings.yml exists in the repo.');
-    } else if (res.status === 403) {
-      throw new Error('Token lacks permissions. Make sure Actions: Read and Write is enabled.');
-    } else {
-      const body = await res.text();
-      throw new Error(`GitHub API error ${res.status}: ${body}`);
-    }
-  } catch(e) {
-    finishApply(card, prog);
-    toast('Failed: ' + e.message, 'error', 10000);
-  }
-}
-
-async function pollWorkflow(cityName, profile, user, beforeTime, card, prog) {
-  await sleep(4000);
-
-  let runId = null;
-  let attempts = 0;
-
-  while (!runId && attempts < 10) {
-    attempts++;
-    try {
-      const res = await fetch(`${API}/repos/${OWNER}/${REPO}/actions/runs?per_page=5&event=workflow_dispatch`, {
-        headers: ghHeaders()
-      });
-      const data = await res.json();
-      const run = data.workflow_runs?.find(r =>
-        new Date(r.created_at) >= new Date(beforeTime) &&
-        r.path?.includes(WORKFLOW)
-      );
-      if (run) {
-        runId = run.id;
-        break;
-      }
-    } catch(e) {}
-    await sleep(3000);
-  }
-
-  if (!runId) {
-    finishApply(card, prog);
-    toast(`Could not find the workflow run. Check Actions tab on GitHub.`, 'error', 10000);
-    return;
-  }
-
-  pollingRunId = runId;
-  let maxPolls = 40;
-  while (maxPolls-- > 0) {
-    await sleep(5000);
-    try {
-      const res = await fetch(`${API}/repos/${OWNER}/${REPO}/actions/runs/${runId}`, { headers: ghHeaders() });
-      const run = await res.json();
-
-      if (prog) {
-        const elapsed = Math.round((Date.now() - new Date(run.created_at).getTime()) / 1000);
-        prog.querySelector('.cp-msg').textContent = `Running... ${elapsed}s elapsed`;
-      }
-
-      if (run.status === 'completed') {
-        finishApply(card, prog);
-        if (run.conclusion === 'success') {
-          toast(`${cityName} → ${P_FULL[profile]} applied successfully!`, 'success', 8000);
-          await sleep(3000);
-          await fetchSharedStatus();
-          renderAll();
-        } else {
-          toast(`Workflow finished with: ${run.conclusion}. Check Actions tab for details.`, 'error', 10000);
-        }
-        return;
-      }
-    } catch(e) {}
-  }
-
-  finishApply(card, prog);
-  toast('Polling timed out. Check the Actions tab on GitHub for status.', 'warn', 10000);
-}
-
-function finishApply(card, prog) {
-  applyingCity = null;
-  pollingRunId = null;
-  if (card) {
-    card.classList.remove('applying');
-    card.querySelectorAll('.b').forEach(b => b.disabled = false);
-  }
-  if (prog) prog.classList.remove('show');
-}
-
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-function updateAuthBanner() {
-  const el = document.getElementById('auth-banner');
-  const pat = getPat();
-  if (pat) {
-    el.innerHTML = '<div class="auth-banner ok"><span class="ab-dot"></span><strong>GitHub token set</strong> — Click any weather button to apply settings automatically via GitHub Actions</div>';
-  } else {
-    el.innerHTML = '<div class="auth-banner warn"><span class="ab-dot"></span><strong>GitHub token not set</strong> — <a onclick="toggleSec(\'sec-howto\');document.getElementById(\'sec-howto\').scrollIntoView({behavior:\'smooth\'})">Open setup instructions</a> to learn how to create a token</div>';
-  }
-}
-
-function toggleSec(id) { document.getElementById(id).classList.toggle('closed'); }
-function cardId(name) { return 'card-' + name.replace(/[^a-zA-Z0-9]/g, '_'); }
-function timeAgo(iso) {
-  if (!iso) return '';
-  const ms = Date.now() - new Date(iso).getTime();
-  if (ms < 0) return 'just now';
-  const m = Math.floor(ms/60000), h = Math.floor(m/60), d = Math.floor(h/24);
-  if (m < 1) return 'just now';
-  if (m < 60) return m + 'm ago';
-  if (h < 24) return h + 'h ' + (m%60) + 'm ago';
-  return d + 'd ' + (h%24) + 'h ago';
-}
-const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
-
-function toast(msg, type='info', dur=5000) {
-  const c = document.getElementById('ts'), t = document.createElement('div');
-  t.className = 'toast ' + type;
-  t.innerHTML = '<span class="tmsg">' + msg + '</span>';
-  c.appendChild(t);
-  setTimeout(() => t.remove(), dur);
-}
-
-const jsonCache = {};
-async function fetchJson(cityName, profile) {
-  const key = cityName + ':' + profile;
-  if (jsonCache[key]) return jsonCache[key];
-  try {
-    const r = await fetch(getJsonUrl(cityName, profile));
-    if (!r.ok) return null;
-    const data = await r.json();
-    jsonCache[key] = data;
-    return data;
-  } catch(e) { return null; }
-}
-
-function syntaxHL(json) {
-  return JSON.stringify(json, null, 2).replace(
-    /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?|null)/g,
-    function(m) {
-      let c = 'json-num';
-      if (/^"/.test(m)) c = /:$/.test(m) ? 'json-key' : 'json-str';
-      else if (/true|false/.test(m)) c = 'json-bool';
-      else if (/null/.test(m)) c = 'json-null';
-      return '<span class="' + c + '">' + m + '</span>';
-    }
-  );
-}
-
-async function openModal(cityName, profile) {
-  const city = CITIES[cityName];
-  document.getElementById('modalTitle').textContent = cityName + ' — Settings';
-  document.getElementById('modalTabs').innerHTML = city.profiles.map(p =>
-    `<button class="modal-tab ${p} ${p===profile?'active':''}" onclick="showModalTab('${cityName}','${p}')">${P_FULL[p]}</button>`
-  ).join('');
-  await showModalTab(cityName, profile);
-  document.getElementById('jsonOverlay').classList.add('open');
-}
-
-async function showModalTab(cityName, profile) {
-  document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
-  document.querySelector(`.modal-tab.${profile}`)?.classList.add('active');
-  const pre = document.getElementById('modalJson');
-  pre.innerHTML = '<div style="text-align:center;padding:20px;color:var(--mu)">Loading...</div>';
-  const data = await fetchJson(cityName, profile);
-  pre.innerHTML = data ? syntaxHL(data) : '<span style="color:var(--harsh)">Failed to load</span>';
-}
-
-function closeModal() { document.getElementById('jsonOverlay').classList.remove('open'); }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-document.getElementById('jsonOverlay').addEventListener('click', e => {
-  if (e.target === e.currentTarget) closeModal();
-});
-
-function buildGroups() {
-  const g = {};
-  for (const [n, c] of Object.entries(CITIES)) {
-    if (!g[c.group]) g[c.group] = {order: c.order, cities: []};
-    g[c.group].cities.push(n);
-  }
-  return Object.entries(g).sort((a,b) => a[1].order - b[1].order);
-}
-
-function renderOverview() {
-  const status = getStatus();
-  const groups = buildGroups();
-  const el = document.getElementById('overview-body');
-  let tracked = 0;
-
-  el.innerHTML = groups.map(([gn, gd]) => {
-    const pills = gd.cities.map(cn => {
-      const s = status[cn];
-      const prof = s?.profile || 'none';
-      const lbl = s ? P_LABELS[prof] : '\u2014';
-      const meta = s ? `<span class="pmeta"><span class="puser">${s.user||'\u2014'}</span> \u00b7 ${timeAgo(s.timestamp)}</span>` : '';
-      if (s) tracked++;
-      return `<span class="pill"><span class="dot ${prof}"></span><span class="pn">${cn}</span><span class="pp ${prof}">${lbl}</span>${meta}</span>`;
-    }).join('');
-    return `<div class="ov-group"><div class="ov-group-h">${gn} \u00b7 ${gd.cities.length}</div><div class="ov-pills">${pills}</div></div>`;
-  }).join('');
-
-  document.getElementById('ov-cnt').textContent = tracked + ' tracked';
-  document.getElementById('hTracked').textContent = tracked;
-}
-
-function renderCitySections(filter) {
-  const groups = buildGroups();
-  const status = getStatus();
-  const wrap = document.getElementById('city-sections');
-  const saved = {};
-  wrap.querySelectorAll('.sec').forEach(s => { saved[s.id] = s.classList.contains('closed'); });
-  const fl = (filter || '').toLowerCase();
-
-  let html = '';
-  groups.forEach(([gn, gd], i) => {
-    const cities = fl ? gd.cities.filter(c => c.toLowerCase().includes(fl)) : gd.cities;
-    if (!cities.length) return;
-    const id = 'sec-g-' + i;
-    const closed = id in saved ? saved[id] : (i > 0 && !fl);
-
-    const cards = cities.map(cn => {
-      const city = CITIES[cn];
-      const s = status[cn];
-      const cid = cardId(cn);
-
-      let statusHtml = '<div class="card-status" style="color:var(--mu2)">No profile set</div>';
-      if (s) {
-        statusHtml = `<div class="card-status"><span class="dot ${s.profile}" style="width:6px;height:6px;border-radius:50%"></span><span class="cs-profile ${s.profile}">${P_FULL[s.profile]}</span><span>\u00b7</span><span class="cs-user">${s.user}</span><span>\u00b7</span><span class="cs-time">${timeAgo(s.timestamp)}</span></div>`;
-      }
-
-      const btns = city.profiles.map(p => {
-        const isActive = s?.profile === p;
-        return `<button class="b ${p} ${isActive ? 'active-prof' : ''}" onclick="applySettings('${cn}','${p}')"><span class="lb">${cap(p)}</span><div class="sp"></div></button>`;
-      }).join('');
-
-      return `<div class="card" id="${cid}">
-        <div class="card-top"><span class="city-name">${cn}</span><a class="admin-link" href="${city.url}" target="_blank">Admin &#8599;</a></div>
-        ${statusHtml}
-        <div class="btns">${btns}</div>
-        <div class="card-progress"><div class="cp-spinner"></div><span class="cp-msg"></span></div>
-        <button class="view-json-btn" onclick="openModal('${cn}','${city.profiles[0]}')">View JSON settings</button>
-      </div>`;
-    }).join('');
-
-    html += `<div class="sec ${closed?'closed':''}" id="${id}">
-      <div class="sec-h" onclick="toggleSec('${id}')"><span class="chv">&#9662;</span><h2>${gn}</h2><span class="cnt">${cities.length} cities</span></div>
-      <div class="sec-b" style="max-height:8000px"><div class="grid">${cards}</div></div>
-    </div>`;
-  });
-  wrap.innerHTML = html;
-}
-
-function renderAll() {
-  renderOverview();
-  renderCitySections(document.getElementById('searchInput').value);
-}
-
-function filterCities(val) { renderCitySections(val); }
-
-(async function init() {
-  const savedUser = localStorage.getItem(LS_USER);
-  if (savedUser) document.getElementById('userName').value = savedUser;
-
-  const savedPat = localStorage.getItem(LS_PAT);
-  if (savedPat) {
-    document.getElementById('patInput').value = savedPat;
-    const g = document.getElementById('patGroup');
-    g.classList.toggle('valid', savedPat.startsWith('ghp_') || savedPat.startsWith('github_pat_'));
-  }
-
-  document.getElementById('hCities').textContent = Object.keys(CITIES).length;
-
-  await fetchSharedStatus();
-  renderAll();
-  updateAuthBanner();
-
-  setInterval(async () => {
-    await fetchSharedStatus();
-    if (!applyingCity) renderAll();
-  }, 30000);
-})();
-</script>
 </body>
 </html>
