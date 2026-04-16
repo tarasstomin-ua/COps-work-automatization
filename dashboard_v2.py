@@ -97,11 +97,39 @@ CONFIG_FILE = Path(__file__).parent / ".cops_config.json"
 
 # ── Config helpers ────────────────────────────────────────────────────────────
 
+def _get_gh_token():
+    """Try to get token from gh CLI, fall back to config file."""
+    try:
+        result = subprocess.run(
+            ["gh", "auth", "token"], capture_output=True, text=True, timeout=5,
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            return result.stdout.strip()
+    except Exception:
+        pass
+    home_gh = Path.home() / "bin" / "gh"
+    if home_gh.exists():
+        try:
+            result = subprocess.run(
+                [str(home_gh), "auth", "token"], capture_output=True, text=True, timeout=5,
+            )
+            if result.returncode == 0 and result.stdout.strip():
+                return result.stdout.strip()
+        except Exception:
+            pass
+    return ""
+
+
 def _load_config():
     try:
-        return json.loads(CONFIG_FILE.read_text()) if CONFIG_FILE.exists() else {}
+        cfg = json.loads(CONFIG_FILE.read_text()) if CONFIG_FILE.exists() else {}
     except Exception:
-        return {}
+        cfg = {}
+    if not cfg.get("pat"):
+        gh_token = _get_gh_token()
+        if gh_token:
+            cfg["pat"] = gh_token
+    return cfg
 
 
 def _save_config(cfg):
@@ -474,7 +502,9 @@ def api_history():
 def api_config():
     if request.method == "GET":
         cfg = _load_config()
-        return jsonify({"user": cfg.get("user", ""), "has_pat": bool(cfg.get("pat", ""))})
+        has_pat = bool(cfg.get("pat", ""))
+        pat_source = "gh CLI" if (has_pat and not CONFIG_FILE.exists()) or (has_pat and "pat" not in (json.loads(CONFIG_FILE.read_text()) if CONFIG_FILE.exists() else {})) else ("saved" if has_pat else "none")
+        return jsonify({"user": cfg.get("user", ""), "has_pat": has_pat, "pat_source": pat_source})
     data = request.json or {}
     cfg = _load_config()
     if "user" in data:
@@ -638,7 +668,7 @@ tr:last-child td{border-bottom:none}
       <option value="anna.tiurina@bolt.eu">Anna Tiurina</option>
       <option value="nataliia.malakova@bolt.eu">Nataliia Malakova</option>
     </select>
-    <input id="patIn" type="password" placeholder="GitHub PAT" style="background:var(--bg);border:1px solid var(--bd);color:var(--txb);padding:5px 10px;border-radius:6px;font-size:11px;width:140px;font-family:monospace" />
+    <span id="patStatus" style="font-size:10px;color:var(--mu);padding:4px 10px;background:var(--bg);border:1px solid var(--bd);border-radius:6px"></span>
     <div class="metric"><div class="metric-v" id="hCities">37</div><div class="metric-l">Cities</div></div>
     <div class="metric"><div class="metric-v" id="hActive">0</div><div class="metric-l">Active</div></div>
     <div class="live" id="liveStatus"><span class="live-dot"></span><span id="liveText">Live</span></div>
@@ -708,14 +738,12 @@ function toggleOvTier(el){el.closest('.ov-tier').classList.toggle('cl')}
 async function loadConfig(){
   const r=await fetch('/api/config');const d=await r.json();
   if(d.user) document.getElementById('userSel').value=d.user;
-  if(d.has_pat) document.getElementById('patIn').placeholder='\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022';
+  const ps=document.getElementById('patStatus');
+  if(d.has_pat){ps.textContent='\u2713 GitHub: '+d.pat_source;ps.style.color='var(--good)';}
+  else{ps.textContent='\u2717 No GitHub token';ps.style.color='var(--harsh)';}
 }
 document.getElementById('userSel').onchange=function(){
   fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user:this.value})});
-};
-document.getElementById('patIn').onchange=function(){
-  if(this.value) fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pat:this.value})});
-  this.value='';this.placeholder='\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022';
 };
 loadConfig();
 
