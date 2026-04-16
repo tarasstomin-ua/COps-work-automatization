@@ -1,12 +1,6 @@
 (function() {
   'use strict';
 
-  if (document.getElementById('cops-overlay')) {
-    document.getElementById('cops-overlay').remove();
-    document.getElementById('cops-log')?.remove();
-    return;
-  }
-
   const OWNER = 'tarasstomin-ua', REPO = 'COps-work-automatization';
   const RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/Bad%20weather%20settings`;
   const STATUS_URL = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/status.json`;
@@ -63,11 +57,12 @@
   const PF = {good:'Good Weather',bad:'Bad Weather',harsh:'Harsh Weather'};
   const PICON = {good:'\u2600\uFE0F',bad:'\u{1F327}\uFE0F',harsh:'\u{1F328}\uFE0F'};
 
-  const LS = 'cops2_status', LS_U = 'cops2_user', LS_P = 'cops2_pat';
+  const LS = 'cops2_status', LS_U = 'cops2_user', LS_P = 'cops2_pat', LS_PEND = 'cops2_pending';
   function loadSt() { try { return JSON.parse(localStorage.getItem(LS)) || {}; } catch(e) { return {}; } }
   function saveSt(s) { localStorage.setItem(LS, JSON.stringify(s)); }
   function getU() { return localStorage.getItem(LS_U) || ''; }
   function getP() { return localStorage.getItem(LS_P) || ''; }
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
   function timeAgo(iso) {
     if (!iso) return '';
@@ -84,10 +79,6 @@
     const c = CITIES[name], m = PM[prof];
     return `${RAW}/${c.base}/${m.f}/${m.px}%20${encodeURIComponent(c.jn)}.json`;
   }
-
-  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-  let busy = false, autoWin = null;
 
   async function setSt(city, profile, user) {
     const s = loadSt();
@@ -137,7 +128,116 @@
     }
   }
 
-  // ── AUTOMATION: script injection into popup ────────────────────────────────
+  // ── Mini progress bar (visible during automation) ──────────────────────────
+
+  function miniBar(text, bg) {
+    let b = document.getElementById('cops-mini');
+    if (!b) {
+      b = document.createElement('div');
+      b.id = 'cops-mini';
+      b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999999;padding:20px 30px;font:700 20px/1.4 system-ui,sans-serif;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.6);transition:background .3s';
+      document.body.appendChild(b);
+    }
+    b.style.background = bg || '#1e40af';
+    b.textContent = text;
+    return b;
+  }
+
+  // ── Core automation: runs on the CURRENT page (same JS context) ────────────
+
+  function waitForEditorOnPage(timeout) {
+    return new Promise(resolve => {
+      const deadline = Date.now() + timeout;
+      const iv = setInterval(() => {
+        if (document.querySelector('.jsoneditor')) { clearInterval(iv); resolve(true); return; }
+        if (Date.now() > deadline) { clearInterval(iv); resolve(false); }
+      }, 300);
+    });
+  }
+
+  async function runAutomationOnPage(target, bar) {
+    bar.textContent = '\u{1F527} Switching to Code mode...';
+
+    const mb = document.querySelector('button.jsoneditor-modes');
+    if (mb) {
+      mb.click();
+      await sleep(600);
+      const items = document.querySelectorAll('.jsoneditor-type-modes div, .jsoneditor-type-modes button');
+      for (const it of items) {
+        if (it.textContent.trim() === 'Code') { it.click(); break; }
+      }
+      await sleep(1200);
+    }
+
+    bar.textContent = '\u{1F4D6} Reading current settings...';
+    const aceEl = document.querySelector('.ace_editor');
+    if (!aceEl) throw new Error('Ace editor element not found on page');
+    if (typeof ace === 'undefined') throw new Error('ace global is not defined');
+    const editor = ace.edit(aceEl);
+    const raw = editor.getValue();
+    if (!raw || raw.trim().length < 10) throw new Error('Editor content is empty');
+    const current = JSON.parse(raw);
+
+    bar.textContent = '\u{1F500} Merging ' + Object.keys(target).length + ' setting groups...';
+    deepMerge(current, target);
+
+    editor.setValue(JSON.stringify(current, null, 2), -1);
+    await sleep(1000);
+
+    bar.textContent = '\u{1F4BE} Clicking Update...';
+    const btn = Array.from(document.querySelectorAll('button')).find(b => b.textContent.trim() === 'Update');
+    if (!btn) throw new Error('Update button not found');
+    btn.click();
+    await sleep(3000);
+
+    bar.textContent = '\u2705 Settings updated successfully!';
+    bar.style.background = '#047857';
+  }
+
+  // ── Pending action: auto-run after full-page redirect ──────────────────────
+
+  const pendRaw = localStorage.getItem(LS_PEND);
+  if (pendRaw) {
+    localStorage.removeItem(LS_PEND);
+    try {
+      const pend = JSON.parse(pendRaw);
+      if ((Date.now() - pend.ts) < 300000) {
+        const expected = '/delivery-courier/settings/city/' + pend.cityId;
+        if (window.location.pathname === expected) {
+          (async () => {
+            const bar = miniBar('\u23F3 COps: Waiting for ' + pend.cityName + ' editor to load...');
+            try {
+              const ok = await waitForEditorOnPage(90000);
+              if (!ok) throw new Error('JSON editor did not appear (90s timeout)');
+              await sleep(2000);
+              await runAutomationOnPage(pend.target, bar);
+              await setSt(pend.cityName, pend.profile, pend.user);
+              bar.textContent = '\u2705 ' + pend.cityName + ': ' + PF[pend.profile] + ' applied by ' + pend.user.split('@')[0] + '!';
+              bar.style.background = '#047857';
+              setTimeout(() => { bar.remove(); }, 6000);
+            } catch(e) {
+              bar.textContent = '\u274C Error: ' + e.message;
+              bar.style.background = '#b91c1c';
+              setTimeout(() => { bar.remove(); }, 10000);
+            }
+          })();
+          return;
+        }
+      }
+    } catch(e) { /* bad JSON, ignore */ }
+  }
+
+  // ── Dashboard toggle ───────────────────────────────────────────────────────
+
+  if (document.getElementById('cops-overlay')) {
+    document.getElementById('cops-overlay').remove();
+    document.getElementById('cops-log')?.remove();
+    return;
+  }
+
+  // ── applySettings: SPA navigation + direct DOM ─────────────────────────────
+
+  let busy = false;
 
   async function applySettings(cityName, profile) {
     const user = getU();
@@ -145,169 +245,89 @@
     if (busy) { toast('Another task is running...', 'warn'); return; }
     busy = true;
     const city = CITIES[cityName];
-    const settingsUrl = `https://admin-panel.bolt.eu/delivery-courier/settings/city/${city.id}`;
-    setCardState(cityName, 'working', `${PICON[profile]} Applying ${PF[profile]}...`);
-
-    if (!autoWin || autoWin.closed) {
-      autoWin = window.open(settingsUrl, 'cops_auto', 'width=1300,height=900');
-    } else {
-      autoWin.location.href = settingsUrl;
-    }
-    if (!autoWin) {
-      toast('Popup blocked! Allow popups for admin-panel.bolt.eu and try again.', 'error');
-      setCardState(cityName, 'error', 'Popup blocked');
-      busy = false;
-      return;
-    }
+    const settingsPath = '/delivery-courier/settings/city/' + city.id;
+    setCardState(cityName, 'working', PICON[profile] + ' Applying ' + PF[profile] + '...');
 
     try {
-      toast(`Fetching ${PF[profile]} settings for ${cityName}...`);
+      toast('Fetching ' + PF[profile] + ' for ' + cityName + '...');
       const resp = await fetch(jsonUrl(cityName, profile));
       if (!resp.ok) throw new Error('GitHub fetch failed: HTTP ' + resp.status);
       const target = await resp.json();
 
-      toast('Waiting for admin panel page to load...');
-      await waitForBody(autoWin, 15000);
-      injectBanner(autoWin, '\u23F3 COps: Waiting for JSON editor to load...');
+      const overlay = document.getElementById('cops-overlay');
+      const logEl = document.getElementById('cops-log');
+      const savedHref = window.location.href;
+      overlay.style.display = 'none';
+      if (logEl) logEl.style.display = 'none';
 
-      await waitForEditor(autoWin, 90000);
+      const bar = miniBar('\u23F3 Navigating to ' + cityName + ' settings...');
+
+      localStorage.setItem(LS_PEND, JSON.stringify({
+        cityName, profile, cityId: city.id, target, user, ts: Date.now()
+      }));
+
+      history.pushState(null, '', settingsPath);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+
+      let found = await waitForEditorOnPage(8000);
+
+      if (!found) {
+        bar.textContent = '\u23F3 Trying alternate navigation...';
+        const a = document.createElement('a');
+        a.href = settingsPath;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        found = await waitForEditorOnPage(5000);
+      }
+
+      if (!found) {
+        bar.textContent = '\u23F3 Redirecting... click bookmarklet again when page loads';
+        bar.style.background = '#b45309';
+        await sleep(1500);
+        bar.remove();
+        window.location.href = 'https://admin-panel.bolt.eu' + settingsPath;
+        return;
+      }
+
+      localStorage.removeItem(LS_PEND);
       await sleep(2000);
-      injectBanner(autoWin, '\u{1F527} COps: Running automation...');
+      await runAutomationOnPage(target, bar);
+      await sleep(1500);
 
-      toast('Injecting automation into admin panel...');
-      autoWin.__copsTargetJSON = JSON.stringify(target);
+      bar.textContent = '\u23F3 Returning to dashboard...';
+      bar.style.background = '#1e40af';
 
-      const result = await runAutomationInPopup(autoWin);
-      if (!result.success) throw new Error(result.error || 'Unknown automation error');
+      history.pushState(null, '', new URL(savedHref).pathname + new URL(savedHref).search);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      await sleep(500);
+
+      bar.remove();
+      overlay.style.display = '';
+      if (logEl) logEl.style.display = '';
+
+      if (!document.getElementById('cops-overlay')) {
+        document.body.appendChild(overlay);
+        document.body.appendChild(logEl);
+      }
 
       await setSt(cityName, profile, user);
-      setCardState(cityName, 'success', `${PICON[profile]} ${PF[profile]} applied!`);
-      toast(`\u2705 ${cityName} \u2192 ${PF[profile]} applied by ${user.split('@')[0]}`, 'success');
-
-      setTimeout(() => { try { autoWin.close(); } catch(e) {} }, 2000);
-      window.focus();
+      setCardState(cityName, 'success', PICON[profile] + ' ' + PF[profile] + ' applied!');
+      toast('\u2705 ' + cityName + ' \u2192 ' + PF[profile] + ' applied by ' + user.split('@')[0], 'success');
       renderAll();
     } catch(e) {
+      localStorage.removeItem(LS_PEND);
+      const overlay = document.getElementById('cops-overlay');
+      const logEl = document.getElementById('cops-log');
+      if (overlay) overlay.style.display = '';
+      if (logEl) logEl.style.display = '';
+      document.getElementById('cops-mini')?.remove();
       setCardState(cityName, 'error', e.message);
       toast('ERROR: ' + e.message, 'error');
-      try { injectBanner(autoWin, '\u274C ERROR: ' + e.message, '#b91c1c'); } catch(x) {}
-      window.focus();
     } finally {
       busy = false;
     }
-  }
-
-  function waitForBody(win, timeout) {
-    return new Promise((resolve) => {
-      const deadline = Date.now() + timeout;
-      const iv = setInterval(() => {
-        try {
-          if (win.document && win.document.body) { clearInterval(iv); resolve(); return; }
-        } catch(e) { /* cross-origin during SSO redirect, keep polling */ }
-        if (Date.now() > deadline) { clearInterval(iv); resolve(); }
-      }, 200);
-    });
-  }
-
-  function injectBanner(win, text, bg) {
-    try {
-      let b = win.document.getElementById('cops-banner');
-      if (!b) {
-        b = win.document.createElement('div');
-        b.id = 'cops-banner';
-        b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999999;padding:18px 28px;font:700 18px/1.4 system-ui,sans-serif;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.6);transition:background .3s';
-        win.document.body.appendChild(b);
-      }
-      b.style.background = bg || '#1e40af';
-      b.textContent = text;
-    } catch(e) { /* couldn't inject, non-critical */ }
-  }
-
-  function runAutomationInPopup(win) {
-    return new Promise((resolve, reject) => {
-      const timeout = setTimeout(() => {
-        window.removeEventListener('message', handler);
-        reject(new Error('Automation timed out (30s)'));
-      }, 30000);
-
-      const handler = function(e) {
-        if (e.data && e.data.type === 'cops-done') {
-          clearTimeout(timeout);
-          window.removeEventListener('message', handler);
-          resolve(e.data);
-        }
-      };
-      window.addEventListener('message', handler);
-
-      try {
-        const script = win.document.createElement('script');
-        script.textContent = [
-          '(async function(){',
-          '  var ban=document.getElementById("cops-banner");',
-          '  function p(t,bg){if(ban){ban.textContent=t;if(bg)ban.style.background=bg;}}',
-          '  try{',
-          '    p("\\u{1F504} Switching to Code mode...");',
-          '    var mb=document.querySelector("button.jsoneditor-modes");',
-          '    if(mb){',
-          '      mb.click();',
-          '      await new Promise(function(r){setTimeout(r,600)});',
-          '      var items=document.querySelectorAll(".jsoneditor-type-modes div,.jsoneditor-type-modes button");',
-          '      for(var i=0;i<items.length;i++){if(items[i].textContent.trim()==="Code"){items[i].click();break;}}',
-          '      await new Promise(function(r){setTimeout(r,1200)});',
-          '    }',
-          '    p("\\u{1F4D6} Reading current settings...");',
-          '    var aceEl=document.querySelector(".ace_editor");',
-          '    if(!aceEl)throw new Error("Ace editor element not found");',
-          '    if(typeof ace==="undefined")throw new Error("ace global not defined");',
-          '    var editor=ace.edit(aceEl);',
-          '    var raw=editor.getValue();',
-          '    if(!raw||raw.trim().length<10)throw new Error("Editor content empty or too short");',
-          '    var current=JSON.parse(raw);',
-          '    p("\\u{1F500} Merging settings...");',
-          '    var target=JSON.parse(window.__copsTargetJSON);',
-          '    function mg(d,s){for(var k in s){if(s.hasOwnProperty(k)){if(s[k]&&typeof s[k]==="object"&&!Array.isArray(s[k])){if(!d[k]||typeof d[k]!=="object")d[k]={};mg(d[k],s[k]);}else d[k]=s[k];}}}',
-          '    mg(current,target);',
-          '    p("\\u{1F4BE} Writing merged settings...");',
-          '    editor.setValue(JSON.stringify(current,null,2),-1);',
-          '    await new Promise(function(r){setTimeout(r,1000)});',
-          '    p("\\u{1F5B1} Clicking Update...");',
-          '    var btns=document.querySelectorAll("button");',
-          '    var found=false;',
-          '    for(var j=0;j<btns.length;j++){if(btns[j].textContent.trim()==="Update"){btns[j].click();found=true;break;}}',
-          '    if(!found)throw new Error("Update button not found");',
-          '    await new Promise(function(r){setTimeout(r,3000)});',
-          '    p("\\u2705 Settings updated successfully!","#047857");',
-          '    await new Promise(function(r){setTimeout(r,1000)});',
-          '    window.opener.postMessage({type:"cops-done",success:true},"*");',
-          '  }catch(e){',
-          '    p("\\u274C "+e.message,"#b91c1c");',
-          '    window.opener.postMessage({type:"cops-done",success:false,error:e.message||String(e)},"*");',
-          '  }',
-          '})();'
-        ].join('\n');
-        win.document.head.appendChild(script);
-      } catch(e) {
-        clearTimeout(timeout);
-        window.removeEventListener('message', handler);
-        reject(new Error('Could not inject script: ' + e.message));
-      }
-    });
-  }
-
-  function waitForEditor(win, timeout) {
-    return new Promise((resolve, reject) => {
-      const deadline = Date.now() + timeout;
-      const iv = setInterval(() => {
-        try {
-          if (Date.now() > deadline) { clearInterval(iv); reject(new Error('Timeout: editor did not load in 90s')); return; }
-          if (win.closed) { clearInterval(iv); reject(new Error('Popup was closed')); return; }
-          const ed = win.document.querySelector('.jsoneditor');
-          if (ed) { clearInterval(iv); resolve(ed); }
-        } catch(e) {
-          if (Date.now() > deadline) { clearInterval(iv); reject(new Error('Timeout (cross-origin): ' + e.message)); }
-        }
-      }, 500);
-    });
   }
 
   // ── UI ──────────────────────────────────────────────────────────────────────
@@ -402,7 +422,8 @@
   lg.id = 'cops-log';
   document.body.appendChild(lg);
 
-  function toast(msg, type='info') {
+  function toast(msg, type) {
+    type = type || 'info';
     const el = document.createElement('div');
     el.className = 'tst ' + type;
     el.textContent = msg;
@@ -434,14 +455,14 @@
     let tracked = 0;
     el.innerHTML = '<h3>\u{1F30D} Active Weather Status</h3>' + groups().map(([gn, gd]) => {
       const pills = gd.cs.map(cn => {
-        const s = st[cn], c = CITIES[cn], prof = s?.profile || 'none', lbl = s ? PL[prof] : '\u2014';
-        const meta = s ? `<span class="pm">${s.user.split('@')[0]} \u00b7 ${timeAgo(s.timestamp)}</span>` : '';
+        const s = st[cn], c = CITIES[cn], prof = s ? s.profile : 'none', lbl = s ? PL[prof] : '\u2014';
+        const meta = s ? '<span class="pm">' + s.user.split('@')[0] + ' \u00b7 ' + timeAgo(s.timestamp) + '</span>' : '';
         if (s) tracked++;
-        return `<span class="cpill"><span class="ico">${c.icon}</span><span class="dot ${prof}"></span><span class="pn">${cn}</span><span class="pp ${prof}">${lbl}</span>${meta}</span>`;
+        return '<span class="cpill"><span class="ico">' + c.icon + '</span><span class="dot ' + prof + '"></span><span class="pn">' + cn + '</span><span class="pp ' + prof + '">' + lbl + '</span>' + meta + '</span>';
       }).join('');
-      return `<div style="margin-bottom:12px"><div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6b7280;margin-bottom:8px">${gn} \u00b7 ${gd.cs.length}</div><div class="cpills">${pills}</div></div>`;
+      return '<div style="margin-bottom:12px"><div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6b7280;margin-bottom:8px">' + gn + ' \u00b7 ' + gd.cs.length + '</div><div class="cpills">' + pills + '</div></div>';
     }).join('');
-    const cnt = document.getElementById('c-cnt');
+    var cnt = document.getElementById('c-cnt');
     if (cnt) cnt.textContent = tracked;
   }
 
@@ -450,9 +471,9 @@
     const h = st._h || [];
     if (!wrap || !list || !h.length) { if (wrap) wrap.style.display = 'none'; return; }
     wrap.style.display = 'block';
-    list.innerHTML = h.slice(0, 50).map(r => {
+    list.innerHTML = h.slice(0, 50).map(function(r) {
       const prof = r.profile || 'none';
-      return `<div class="chist-row"><span class="hc">${CITIES[r.city]?.icon || ''} ${r.city}</span><span class="hp ${prof}">${PICON[prof] || ''} ${PF[prof] || prof}</span><span class="hu">${(r.user||'').split('@')[0]}</span><span class="ht">${r.timestamp ? new Date(r.timestamp).toLocaleString('uk-UA',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : ''}</span></div>`;
+      return '<div class="chist-row"><span class="hc">' + (CITIES[r.city] ? CITIES[r.city].icon : '') + ' ' + r.city + '</span><span class="hp ' + prof + '">' + (PICON[prof] || '') + ' ' + (PF[prof] || prof) + '</span><span class="hu">' + (r.user || '').split('@')[0] + '</span><span class="ht">' + (r.timestamp ? new Date(r.timestamp).toLocaleString('uk-UA',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : '') + '</span></div>';
     }).join('');
   }
 
@@ -460,50 +481,48 @@
     const st = loadSt(), wrap = document.getElementById('c-cities');
     if (!wrap) return;
     const fl = (filter || '').toLowerCase();
-    wrap.innerHTML = groups().map(([gn, gd], i) => {
-      const cs = fl ? gd.cs.filter(c => c.toLowerCase().includes(fl)) : gd.cs;
+    wrap.innerHTML = groups().map(function([gn, gd], i) {
+      const cs = fl ? gd.cs.filter(function(c) { return c.toLowerCase().indexOf(fl) >= 0; }) : gd.cs;
       if (!cs.length) return '';
-      const cards = cs.map(cn => {
+      const cards = cs.map(function(cn) {
         const c = CITIES[cn], s = st[cn], cid = 'cc-' + cn.replace(/[^a-zA-Z0-9]/g, '_');
         let stH = '<div class="cst">No profile set</div>';
-        if (s) stH = `<div class="cst"><span class="dot ${s.profile}"></span><span class="sp ${s.profile}">${PICON[s.profile]} ${PF[s.profile]}</span><span>\u00b7</span><span class="su">${s.user.split('@')[0]}</span><span>\u00b7</span><span>${timeAgo(s.timestamp)}</span></div>`;
-        const btns = c.p.map(p => `<button class="cb ${p}${s?.profile===p?' on':''}" onclick="window.__ca('${cn}','${p}')">${PICON[p]} ${PL[p]}</button>`).join('');
-        return `<div class="ccard" id="${cid}"><div class="ccard-top"><span class="ico">${c.icon}</span><span class="cn">${cn}</span></div>${stH}<div class="cbtns">${btns}</div><div class="cprog"></div></div>`;
+        if (s) stH = '<div class="cst"><span class="dot ' + s.profile + '"></span><span class="sp ' + s.profile + '">' + PICON[s.profile] + ' ' + PF[s.profile] + '</span><span>\u00b7</span><span class="su">' + s.user.split('@')[0] + '</span><span>\u00b7</span><span>' + timeAgo(s.timestamp) + '</span></div>';
+        const btns = c.p.map(function(p) { return '<button class="cb ' + p + (s && s.profile===p ? ' on' : '') + '" onclick="window.__ca(\'' + cn + '\',\'' + p + '\')">' + PICON[p] + ' ' + PL[p] + '</button>'; }).join('');
+        return '<div class="ccard" id="' + cid + '"><div class="ccard-top"><span class="ico">' + c.icon + '</span><span class="cn">' + cn + '</span></div>' + stH + '<div class="cbtns">' + btns + '</div><div class="cprog"></div></div>';
       }).join('');
       const closed = i > 0 && !fl ? ' closed' : '';
-      return `<div class="csec${closed}"><div class="csec-h" onclick="this.parentElement.classList.toggle('closed')"><span class="chv">\u25BE</span><h2>${gn}</h2><span class="cnt">${cs.length}</span></div><div class="csec-b"><div class="cgrid">${cards}</div></div></div>`;
+      return '<div class="csec' + closed + '"><div class="csec-h" onclick="this.parentElement.classList.toggle(\'closed\')"><span class="chv">\u25BE</span><h2>' + gn + '</h2><span class="cnt">' + cs.length + '</span></div><div class="csec-b"><div class="cgrid">' + cards + '</div></div></div>';
     }).join('');
   }
 
-  function renderAll() { renderOverview(); renderHist(); renderCards(document.getElementById('c-search')?.value); }
+  function renderAll() { renderOverview(); renderHist(); renderCards(document.getElementById('c-search') ? document.getElementById('c-search').value : ''); }
 
   window.__ca = function(c, p) { applySettings(c, p); };
   window.__cf = function(v) { renderCards(v); };
-  window.__sp = function(v) { localStorage.setItem(LS_P, v.trim()); const g = document.getElementById('c-pat'); if (g) g.classList.toggle('v', v.trim().startsWith('ghp_') || v.trim().startsWith('github_pat_')); };
+  window.__sp = function(v) { localStorage.setItem(LS_P, v.trim()); var g = document.getElementById('c-pat'); if (g) g.classList.toggle('v', v.trim().indexOf('ghp_') === 0 || v.trim().indexOf('github_pat_') === 0); };
 
-  const uOpts = USERS.map(u => `<option value="${u.email}" ${getU()===u.email?'selected':''}>${u.name}</option>`).join('');
-  const sp = getP(), pv = sp.startsWith('ghp_') || sp.startsWith('github_pat_');
+  const uOpts = USERS.map(function(u) { return '<option value="' + u.email + '"' + (getU()===u.email?' selected':'') + '>' + u.name + '</option>'; }).join('');
+  const sp = getP(), pv = sp.indexOf('ghp_') === 0 || sp.indexOf('github_pat_') === 0;
 
-  ov.innerHTML = `
-<div class="ch">
-  <div style="display:flex;align-items:center"><span class="flag">\u{1F1FA}\u{1F1E6}</span><h1>COps Weather Control</h1><span class="sub">Dashboard</span></div>
-  <div class="chr">
-    <div class="csel"><label>You</label><select onchange="localStorage.setItem('cops2_user',this.value)"><option value="">-- select --</option>${uOpts}</select></div>
-    <div class="csel${pv?' v':''}" id="c-pat"><label>Token</label><input type="password" placeholder="ghp_..." value="${sp}" oninput="window.__sp(this.value)"><span class="tok">\u2713</span></div>
-    <div style="text-align:center"><div style="font-size:28px;font-weight:800;color:#fff" id="c-cnt">0</div><div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.8px;font-weight:600">Tracked</div></div>
-    <button class="cbtn" onclick="document.getElementById('cops-overlay').remove();document.getElementById('cops-log')?.remove()">Close</button>
-  </div>
-</div>
-<div class="cm">
-  <div class="cov" id="c-ov"></div>
-  <div class="chist" id="c-hist" style="display:none"><h3 onclick="var l=document.getElementById('c-hist-list');l.style.display=l.style.display==='none'?'block':'none'">\u{1F4CB} Recent Changes \u25BE</h3><div class="chist-list" id="c-hist-list"></div></div>
-  <div class="csearch"><span style="font-size:20px">\u{1F50D}</span><input type="text" id="c-search" placeholder="Search cities..." oninput="window.__cf(this.value)"></div>
-  <div id="c-cities"></div>
-</div>`;
+  ov.innerHTML = '<div class="ch">' +
+    '<div style="display:flex;align-items:center"><span class="flag">\u{1F1FA}\u{1F1E6}</span><h1>COps Weather Control</h1><span class="sub">Dashboard</span></div>' +
+    '<div class="chr">' +
+    '<div class="csel"><label>You</label><select onchange="localStorage.setItem(\'cops2_user\',this.value)"><option value="">-- select --</option>' + uOpts + '</select></div>' +
+    '<div class="csel' + (pv ? ' v' : '') + '" id="c-pat"><label>Token</label><input type="password" placeholder="ghp_..." value="' + sp + '" oninput="window.__sp(this.value)"><span class="tok">\u2713</span></div>' +
+    '<div style="text-align:center"><div style="font-size:28px;font-weight:800;color:#fff" id="c-cnt">0</div><div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.8px;font-weight:600">Tracked</div></div>' +
+    '<button class="cbtn" onclick="document.getElementById(\'cops-overlay\').remove();document.getElementById(\'cops-log\').remove()">Close</button>' +
+    '</div></div>' +
+    '<div class="cm">' +
+    '<div class="cov" id="c-ov"></div>' +
+    '<div class="chist" id="c-hist" style="display:none"><h3 onclick="var l=document.getElementById(\'c-hist-list\');l.style.display=l.style.display===\'none\'?\'block\':\'none\'">\u{1F4CB} Recent Changes \u25BE</h3><div class="chist-list" id="c-hist-list"></div></div>' +
+    '<div class="csearch"><span style="font-size:20px">\u{1F50D}</span><input type="text" id="c-search" placeholder="Search cities..." oninput="window.__cf(this.value)"></div>' +
+    '<div id="c-cities"></div>' +
+    '</div>';
 
   renderAll();
 
-  fetch(STATUS_URL + '?t=' + Date.now()).then(r => r.ok ? r.json() : null).then(data => {
+  fetch(STATUS_URL + '?t=' + Date.now()).then(function(r) { return r.ok ? r.json() : null; }).then(function(data) {
     if (!data) return;
     const local = loadSt();
     if (data.cities) {
@@ -513,13 +532,13 @@
     }
     if (data.history) {
       local._h = local._h || [];
-      for (const h of data.history) { if (!local._h.find(l => l.city===h.city && l.timestamp===h.timestamp)) local._h.push(h); }
-      local._h.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+      for (const h of data.history) { if (!local._h.find(function(l) { return l.city===h.city && l.timestamp===h.timestamp; })) local._h.push(h); }
+      local._h.sort(function(a,b) { return new Date(b.timestamp) - new Date(a.timestamp); });
       local._h = local._h.slice(0, 300);
     }
     saveSt(local);
     renderAll();
-  }).catch(() => {});
+  }).catch(function() {});
 
   toast(getP() ? '\u{1F30D} Dashboard ready! Status shared via GitHub.' : '\u{1F30D} Dashboard ready! Add token to share status.', 'success');
 })();
