@@ -24,11 +24,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T11:49:24.239001"
+    },
+    "Vinnytsia": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T11:50:24.926007"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T11:50:05.864567",
+  "last_updated": "2026-04-17T11:50:24.926007",
   "history": [
+    {
+      "city": "Vinnytsia",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T11:50:24.926007"
+    },
     {
       "city": "Odesa",
       "profile": "good",
