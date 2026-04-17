@@ -159,11 +159,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:51:27.074263"
+    },
+    "Drohobych": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:53:00.696760"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:51:27.074263",
+  "last_updated": "2026-04-17T12:53:00.696760",
   "history": [
+    {
+      "city": "Drohobych",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:53:00.696760"
+    },
     {
       "city": "Vyshhorod",
       "profile": "good",
