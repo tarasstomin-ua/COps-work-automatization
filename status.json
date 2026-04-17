@@ -59,11 +59,22 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:41:46.769075"
+    },
+    "Zaporizhia": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:42:06.325206"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:41:46.769075",
+  "last_updated": "2026-04-17T12:42:06.325206",
   "history": [
+    {
+      "city": "Zaporizhia",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:42:06.325206"
+    },
     {
       "city": "Irpin",
       "profile": "harsh",
