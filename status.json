@@ -49,11 +49,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:41:15.568498"
+    },
+    "Chernivtsi": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:41:31.662672"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:41:15.568498",
+  "last_updated": "2026-04-17T12:41:31.662672",
   "history": [
+    {
+      "city": "Chernivtsi",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:41:31.662672"
+    },
     {
       "city": "Ivano-Frankivsk",
       "profile": "good",
