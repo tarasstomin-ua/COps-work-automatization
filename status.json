@@ -19,11 +19,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T11:48:51.721325"
+    },
+    "Kharkiv": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T11:49:24.239001"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T11:49:07.755264",
+  "last_updated": "2026-04-17T11:49:24.239001",
   "history": [
+    {
+      "city": "Kharkiv",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T11:49:24.239001"
+    },
     {
       "city": "Dnipro",
       "profile": "good",
