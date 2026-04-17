@@ -94,11 +94,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:43:36.580659"
+    },
+    "Mykolaiv": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:43:55.881538"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:43:36.580659",
+  "last_updated": "2026-04-17T12:43:55.881538",
   "history": [
+    {
+      "city": "Mykolaiv",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:43:55.881538"
+    },
     {
       "city": "Zhytomyr",
       "profile": "good",
