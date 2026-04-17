@@ -104,11 +104,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:44:11.381140"
+    },
+    "Sumy": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:46:41.433463"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:44:11.381140",
+  "last_updated": "2026-04-17T12:46:41.433463",
   "history": [
+    {
+      "city": "Sumy",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:46:41.433463"
+    },
     {
       "city": "Chernihiv",
       "profile": "good",
