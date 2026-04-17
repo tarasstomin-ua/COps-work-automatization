@@ -144,11 +144,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:49:00.506228"
+    },
+    "Mukachevo": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:49:47.333988"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:49:00.506228",
+  "last_updated": "2026-04-17T12:49:47.333988",
   "history": [
+    {
+      "city": "Mukachevo",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:49:47.333988"
+    },
     {
       "city": "Kamianske",
       "profile": "good",
