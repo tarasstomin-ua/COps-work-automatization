@@ -39,11 +39,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:40:44.862799"
+    },
+    "Poltava": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:40:59.884704"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:40:44.862799",
+  "last_updated": "2026-04-17T12:40:59.884704",
   "history": [
+    {
+      "city": "Poltava",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:40:59.884704"
+    },
     {
       "city": "Kryvyi Rih",
       "profile": "good",
