@@ -179,11 +179,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:56:30.847251"
+    },
+    "Kolomyia": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:56:46.167157"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:56:30.847251",
+  "last_updated": "2026-04-17T12:56:46.167157",
   "history": [
+    {
+      "city": "Kolomyia",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:56:46.167157"
+    },
     {
       "city": "Oleksandriia",
       "profile": "good",
