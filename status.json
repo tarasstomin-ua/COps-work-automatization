@@ -164,11 +164,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:53:00.696760"
+    },
+    "Truskavets": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:53:16.826056"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:53:00.696760",
+  "last_updated": "2026-04-17T12:53:16.826056",
   "history": [
+    {
+      "city": "Truskavets",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:53:16.826056"
+    },
     {
       "city": "Drohobych",
       "profile": "good",
