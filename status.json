@@ -169,11 +169,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:53:16.826056"
+    },
+    "Kovel": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:53:35.202083"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:53:16.826056",
+  "last_updated": "2026-04-17T12:53:35.202083",
   "history": [
+    {
+      "city": "Kovel",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:53:35.202083"
+    },
     {
       "city": "Truskavets",
       "profile": "good",
