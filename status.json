@@ -91,9 +91,9 @@
       "timestamp": "2026-04-17T15:36:37.206811"
     },
     "Zhytomyr": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-04-17T12:43:36.580659"
+      "timestamp": "2026-04-17T20:59:01.821681"
     },
     "Mykolaiv": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T20:58:46.387387",
+  "last_updated": "2026-04-17T20:59:01.821681",
   "history": [
+    {
+      "city": "Zhytomyr",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T20:59:01.821681"
+    },
     {
       "city": "Pavlohrad",
       "profile": "harsh",
