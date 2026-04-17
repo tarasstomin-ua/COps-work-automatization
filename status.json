@@ -139,11 +139,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:48:33.531375"
+    },
+    "Kamianske": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:49:00.506228"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:48:33.531375",
+  "last_updated": "2026-04-17T12:49:00.506228",
   "history": [
+    {
+      "city": "Kamianske",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:49:00.506228"
+    },
     {
       "city": "Pavlohrad",
       "profile": "good",
