@@ -99,11 +99,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:43:55.881538"
+    },
+    "Chernihiv": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:44:11.381140"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:43:55.881538",
+  "last_updated": "2026-04-17T12:44:11.381140",
   "history": [
+    {
+      "city": "Chernihiv",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:44:11.381140"
+    },
     {
       "city": "Mykolaiv",
       "profile": "good",
