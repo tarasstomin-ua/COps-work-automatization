@@ -14,11 +14,22 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-16T22:14:11.655005"
+    },
+    "Lviv": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T11:48:51.721325"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T11:48:33.210080",
+  "last_updated": "2026-04-17T11:48:51.721325",
   "history": [
+    {
+      "city": "Lviv",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T11:48:51.721325"
+    },
     {
       "city": "Kyiv",
       "profile": "good",
