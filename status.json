@@ -171,9 +171,9 @@
       "timestamp": "2026-04-17T12:53:16.826056"
     },
     "Kovel": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-04-17T12:53:35.202083"
+      "timestamp": "2026-04-17T13:26:39.689800"
     },
     "Oleksandriia": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T13:26:11.471121",
+  "last_updated": "2026-04-17T13:26:39.689800",
   "history": [
+    {
+      "city": "Kovel",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T13:26:39.689800"
+    },
     {
       "city": "Kryvyi Rih",
       "profile": "harsh",
