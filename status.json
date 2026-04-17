@@ -129,11 +129,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:47:59.236735"
+    },
+    "Kamianets-Podilskyi": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:48:16.733041"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:47:59.236735",
+  "last_updated": "2026-04-17T12:48:16.733041",
   "history": [
+    {
+      "city": "Kamianets-Podilskyi",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:48:16.733041"
+    },
     {
       "city": "Kremenchuk",
       "profile": "good",
