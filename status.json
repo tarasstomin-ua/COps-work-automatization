@@ -154,11 +154,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:50:26.303362"
+    },
+    "Vyshhorod": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:51:27.074263"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:50:26.303362",
+  "last_updated": "2026-04-17T12:51:27.074263",
   "history": [
+    {
+      "city": "Vyshhorod",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:51:27.074263"
+    },
     {
       "city": "Boryspil",
       "profile": "good",
