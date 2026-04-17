@@ -29,11 +29,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T11:50:24.926007"
+    },
+    "Cherkasy": {
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:02:35.760467"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T11:50:24.926007",
+  "last_updated": "2026-04-17T12:02:35.760467",
   "history": [
+    {
+      "city": "Cherkasy",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:02:35.760467"
+    },
     {
       "city": "Vinnytsia",
       "profile": "good",
