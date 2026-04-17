@@ -16,9 +16,9 @@
       "timestamp": "2026-04-17T11:50:05.864567"
     },
     "Lviv": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-04-17T13:30:07.575981"
+      "timestamp": "2026-04-17T13:43:46.481159"
     },
     "Kharkiv": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T13:30:07.575981",
+  "last_updated": "2026-04-17T13:43:46.481159",
   "history": [
+    {
+      "city": "Lviv",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T13:43:46.481159"
+    },
     {
       "city": "Lviv",
       "profile": "harsh",
