@@ -134,11 +134,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:48:16.733041"
+    },
+    "Pavlohrad": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:48:33.531375"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:48:16.733041",
+  "last_updated": "2026-04-17T12:48:33.531375",
   "history": [
+    {
+      "city": "Pavlohrad",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:48:33.531375"
+    },
     {
       "city": "Kamianets-Podilskyi",
       "profile": "good",
