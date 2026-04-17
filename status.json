@@ -109,11 +109,22 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-17T12:46:41.433463"
+    },
+    "Ternopil": {
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:46:57.707826"
     }
   },
   "team": [],
-  "last_updated": "2026-04-17T12:46:41.433463",
+  "last_updated": "2026-04-17T12:46:57.707826",
   "history": [
+    {
+      "city": "Ternopil",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-17T12:46:57.707826"
+    },
     {
       "city": "Sumy",
       "profile": "good",
