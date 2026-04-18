@@ -106,9 +106,9 @@
       "timestamp": "2026-04-17T20:56:05.946608"
     },
     "Sumy": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-04-17T12:46:41.433463"
+      "timestamp": "2026-04-18T17:25:17.353122"
     },
     "Ternopil": {
       "profile": "harsh",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-04-18T17:23:38.418677",
+  "last_updated": "2026-04-18T17:25:17.353122",
   "history": [
+    {
+      "city": "Sumy",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-18T17:25:17.353122"
+    },
     {
       "city": "Bila Tserkva",
       "profile": "harsh",
