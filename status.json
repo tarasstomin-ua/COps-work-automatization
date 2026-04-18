@@ -81,9 +81,9 @@
       "timestamp": "2026-04-17T12:42:51.288076"
     },
     "Uzhhorod": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-04-17T12:43:05.992276"
+      "timestamp": "2026-04-18T18:29:48.054170"
     },
     "Brovary": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-04-18T18:29:30.700635",
+  "last_updated": "2026-04-18T18:29:48.054170",
   "history": [
+    {
+      "city": "Uzhhorod",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-18T18:29:48.054170"
+    },
     {
       "city": "Mykolaiv",
       "profile": "harsh",
