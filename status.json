@@ -46,9 +46,9 @@
       "timestamp": "2026-04-18T18:30:48.143966"
     },
     "Ivano-Frankivsk": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-04-18T18:30:27.046645"
+      "timestamp": "2026-04-18T21:37:57.188298"
     },
     "Chernivtsi": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-04-18T21:02:36.128960",
+  "last_updated": "2026-04-18T21:37:57.188298",
   "history": [
+    {
+      "city": "Ivano-Frankivsk",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-18T21:37:57.188298"
+    },
     {
       "city": "Mukachevo",
       "profile": "harsh",
