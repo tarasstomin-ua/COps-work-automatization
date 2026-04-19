@@ -116,9 +116,9 @@
       "timestamp": "2026-04-19T13:36:17.496407"
     },
     "Lutsk": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-04-17T20:58:18.138210"
+      "timestamp": "2026-04-19T13:37:00.986373"
     },
     "Kropyvnytskyi": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-04-19T13:36:44.337444",
+  "last_updated": "2026-04-19T13:37:00.986373",
   "history": [
+    {
+      "city": "Lutsk",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-19T13:37:00.986373"
+    },
     {
       "city": "Sumy",
       "profile": "good",
