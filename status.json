@@ -31,9 +31,9 @@
       "timestamp": "2026-04-18T10:08:57.981196"
     },
     "Cherkasy": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-04-19T09:22:41.548881"
+      "timestamp": "2026-04-19T13:34:28.467335"
     },
     "Kryvyi Rih": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-04-19T13:34:10.631662",
+  "last_updated": "2026-04-19T13:34:28.467335",
   "history": [
+    {
+      "city": "Cherkasy",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-19T13:34:28.467335"
+    },
     {
       "city": "Ivano-Frankivsk",
       "profile": "good",
