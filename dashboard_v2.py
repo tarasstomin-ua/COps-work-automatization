@@ -205,15 +205,30 @@ def _compute_durations(cutoff: datetime) -> tuple:
 
 # ── Slack config fetcher ──────────────────────────────────────────────────────
 
-SLACK_CONFIG_URL = f"https://raw.githubusercontent.com/{OWNER}/{REPO}/main/slack_config.json"
-
 _slack_cache: dict = {"data": None, "ts": 0}
 
 def _fetch_slack_config() -> dict:
     now = time.time()
     if _slack_cache["data"] and now - _slack_cache["ts"] < 300:
         return _slack_cache["data"]
-    r = requests.get(f"{SLACK_CONFIG_URL}?t={now}", timeout=15)
+    cfg = _load_config()
+    pat = cfg.get("pat", "")
+    if pat:
+        try:
+            headers = {"Authorization": f"Bearer {pat}", "Accept": "application/vnd.github+json"}
+            r = requests.get(
+                f"{GH_API}/repos/{OWNER}/{REPO}/contents/slack_config.json",
+                headers=headers, timeout=10,
+            )
+            if r.ok:
+                content = base64.b64decode(r.json()["content"]).decode()
+                _slack_cache["data"] = json.loads(content)
+                _slack_cache["ts"] = now
+                return _slack_cache["data"]
+        except Exception:
+            pass
+    url = f"https://raw.githubusercontent.com/{OWNER}/{REPO}/main/slack_config.json?t={now}"
+    r = requests.get(url, timeout=15)
     r.raise_for_status()
     _slack_cache["data"] = r.json()
     _slack_cache["ts"] = now
@@ -359,7 +374,6 @@ def api_cities():
         group_map[g]["cities"].append({"name": name, "profiles": cfg["profiles"]})
     groups = sorted(group_map.items(), key=lambda x: x[1]["order"])
 
-    local_active = _get_active_profiles()
     gh = _pull_github_status()
     active = {}
     for city, info in gh.get("cities", {}).items():
@@ -368,11 +382,6 @@ def api_cities():
             "since": info["timestamp"],
             "user": info.get("user", ""),
         }
-    for city, info in local_active.items():
-        local_ts = info.get("since", "2000-01-01")
-        remote_ts = active.get(city, {}).get("since", "2000-01-01")
-        if city not in active or datetime.fromisoformat(local_ts) > datetime.fromisoformat(remote_ts):
-            active[city] = info
 
     return jsonify({
         "groups": [{"name": k, "count": len(v["cities"]), "cities": v["cities"]} for k, v in groups],
@@ -915,7 +924,7 @@ document.addEventListener('click',function(e){
   if(btn&&!btn.disabled)ask(btn.dataset.city,btn.dataset.prof);
 });
 
-setInterval(()=>{loadCities();loadStats()},60000);
+setInterval(()=>{loadCities();loadStats()},30000);
 
 function ask(city,prof){
   const user=document.getElementById('userSel').value;
