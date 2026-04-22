@@ -86,9 +86,9 @@
       "timestamp": "2026-04-22T12:36:42.335592"
     },
     "Brovary": {
-      "profile": "harsh",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-04-22T15:56:16.888850"
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-22T16:01:14.646420"
     },
     "Zhytomyr": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-04-22T15:56:16.888850",
+  "last_updated": "2026-04-22T16:01:14.646420",
   "history": [
+    {
+      "city": "Brovary",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-22T16:01:14.646420"
+    },
     {
       "city": "Brovary",
       "profile": "harsh",
