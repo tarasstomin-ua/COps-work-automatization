@@ -2,10 +2,11 @@
 """
 Courier Ops Dashboard v2 — Weather Settings Control Panel — Ukraine
 
-Self-contained Flask + Selenium dashboard.
-Fetches target settings JSON from GitHub, applies via Selenium directly.
+Self-contained Flask dashboard.
+Posts weather-change commands to Slack; @Delivery Courier Automation Bot
+applies the settings in the admin panel.
 Shared status tracking via GitHub API (status.json in the repo).
-Multi-user support with user selector dropdown.
+Slack config (channel, templates) fetched from GitHub; bot token stored locally.
 
 Run:   python3 dashboard_v2.py
 Open:  http://127.0.0.1:5050
@@ -16,20 +17,17 @@ import json
 import subprocess
 import threading
 import time
-import urllib.parse
 import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
 
 import requests
 from flask import Flask, jsonify, request
-from selenium import webdriver
 
 # ── GitHub constants ──────────────────────────────────────────────────────────
 
 OWNER = "tarasstomin-ua"
 REPO = "COps-work-automatization"
-RAW_BASE = f"https://raw.githubusercontent.com/{OWNER}/{REPO}/main/Bad%20weather%20settings"
 GH_API = "https://api.github.com"
 
 # ── Users ─────────────────────────────────────────────────────────────────────
@@ -82,15 +80,13 @@ CITIES = {
     "Kolomyia": {"group": "Rest of cities", "group_order": 3, "id": 2499, "base": "Secondary cities/Rest of the cities/Kolomyia", "jn": "Kolomyia", "profiles": ["good", "harsh"]},
 }
 
-PROF_FOLDERS = {"good": "Good weather", "bad": "Bad weather", "harsh": "Harsh weather"}
-PROF_PREFIXES = {"good": "Good Weather Settings", "bad": "Bad Weather Settings", "harsh": "Harsh Weather Settings"}
+VALID_PROFILES = {"good", "bad", "harsh"}
 
 # ── Flask app ─────────────────────────────────────────────────────────────────
 
 app = Flask(__name__)
 tasks: dict = {}
 log_lock = threading.Lock()
-run_lock = threading.Lock()
 
 LOG_FILE = Path(__file__).parent / ".cops_log.json"
 CONFIG_FILE = Path(__file__).parent / ".cops_config.json"
@@ -207,101 +203,53 @@ def _compute_durations(cutoff: datetime) -> tuple:
 
     return city_breakdown, {k: round(v, 2) for k, v in profile_hours.items()}
 
-# ── Settings URL builder & fetcher ────────────────────────────────────────────
+# ── Slack config fetcher ──────────────────────────────────────────────────────
 
-def _settings_url(city_name, profile):
-    city = CITIES[city_name]
-    folder = PROF_FOLDERS[profile]
-    prefix = PROF_PREFIXES[profile]
-    filename = f"{prefix} {city['jn']}.json"
-    path = f"{city['base']}/{folder}/{filename}"
-    return f"{RAW_BASE}/{urllib.parse.quote(path)}"
+SLACK_CONFIG_URL = f"https://raw.githubusercontent.com/{OWNER}/{REPO}/main/slack_config.json"
 
+_slack_cache: dict = {"data": None, "ts": 0}
 
-def _fetch_target(city_name, profile):
-    url = _settings_url(city_name, profile)
-    r = requests.get(url, timeout=30)
+def _fetch_slack_config() -> dict:
+    now = time.time()
+    if _slack_cache["data"] and now - _slack_cache["ts"] < 300:
+        return _slack_cache["data"]
+    r = requests.get(f"{SLACK_CONFIG_URL}?t={now}", timeout=15)
     r.raise_for_status()
-    return r.json()
-
-# ── Deep merge ────────────────────────────────────────────────────────────────
-
-def _deep_merge(dst, src):
-    for k, v in src.items():
-        if isinstance(v, dict) and isinstance(dst.get(k), dict):
-            _deep_merge(dst[k], v)
-        else:
-            dst[k] = v
-
-# ── Selenium automation ───────────────────────────────────────────────────────
-
-def _make_driver():
-    from selenium.webdriver.chrome.options import Options
-    tmp = Path.home() / ".chrome_selenium_profile"
-    tmp.mkdir(exist_ok=True)
-    opts = Options()
-    opts.add_argument(f"--user-data-dir={tmp}")
-    opts.add_argument("--profile-directory=AutomationProfile")
-    return webdriver.Chrome(options=opts)
+    _slack_cache["data"] = r.json()
+    _slack_cache["ts"] = now
+    return _slack_cache["data"]
 
 
-def _apply_selenium(city_name, target):
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.support.ui import WebDriverWait
-    from selenium.webdriver.support import expected_conditions as EC
+def _post_to_slack(city: str, profile: str, user: str) -> tuple:
+    cfg = _load_config()
+    token = cfg.get("slack_token", "")
+    if not token:
+        return False, "No Slack bot token configured. Paste it in the dashboard header."
 
-    city = CITIES[city_name]
-    url = f"https://admin-panel.bolt.eu/delivery-courier/settings/city/{city['id']}"
-    driver = _make_driver()
-    try:
-        driver.get(url)
-        WebDriverWait(driver, 120).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, ".jsoneditor"))
-        )
-        time.sleep(2)
+    slack_cfg = _fetch_slack_config()
+    channel = slack_cfg["channel_id"]
+    templates = slack_cfg.get("templates", {})
 
-        driver.find_element(By.CSS_SELECTOR, "button.jsoneditor-modes").click()
-        time.sleep(0.5)
-        for el in driver.find_elements(By.CSS_SELECTOR, ".jsoneditor-type-modes div"):
-            if el.text.strip() == "Code":
-                el.click()
-                break
-        time.sleep(1)
+    city_templates = templates.get(city)
+    if not city_templates:
+        return False, f"No Slack template found for city: {city}"
+    message = city_templates.get(profile)
+    if not message:
+        return False, f"No Slack template for {city}/{profile}"
 
-        raw = driver.execute_script(
-            "return ace.edit(document.querySelector('.ace_editor')).getValue();"
-        )
-        current = json.loads(raw)
-        _deep_merge(current, target)
+    user_label = user.split("@")[0] if user else "unknown"
+    text = f"{message}\n(applied by {user_label})"
 
-        driver.execute_script(
-            "ace.edit(document.querySelector('.ace_editor')).setValue(arguments[0], -1);",
-            json.dumps(current, indent=2),
-        )
-        time.sleep(1)
-
-        driver.execute_script("""
-            Array.from(document.querySelectorAll('button'))
-                 .find(b => b.textContent.trim() === 'Update')
-                 ?.click();
-        """)
-        time.sleep(3)
-        return True, "Settings applied successfully!"
-    except Exception as e:
-        return False, str(e)
-    finally:
-        try:
-            driver.quit()
-        except Exception:
-            pass
-
-# ── Chrome cleanup ────────────────────────────────────────────────────────────
-
-def _cleanup_chrome():
-    try:
-        subprocess.run(["pkill", "-f", "chrome_selenium_profile"], capture_output=True, timeout=5)
-    except Exception:
-        pass
+    r = requests.post(
+        "https://slack.com/api/chat.postMessage",
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+        json={"channel": channel, "text": text},
+        timeout=15,
+    )
+    body = r.json()
+    if not body.get("ok"):
+        return False, f"Slack API error: {body.get('error', 'unknown')}"
+    return True, "Message posted to Slack successfully!"
 
 # ── GitHub shared status ──────────────────────────────────────────────────────
 
@@ -360,33 +308,24 @@ def _push_github_status(city, profile, user):
 def _run_task(task_id: str, city_name: str, profile: str, user: str):
     start = time.time()
     try:
-        with run_lock:
-            tasks[task_id]["status"] = "running"
-            tasks[task_id]["message"] = f"Downloading {profile} settings from GitHub..."
+        tasks[task_id]["status"] = "running"
+        tasks[task_id]["message"] = f"Posting to Slack: {city_name} → {profile}..."
 
-            target = _fetch_target(city_name, profile)
+        success, message = _post_to_slack(city_name, profile, user)
+        elapsed = time.time() - start
 
-            tasks[task_id]["message"] = f"Opening Chrome, navigating to {city_name}..."
-            _cleanup_chrome()
-            time.sleep(1)
+        tasks[task_id].update(
+            status="success" if success else "error",
+            finished_at=datetime.now().isoformat(),
+            duration=round(elapsed, 1),
+            message=message,
+        )
+        _log_action(city_name, profile, "success" if success else "error", elapsed, user)
 
-            success, message = _apply_selenium(city_name, target)
-            elapsed = time.time() - start
-            _cleanup_chrome()
-
-            tasks[task_id].update(
-                status="success" if success else "error",
-                finished_at=datetime.now().isoformat(),
-                duration=round(elapsed, 1),
-                message=message,
-            )
-            _log_action(city_name, profile, "success" if success else "error", elapsed, user)
-
-            if success:
-                _push_github_status(city_name, profile, user)
+        if success:
+            _push_github_status(city_name, profile, user)
 
     except Exception as exc:
-        _cleanup_chrome()
         elapsed = time.time() - start
         tasks[task_id].update(
             status="error", message=str(exc), finished_at=datetime.now().isoformat(),
@@ -441,14 +380,11 @@ def api_apply():
         return jsonify({"error": "Select your name first"}), 400
     if city not in CITIES:
         return jsonify({"error": f"Unknown city: {city}"}), 400
-    if profile not in PROF_FOLDERS:
+    if profile not in VALID_PROFILES:
         return jsonify({"error": f"Unknown profile: {profile}"}), 400
     avail = CITIES[city]["profiles"]
     if profile not in avail:
         return jsonify({"error": f"Profile '{profile}' not available for {city}"}), 400
-    for t in tasks.values():
-        if t["status"] == "running":
-            return jsonify({"error": "Another task is already running"}), 409
 
     task_id = str(uuid.uuid4())[:8]
     tasks[task_id] = {
@@ -504,13 +440,20 @@ def api_config():
         cfg = _load_config()
         has_pat = bool(cfg.get("pat", ""))
         pat_source = "gh CLI" if (has_pat and not CONFIG_FILE.exists()) or (has_pat and "pat" not in (json.loads(CONFIG_FILE.read_text()) if CONFIG_FILE.exists() else {})) else ("saved" if has_pat else "none")
-        return jsonify({"user": cfg.get("user", ""), "has_pat": has_pat, "pat_source": pat_source})
+        has_slack = bool(cfg.get("slack_token", ""))
+        return jsonify({
+            "user": cfg.get("user", ""),
+            "has_pat": has_pat, "pat_source": pat_source,
+            "has_slack": has_slack,
+        })
     data = request.json or {}
     cfg = _load_config()
     if "user" in data:
         cfg["user"] = data["user"]
     if "pat" in data:
         cfg["pat"] = data["pat"]
+    if "slack_token" in data:
+        cfg["slack_token"] = data["slack_token"]
     _save_config(cfg)
     return jsonify({"ok": True})
 
@@ -754,6 +697,8 @@ tr.city-row:hover{background:var(--card2)}
     </select>
     <span class="pat-badge" id="patStatus"></span>
     <input class="pat-input" id="patIn" type="password" placeholder="Paste GitHub PAT" style="display:none" />
+    <span class="pat-badge" id="slackStatus"></span>
+    <input class="pat-input" id="slackIn" type="password" placeholder="Paste Slack Bot Token" style="display:none" />
     <div class="hdr-stat"><div class="hdr-stat-v" id="hCities">37</div><div class="hdr-stat-l">Cities</div></div>
     <div class="hdr-stat"><div class="hdr-stat-v" id="hActive">0</div><div class="hdr-stat-l">Active</div></div>
     <div class="live" id="liveStatus"><span class="live-dot"></span><span id="liveText">Live</span></div>
@@ -830,6 +775,9 @@ async function loadConfig(){
   const ps=document.getElementById('patStatus'),pi=document.getElementById('patIn');
   if(d.has_pat){ps.textContent='\u2713 GitHub: '+d.pat_source;ps.style.color='var(--good)';pi.style.display='none';}
   else{ps.textContent='\u2717 No PAT';ps.style.color='var(--harsh)';pi.style.display='';}
+  const ss=document.getElementById('slackStatus'),si=document.getElementById('slackIn');
+  if(d.has_slack){ss.textContent='\u2713 Slack';ss.style.color='var(--good)';si.style.display='none';}
+  else{ss.textContent='\u2717 No Slack token';ss.style.color='var(--harsh)';si.style.display='';}
 }
 document.getElementById('userSel').onchange=function(){
   fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user:this.value})});
@@ -838,6 +786,11 @@ document.getElementById('patIn').onchange=async function(){
   if(!this.value)return;
   await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pat:this.value})});
   this.value='';loadConfig();toast('GitHub token saved!','success');
+};
+document.getElementById('slackIn').onchange=async function(){
+  if(!this.value)return;
+  await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slack_token:this.value})});
+  this.value='';loadConfig();toast('Slack bot token saved!','success');
 };
 loadConfig();
 
@@ -905,7 +858,7 @@ function ask(city,prof){
   if(!user){toast('Select your name first!','error');return;}
   pending={city,profile:prof};
   document.getElementById('mt').textContent='Apply '+labelsF[prof]+'?';
-  document.getElementById('md').textContent=user.split('@')[0]+' \u2192 Update '+city+' to '+labelsF[prof]+' via Selenium.';
+  document.getElementById('md').textContent=user.split('@')[0]+' \u2192 Post '+city+' '+labelsF[prof]+' to Slack channel.';
   document.getElementById('ov').classList.add('open');
 }
 function closeM(){document.getElementById('ov').classList.remove('open');pending=null}
@@ -922,10 +875,9 @@ async function apply(city,prof){
   const all=document.querySelectorAll('.b');
   all.forEach(b=>b.disabled=true);if(btn)btn.classList.add('ld');
   const ls=document.getElementById('liveStatus'),lt=document.getElementById('liveText');
-  ls.classList.add('busy');lt.textContent=cap(prof)+' \u2192 '+city+'...';
+  ls.classList.add('busy');lt.textContent='Slack: '+cap(prof)+' \u2192 '+city+'...';
   try{
     const r=await fetch('/api/apply',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({city,profile:prof,user})});
-    if(r.status===409){toast('Another task is running','error');return}
     if(!r.ok){const e=await r.json();toast(e.error||'Request failed','error');return}
     const{task_id}=await r.json();
     while(true){
