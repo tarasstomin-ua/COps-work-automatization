@@ -1,0 +1,159 @@
+{
+  "channel_id": "C0AKTN5AK53",
+  "channel_name": "delivery-city-settings-automation",
+  "templates": {
+    "Kyiv": {
+      "good": "@Delivery Courier Automation Bot 158, UA-Kyiv-Proposed Settings",
+      "bad": "@Delivery Courier Automation Bot 158, UA-Kyiv-Bad Weather Settings",
+      "harsh": "@Delivery Courier Automation Bot 158, UA-Kyiv-Harsh Weather Settings"
+    },
+    "Lviv": {
+      "good": "@Delivery Courier Automation Bot 496, UA-Lviv-Proposed Settings",
+      "bad": "@Delivery Courier Automation Bot 496, UA-Lviv-Bad Weather Settings",
+      "harsh": "@Delivery Courier Automation Bot 496, UA-Lviv-Harsh Weather Settings"
+    },
+    "Kharkiv": {
+      "good": "@Delivery Courier Automation Bot 491, UA-Kharkiv-Proposed Settings",
+      "bad": "@Delivery Courier Automation Bot 491, UA-Kharkiv-Bad Weather Settings",
+      "harsh": "@Delivery Courier Automation Bot 491, UA-Kharkiv-Harsh Weather Settings"
+    },
+    "Dnipro": {
+      "good": "@Delivery Courier Automation Bot 499, UA-Dnipro-Proposed Settings",
+      "bad": "@Delivery Courier Automation Bot 499, UA-Dnipro-Bad Weather Settings",
+      "harsh": "@Delivery Courier Automation Bot 499, UA-Dnipro-Harsh Weather Settings"
+    },
+    "Vinnytsia": {
+      "good": "@Delivery Courier Automation Bot 501, UA-Vinnytsia-Proposed Settings",
+      "bad": "@Delivery Courier Automation Bot 501, UA-Vinnytsia-Bad Weather Settings",
+      "harsh": "@Delivery Courier Automation Bot 501, UA-Vinnytsia-Harsh Weather Settings"
+    },
+    "Odesa": {
+      "good": "@Delivery Courier Automation Bot 498, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 498, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Zaporizhia": {
+      "good": "@Delivery Courier Automation Bot 500, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 500, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Mykolaiv": {
+      "good": "@Delivery Courier Automation Bot 503, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 503, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Kryvyi Rih": {
+      "good": "@Delivery Courier Automation Bot 504, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 504, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Poltava": {
+      "good": "@Delivery Courier Automation Bot 506, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 506, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Ivano-Frankivsk": {
+      "good": "@Delivery Courier Automation Bot 990, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 990, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Chernihiv": {
+      "good": "@Delivery Courier Automation Bot 1076, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1076, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Sumy": {
+      "good": "@Delivery Courier Automation Bot 1078, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1078, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Bila Tserkva": {
+      "good": "@Delivery Courier Automation Bot 1079, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1079, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Ternopil": {
+      "good": "@Delivery Courier Automation Bot 1080, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1080, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Khmelnytskyi": {
+      "good": "@Delivery Courier Automation Bot 1081, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1081, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Lutsk": {
+      "good": "@Delivery Courier Automation Bot 1082, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1082, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Zhytomyr": {
+      "good": "@Delivery Courier Automation Bot 1083, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1083, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Chernivtsi": {
+      "good": "@Delivery Courier Automation Bot 1084, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1084, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Kropyvnytskyi": {
+      "good": "@Delivery Courier Automation Bot 1085, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1085, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Rivne": {
+      "good": "@Delivery Courier Automation Bot 1086, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1086, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Cherkasy": {
+      "good": "@Delivery Courier Automation Bot 1087, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1087, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Kremenchuk": {
+      "good": "@Delivery Courier Automation Bot 1088, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1088, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Uzhhorod": {
+      "good": "@Delivery Courier Automation Bot 1131, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1131, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Kamianets-Podilskyi": {
+      "good": "@Delivery Courier Automation Bot 1132, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1132, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Pavlohrad": {
+      "good": "@Delivery Courier Automation Bot 1176, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1176, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Kamianske": {
+      "good": "@Delivery Courier Automation Bot 1178, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1178, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Mukachevo": {
+      "good": "@Delivery Courier Automation Bot 1179, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1179, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Boryspil": {
+      "good": "@Delivery Courier Automation Bot 1220, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1220, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Brovary": {
+      "good": "@Delivery Courier Automation Bot 1259, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1259, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Irpin": {
+      "good": "@Delivery Courier Automation Bot 1261, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1261, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Vyshhorod": {
+      "good": "@Delivery Courier Automation Bot 1262, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1262, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Drohobych": {
+      "good": "@Delivery Courier Automation Bot 1348, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1348, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Truskavets": {
+      "good": "@Delivery Courier Automation Bot 1357, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 1357, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Kovel": {
+      "good": "@Delivery Courier Automation Bot 2170, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 2170, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Oleksandriia": {
+      "good": "@Delivery Courier Automation Bot 2171, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 2171, UA-Rest of cities-Harsh Weather Settings"
+    },
+    "Kolomyia": {
+      "good": "@Delivery Courier Automation Bot 2499, UA-Rest of cities-Proposed Settings",
+      "harsh": "@Delivery Courier Automation Bot 2499, UA-Rest of cities-Harsh Weather Settings"
+    }
+  }
+}
