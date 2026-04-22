@@ -237,8 +237,7 @@ def _post_to_slack(city: str, profile: str, user: str) -> tuple:
     if not message:
         return False, f"No Slack template for {city}/{profile}"
 
-    user_label = user.split("@")[0] if user else "unknown"
-    text = f"{message}\n(applied by {user_label})"
+    text = message.replace("@Delivery Courier Automation Bot", "<@U0AEPHE0CHH>")
 
     r = requests.post(
         "https://slack.com/api/chat.postMessage",
