@@ -224,7 +224,7 @@ def _post_to_slack(city: str, profile: str, user: str) -> tuple:
     cfg = _load_config()
     token = cfg.get("slack_token", "")
     if not token:
-        return False, "No Slack bot token configured. Paste it in the dashboard header."
+        return False, "No Slack token configured. Paste it in the dashboard header."
 
     slack_cfg = _fetch_slack_config()
     channel = slack_cfg["channel_id"]
@@ -460,6 +460,65 @@ def api_config():
 @app.route("/api/shared-status")
 def api_shared_status():
     return jsonify(_pull_github_status())
+
+# ── Slack OAuth flow ──────────────────────────────────────────────────────────
+
+SLACK_OAUTH_REDIRECT = "http://localhost:5050/slack/callback"
+
+@app.route("/slack/authorize")
+def slack_authorize():
+    cfg = _load_config()
+    cid = cfg.get("slack_client_id", "")
+    if not cid:
+        return "Slack client_id not configured in .cops_config.json", 400
+    url = (
+        f"https://slack.com/oauth/v2/authorize"
+        f"?client_id={cid}"
+        f"&user_scope=chat:write"
+        f"&redirect_uri={SLACK_OAUTH_REDIRECT}"
+    )
+    return f'<html><head><meta http-equiv="refresh" content="0;url={url}"></head></html>'
+
+
+@app.route("/slack/callback")
+def slack_callback():
+    code = request.args.get("code")
+    error = request.args.get("error")
+    if error:
+        return f"""<html><body style="background:#0f0f1a;color:#ef4444;font-family:Inter,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;text-align:center">
+        <div><h2>Slack Authorization Failed</h2><p>{error}</p><a href="/" style="color:#8b5cf6">Back to Dashboard</a></div></body></html>"""
+    if not code:
+        return "Missing code parameter", 400
+
+    cfg = _load_config()
+    cid = cfg.get("slack_client_id", "")
+    csecret = cfg.get("slack_client_secret", "")
+    if not cid or not csecret:
+        return "Slack OAuth credentials not configured", 400
+
+    r = requests.post("https://slack.com/api/oauth.v2.access", data={
+        "client_id": cid,
+        "client_secret": csecret,
+        "code": code,
+        "redirect_uri": SLACK_OAUTH_REDIRECT,
+    }, timeout=15)
+    body = r.json()
+
+    if not body.get("ok"):
+        err = body.get("error", "unknown")
+        return f"""<html><body style="background:#0f0f1a;color:#ef4444;font-family:Inter,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;text-align:center">
+        <div><h2>Token Exchange Failed</h2><p>{err}</p><a href="/" style="color:#8b5cf6">Back to Dashboard</a></div></body></html>"""
+
+    user_token = body.get("authed_user", {}).get("access_token", "")
+    if not user_token:
+        return "No user token received from Slack", 400
+
+    cfg["slack_token"] = user_token
+    _save_config(cfg)
+
+    return """<html><body style="background:#0f0f1a;color:#10b981;font-family:Inter,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;text-align:center">
+    <div><h2>Slack Connected!</h2><p style="color:#c8cad0">Your Slack account is now linked. Messages will be sent on your behalf.</p>
+    <a href="/" style="color:#8b5cf6;font-size:16px;text-decoration:none">&#8592; Back to Dashboard</a></div></body></html>"""
 
 # ── City timeline API ──────────────────────────────────────────────────────────
 
@@ -697,7 +756,7 @@ tr.city-row:hover{background:var(--card2)}
     <span class="pat-badge" id="patStatus"></span>
     <input class="pat-input" id="patIn" type="password" placeholder="Paste GitHub PAT" style="display:none" />
     <span class="pat-badge" id="slackStatus"></span>
-    <input class="pat-input" id="slackIn" type="password" placeholder="Paste Slack Bot Token" style="display:none" />
+    <a id="slackConnect" href="/slack/authorize" class="pat-badge" style="display:none;text-decoration:none;color:var(--accent);border-color:var(--accent);cursor:pointer">Connect Slack</a>
     <div class="hdr-stat"><div class="hdr-stat-v" id="hCities">37</div><div class="hdr-stat-l">Cities</div></div>
     <div class="hdr-stat"><div class="hdr-stat-v" id="hActive">0</div><div class="hdr-stat-l">Active</div></div>
     <div class="live" id="liveStatus"><span class="live-dot"></span><span id="liveText">Live</span></div>
@@ -774,9 +833,9 @@ async function loadConfig(){
   const ps=document.getElementById('patStatus'),pi=document.getElementById('patIn');
   if(d.has_pat){ps.textContent='\u2713 GitHub: '+d.pat_source;ps.style.color='var(--good)';pi.style.display='none';}
   else{ps.textContent='\u2717 No PAT';ps.style.color='var(--harsh)';pi.style.display='';}
-  const ss=document.getElementById('slackStatus'),si=document.getElementById('slackIn');
-  if(d.has_slack){ss.textContent='\u2713 Slack';ss.style.color='var(--good)';si.style.display='none';}
-  else{ss.textContent='\u2717 No Slack token';ss.style.color='var(--harsh)';si.style.display='';}
+  const ss=document.getElementById('slackStatus'),sc=document.getElementById('slackConnect');
+  if(d.has_slack){ss.textContent='\u2713 Slack';ss.style.color='var(--good)';sc.style.display='none';}
+  else{ss.textContent='';sc.style.display='';}
 }
 document.getElementById('userSel').onchange=function(){
   fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user:this.value})});
@@ -785,11 +844,6 @@ document.getElementById('patIn').onchange=async function(){
   if(!this.value)return;
   await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pat:this.value})});
   this.value='';loadConfig();toast('GitHub token saved!','success');
-};
-document.getElementById('slackIn').onchange=async function(){
-  if(!this.value)return;
-  await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slack_token:this.value})});
-  this.value='';loadConfig();toast('Slack bot token saved!','success');
 };
 loadConfig();
 
