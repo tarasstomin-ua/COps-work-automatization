@@ -253,7 +253,18 @@ def _post_to_slack(city: str, profile: str, user: str) -> tuple:
 # ── GitHub shared status ──────────────────────────────────────────────────────
 
 def _pull_github_status():
+    cfg = _load_config()
+    pat = cfg.get("pat", "")
     try:
+        if pat:
+            headers = {"Authorization": f"Bearer {pat}", "Accept": "application/vnd.github+json"}
+            r = requests.get(
+                f"{GH_API}/repos/{OWNER}/{REPO}/contents/status.json",
+                headers=headers, timeout=10,
+            )
+            if r.ok:
+                content = base64.b64decode(r.json()["content"]).decode()
+                return json.loads(content)
         r = requests.get(
             f"https://raw.githubusercontent.com/{OWNER}/{REPO}/main/status.json?t={time.time()}",
             timeout=10,
