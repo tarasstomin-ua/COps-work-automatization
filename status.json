@@ -66,9 +66,9 @@
       "timestamp": "2026-04-17T12:42:06.325206"
     },
     "Bila Tserkva": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-04-23T10:14:48.616322"
+      "timestamp": "2026-04-23T12:28:17.504692"
     },
     "Khmelnytskyi": {
       "profile": "harsh",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-04-23T13:09:31.856873",
+  "last_updated": "2026-04-23T12:28:17.504692",
   "history": [
+    {
+      "city": "Bila Tserkva",
+      "profile": "good",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-04-23T12:28:17.504692"
+    },
     {
       "city": "Cherkasy",
       "profile": "harsh",
