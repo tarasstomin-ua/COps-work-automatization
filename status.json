@@ -146,9 +146,9 @@
       "timestamp": "2026-04-17T12:49:00.506228"
     },
     "Mukachevo": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-04-23T15:47:14.009890"
+      "timestamp": "2026-04-24T00:10:37.360924"
     },
     "Boryspil": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-04-24T00:10:30.633934",
+  "last_updated": "2026-04-24T00:10:37.360924",
   "history": [
+    {
+      "city": "Mukachevo",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-04-24T00:10:37.360924"
+    },
     {
       "city": "Ternopil",
       "profile": "good",
