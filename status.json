@@ -146,9 +146,9 @@
       "timestamp": "2026-04-17T12:49:00.506228"
     },
     "Mukachevo": {
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-04-24T00:10:37.360924"
+      "profile": "harsh",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-04-26T13:04:49.706802"
     },
     "Boryspil": {
       "profile": "harsh",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-04-26T13:00:29.237164",
+  "last_updated": "2026-04-26T13:04:49.706802",
   "history": [
+    {
+      "city": "Mukachevo",
+      "profile": "harsh",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-04-26T13:04:49.706802"
+    },
     {
       "city": "Kropyvnytskyi",
       "profile": "harsh",
