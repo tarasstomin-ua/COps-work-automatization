@@ -41,9 +41,9 @@
       "timestamp": "2026-04-17T15:35:48.751679"
     },
     "Poltava": {
-      "profile": "harsh",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-04-25T09:47:02.675640"
+      "profile": "good",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-04-26T22:25:18.097577"
     },
     "Ivano-Frankivsk": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-04-26T22:23:31.893598",
+  "last_updated": "2026-04-26T22:25:18.097577",
   "history": [
+    {
+      "city": "Poltava",
+      "profile": "good",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-04-26T22:25:18.097577"
+    },
     {
       "city": "Vyshhorod",
       "profile": "good",
