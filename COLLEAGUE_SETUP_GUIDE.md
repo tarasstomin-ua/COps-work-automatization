@@ -1,63 +1,73 @@
 # UA Weather Dashboard — Setup Guide
 
 ## What this does
-This sets up the **Courier Ops Weather Dashboard** on your computer. Once done, you'll have a local web dashboard where you can switch weather settings for all 37 Ukrainian cities by clicking a button. Changes are posted to the **#delivery-city-settings-automation** Slack channel on your behalf.
+This sets up the **Courier Ops Weather Dashboard** on your computer. It's a shared dashboard — all 3 of us (Taras, Anna, Nataliia) see the same live status for all 37 cities in real time. When anyone changes a city's weather, everyone's dashboard updates within 30 seconds.
+
+The dashboard posts messages to **#delivery-city-settings-automation** on your behalf, and **@Delivery Courier Automation Bot** applies the settings automatically.
 
 ---
 
-## Instructions for Cursor AI
+## Setup — paste this into Cursor
 
-> **Copy everything below this line and paste it as a message to Cursor Agent (Cmd+I → Agent mode):**
-
----
-
-### Prompt to paste into Cursor:
+Open **Cursor** → press **Cmd+I** → make sure you're in **Agent** mode → paste this:
 
 ```
-Please set up the UA Weather Dashboard on my machine. Follow these steps exactly:
+Please set up the UA Weather Dashboard on my machine. Follow ALL steps exactly:
 
-1. Clone the repo:
+1. Clone the repo (if folder exists, pull latest instead):
    git clone https://github.com/tarasstomin-ua/COps-work-automatization.git ~/Documents/Cursor/Bad\ weather\ settings
-
-   If the folder already exists, just pull the latest:
+   OR if folder exists:
    cd ~/Documents/Cursor/Bad\ weather\ settings && git pull
 
 2. Install Python dependencies:
    pip3 install flask requests
+   If that fails try: python3 -m pip install flask requests
 
-3. Create the local config file at ~/Documents/Cursor/Bad weather settings/.cops_config.json with this content:
+3. Create the local config file. Write this JSON to ~/Documents/Cursor/Bad weather settings/.cops_config.json :
    {
+     "pat": "ASK_TARAS_FOR_GITHUB_TOKEN",
      "slack_client_id": "2894167688.10943458704292",
      "slack_client_secret": "5d92724dd7a2cf21499d95877ff89cf9"
    }
+   IMPORTANT: Replace ASK_TARAS_FOR_GITHUB_TOKEN with the actual GitHub token Taras sends you.
 
-4. Start the dashboard:
-   cd ~/Documents/Cursor/Bad\ weather\ settings && python3 dashboard_v2.py
+4. Set up auto-start so the dashboard survives restarts. Add this to crontab:
+   @reboot sleep 10 && cd "/Users/$(whoami)/Documents/Cursor/Bad weather settings" && /usr/bin/python3 dashboard_v2.py >> /tmp/courier-ops-dashboard.log 2>&1
+   Use: echo '@reboot sleep 10 && cd "$HOME/Documents/Cursor/Bad weather settings" && /usr/bin/python3 dashboard_v2.py >> /tmp/courier-ops-dashboard.log 2>&1' | crontab -
 
-5. Once the server is running, open http://localhost:5050 in my browser.
+5. Start the dashboard now:
+   Kill anything on port 5050 first: lsof -ti :5050 | xargs kill 2>/dev/null
+   Then: cd ~/Documents/Cursor/Bad\ weather\ settings && python3 dashboard_v2.py
 
-6. Tell me to do these two things manually in the dashboard:
-   a) Paste my GitHub Personal Access Token in the header (I can create one at https://github.com/settings/tokens → "Generate new token (classic)" → select "repo" scope → Generate → copy the token)
-   b) Click the purple "Connect Slack" button in the header → authorize in Slack when prompted
-   c) Select my name from the dropdown
+6. Once running, open http://localhost:5050 in the browser.
 
-That's it — the dashboard is ready to use.
+7. Tell me I need to do ONE manual step in the dashboard:
+   - Click the purple "Connect Slack" button in the header → it will open Slack → I authorize → done
+   - Then select my name from the dropdown
+
+That's it. The dashboard auto-starts on reboot and stays running 24/7.
 ```
 
 ---
 
-## What happens after setup
+## After setup
 
 - **Dashboard URL:** http://localhost:5050
-- **How to start it next time:** Open Terminal, run:
-  ```
-  cd ~/Documents/Cursor/Bad\ weather\ settings && python3 dashboard_v2.py
-  ```
-  Then open http://localhost:5050
+- **Auto-starts** on Mac login (via crontab)
+- **Shared status:** All team members see the same city statuses in real time (synced via GitHub every 30 seconds)
+- **How it works:** Click a weather button → message posted to Slack on your behalf → bot applies settings → status updates for everyone
 
-- **What each button does:** Clicking a weather button (Good/Bad/Harsh) for any city posts a message to Slack on your behalf. The @Delivery Courier Automation Bot picks it up and applies the settings automatically.
+---
 
-- **Live status:** The dashboard shows which weather is active in every city, who changed it, and when — shared across the whole team in real time.
+## If dashboard goes down
+
+Open **Cursor** → paste:
+
+```
+My dashboard is down. Kill anything on port 5050, then start it:
+lsof -ti :5050 | xargs kill
+cd ~/Documents/Cursor/Bad\ weather\ settings && python3 dashboard_v2.py
+```
 
 ---
 
@@ -66,6 +76,7 @@ That's it — the dashboard is ready to use.
 | Problem | Fix |
 |---|---|
 | `pip3 install` fails | Try `python3 -m pip install flask requests` |
-| Port 5050 already in use | Run `lsof -ti :5050 \| xargs kill` then start again |
-| "No Slack token" after restart | Click "Connect Slack" again — it's a one-time auth per machine |
-| Dashboard won't open | Make sure `python3 dashboard_v2.py` is running in a terminal |
+| Port 5050 already in use | `lsof -ti :5050 \| xargs kill` then start again |
+| "Connect Slack" needed after restart | Click the purple button again — one-time per machine |
+| Dashboard won't open | Make sure `python3 dashboard_v2.py` is running |
+| Don't see teammate's changes | Refresh the page — auto-updates every 30 seconds |
