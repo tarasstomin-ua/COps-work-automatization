@@ -8,7 +8,7 @@
     "Dnipro": {
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-04-27T15:43:55.718586"
+      "timestamp": "2026-05-07T13:09:38.492486"
     },
     "Odesa": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-05-07T13:09:32.425157",
+  "last_updated": "2026-05-07T13:09:38.492486",
   "history": [
+    {
+      "city": "Dnipro",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-05-07T13:09:38.492486"
+    },
     {
       "city": "Kyiv",
       "profile": "good",
