@@ -56,9 +56,9 @@
       "timestamp": "2026-05-11T00:27:00.071507"
     },
     "Irpin": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-05-13T15:51:57.669692"
+      "timestamp": "2026-05-20T20:17:11.164947"
     },
     "Zaporizhia": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-05-20T20:14:50.342424",
+  "last_updated": "2026-05-20T20:17:11.164947",
   "history": [
+    {
+      "city": "Irpin",
+      "profile": "harsh",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-05-20T20:17:11.164947"
+    },
     {
       "city": "Odesa",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-04-19T21:33:46.310395"
-    },
-    {
-      "city": "Lviv",
-      "profile": "bad",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-04-19T21:33:11.236715"
     }
   ]
 }
