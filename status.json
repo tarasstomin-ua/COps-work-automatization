@@ -86,9 +86,9 @@
       "timestamp": "2026-05-30T13:44:36.965228"
     },
     "Brovary": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-05-31T11:45:08.746684"
+      "timestamp": "2026-05-31T12:56:39.233160"
     },
     "Zhytomyr": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-05-31T12:56:24.520830",
+  "last_updated": "2026-05-31T12:56:39.233160",
   "history": [
+    {
+      "city": "Brovary",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-05-31T12:56:39.233160"
+    },
     {
       "city": "Ivano-Frankivsk",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-05-08T14:35:54.770918"
-    },
-    {
-      "city": "Lviv",
-      "profile": "good",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-05-08T11:03:10.155298"
     }
   ]
 }
