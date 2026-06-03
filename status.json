@@ -116,9 +116,9 @@
       "timestamp": "2026-06-03T01:43:23.767211"
     },
     "Lutsk": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-06-02T17:18:49.282455"
+      "timestamp": "2026-06-03T10:21:03.627228"
     },
     "Kropyvnytskyi": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-06-03T10:20:48.360046",
+  "last_updated": "2026-06-03T10:21:03.627228",
   "history": [
+    {
+      "city": "Lutsk",
+      "profile": "good",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-06-03T10:21:03.627228"
+    },
     {
       "city": "Boryspil",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-05-13T13:58:43.805330"
-    },
-    {
-      "city": "Kovel",
-      "profile": "harsh",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-05-13T14:13:23.430271"
     }
   ]
 }
