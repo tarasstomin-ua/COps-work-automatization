@@ -86,9 +86,9 @@
       "timestamp": "2026-06-07T08:44:53.676000"
     },
     "Brovary": {
-      "profile": "harsh",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-06-06T23:05:29.753741"
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-06-07T14:18:04.068263"
     },
     "Zhytomyr": {
       "profile": "harsh",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-06-07T14:17:31.334900",
+  "last_updated": "2026-06-07T14:18:04.068263",
   "history": [
+    {
+      "city": "Brovary",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-06-07T14:18:04.068263"
+    },
     {
       "city": "Bila Tserkva",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-05-20T23:19:40.182207"
-    },
-    {
-      "city": "Boryspil",
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-05-20T23:19:13.204007"
     }
   ]
 }
