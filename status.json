@@ -76,9 +76,9 @@
       "timestamp": "2026-06-11T21:05:41.068932"
     },
     "Rivne": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-05-13T09:20:25.102547"
+      "timestamp": "2026-06-12T14:48:15.259335"
     },
     "Uzhhorod": {
       "profile": "harsh",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-06-12T14:48:02.477903",
+  "last_updated": "2026-06-12T14:48:15.259335",
   "history": [
+    {
+      "city": "Rivne",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-06-12T14:48:15.259335"
+    },
     {
       "city": "Mukachevo",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-05-28T14:51:15.800352"
-    },
-    {
-      "city": "Irpin",
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-05-28T14:51:10.650554"
     }
   ]
 }
