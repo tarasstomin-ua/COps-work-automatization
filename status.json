@@ -26,9 +26,9 @@
       "timestamp": "2026-06-11T20:24:40.004497"
     },
     "Vinnytsia": {
-      "profile": "bad",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-06-12T10:47:04.516110"
+      "timestamp": "2026-06-12T10:47:33.235544"
     },
     "Cherkasy": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-06-12T10:47:04.516110",
+  "last_updated": "2026-06-12T10:47:33.235544",
   "history": [
+    {
+      "city": "Vinnytsia",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-06-12T10:47:33.235544"
+    },
     {
       "city": "Vinnytsia",
       "profile": "bad",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-05-27T22:16:41.639019"
-    },
-    {
-      "city": "Odesa",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-05-27T21:56:14.219413"
     }
   ]
 }
