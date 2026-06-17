@@ -181,14 +181,20 @@
       "timestamp": "2026-04-17T12:56:30.847251"
     },
     "Kolomyia": {
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-06-15T14:14:00.008895"
+      "profile": "harsh",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-06-17T12:58:18.287776"
     }
   },
   "team": [],
-  "last_updated": "2026-06-17T12:58:01.853205",
+  "last_updated": "2026-06-17T12:58:18.287776",
   "history": [
+    {
+      "city": "Kolomyia",
+      "profile": "harsh",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-06-17T12:58:18.287776"
+    },
     {
       "city": "Drohobych",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-06-01T11:52:40.806454"
-    },
-    {
-      "city": "Uzhhorod",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-05-31T21:43:29.154098"
     }
   ]
 }
