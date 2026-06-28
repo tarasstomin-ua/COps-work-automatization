@@ -6,9 +6,9 @@
       "timestamp": "2026-06-22T17:04:33.764577"
     },
     "Dnipro": {
-      "profile": "bad",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-06-28T13:56:20.938597"
+      "timestamp": "2026-06-28T15:07:39.561100"
     },
     "Odesa": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-06-28T13:56:20.938597",
+  "last_updated": "2026-06-28T15:07:39.561100",
   "history": [
+    {
+      "city": "Dnipro",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-06-28T15:07:39.561100"
+    },
     {
       "city": "Dnipro",
       "profile": "bad",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-06-03T18:02:06.243338"
-    },
-    {
-      "city": "Irpin",
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-06-03T17:22:08.371925"
     }
   ]
 }
