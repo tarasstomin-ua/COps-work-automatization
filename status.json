@@ -141,9 +141,9 @@
       "timestamp": "2026-06-26T15:51:47.340932"
     },
     "Kamianske": {
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-05-18T19:48:49.332295"
+      "profile": "harsh",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-06-29T12:57:41.075855"
     },
     "Mukachevo": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-06-29T12:57:13.490140",
+  "last_updated": "2026-06-29T12:57:41.075855",
   "history": [
+    {
+      "city": "Kamianske",
+      "profile": "harsh",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-06-29T12:57:41.075855"
+    },
     {
       "city": "Brovary",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-06-04T11:38:45.933112"
-    },
-    {
-      "city": "Uzhhorod",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-06-03T20:12:48.435280"
     }
   ]
 }
