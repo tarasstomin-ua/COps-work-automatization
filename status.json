@@ -121,9 +121,9 @@
       "timestamp": "2026-06-30T11:02:44.507783"
     },
     "Kropyvnytskyi": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-04-28T13:51:21.273335"
+      "timestamp": "2026-07-03T22:45:27.746641"
     },
     "Kremenchuk": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-07-03T22:45:22.377384",
+  "last_updated": "2026-07-03T22:45:27.746641",
   "history": [
+    {
+      "city": "Kropyvnytskyi",
+      "profile": "harsh",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-07-03T22:45:27.746641"
+    },
     {
       "city": "Sumy",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-06-08T13:43:46.070593"
-    },
-    {
-      "city": "Irpin",
-      "profile": "harsh",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-06-08T13:16:26.057195"
     }
   ]
 }
