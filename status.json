@@ -176,9 +176,9 @@
       "timestamp": "2026-05-13T15:52:23.541067"
     },
     "Oleksandriia": {
-      "profile": "harsh",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-07-03T22:45:51.826274"
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-07-05T12:09:47.447718"
     },
     "Kolomyia": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-07-05T12:09:30.934048",
+  "last_updated": "2026-07-05T12:09:47.447718",
   "history": [
+    {
+      "city": "Oleksandriia",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-07-05T12:09:47.447718"
+    },
     {
       "city": "Zaporizhia",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-06-09T19:44:40.149269"
-    },
-    {
-      "city": "Uzhhorod",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-06-09T10:25:08.880874"
     }
   ]
 }
