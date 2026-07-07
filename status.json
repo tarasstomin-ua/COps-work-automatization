@@ -166,9 +166,9 @@
       "timestamp": "2026-07-07T23:09:08.515189"
     },
     "Truskavets": {
-      "profile": "good",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-06-19T19:07:15.835125"
+      "profile": "harsh",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-07-07T23:09:12.200679"
     },
     "Kovel": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-07-07T23:09:08.515189",
+  "last_updated": "2026-07-07T23:09:12.200679",
   "history": [
+    {
+      "city": "Truskavets",
+      "profile": "harsh",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-07-07T23:09:12.200679"
+    },
     {
       "city": "Drohobych",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-06-12T16:01:43.074457"
-    },
-    {
-      "city": "Irpin",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-06-12T15:58:40.745568"
     }
   ]
 }
