@@ -158,7 +158,7 @@
     "Vyshhorod": {
       "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-07-07T23:12:51.607191"
+      "timestamp": "2026-07-07T23:13:16.379032"
     },
     "Drohobych": {
       "profile": "harsh",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-07-07T23:12:51.607191",
+  "last_updated": "2026-07-07T23:13:16.379032",
   "history": [
+    {
+      "city": "Vyshhorod",
+      "profile": "harsh",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-07-07T23:13:16.379032"
+    },
     {
       "city": "Vyshhorod",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-06-12T17:57:48.349098"
-    },
-    {
-      "city": "Kharkiv",
-      "profile": "bad",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-06-12T17:57:38.865898"
     }
   ]
 }
