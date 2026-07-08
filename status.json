@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-07-08T13:31:15.691343",
+  "last_updated": "2026-07-08T13:31:36.394618",
   "history": [
+    {
+      "city": "Odesa",
+      "action": "distance:regular",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-07-08T13:31:36.394618"
+    },
     {
       "city": "Lviv",
       "action": "distance:regular",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-06-12T20:11:50.885839"
-    },
-    {
-      "city": "Ivano-Frankivsk",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-06-12T20:11:46.421313"
     }
   ],
   "distances": {
@@ -2015,6 +2015,11 @@
       "mode": "regular",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-07-08T13:31:15.691343"
+    },
+    "Odesa": {
+      "mode": "regular",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-07-08T13:31:36.394618"
     }
   }
 }
