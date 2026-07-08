@@ -386,54 +386,118 @@ def _run_task(task_id: str, city_name: str, profile: str, user: str):
         )
         _log_action(city_name, profile, "error", elapsed, user)
 
+# ── Selenium helpers (for distance settings) ─────────────────────────────────
+
+dist_lock = threading.Lock()
+
+def _make_driver():
+    from selenium.webdriver.chrome.options import Options
+    tmp = Path.home() / ".chrome_selenium_profile"
+    tmp.mkdir(exist_ok=True)
+    opts = Options()
+    opts.add_argument(f"--user-data-dir={tmp}")
+    opts.add_argument("--profile-directory=AutomationProfile")
+    from selenium import webdriver
+    return webdriver.Chrome(options=opts)
+
+
+def _cleanup_chrome():
+    try:
+        subprocess.run(["pkill", "-f", "chrome_selenium_profile"], capture_output=True, timeout=5)
+    except Exception:
+        pass
+
+
+def _deep_merge(dst, src):
+    for k, v in src.items():
+        if isinstance(v, dict) and isinstance(dst.get(k), dict):
+            _deep_merge(dst[k], v)
+        else:
+            dst[k] = v
+
+
+def _apply_selenium_distance(city_name, dist_profile):
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+
+    city = CITIES[city_name]
+    target = DISTANCE_PROFILES[dist_profile]["order_settings"]
+    url = f"https://admin-panel.bolt.eu/delivery-courier/settings/city/{city['id']}"
+
+    driver = _make_driver()
+    try:
+        driver.get(url)
+        WebDriverWait(driver, 120).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, ".jsoneditor"))
+        )
+        time.sleep(2)
+
+        driver.find_element(By.CSS_SELECTOR, "button.jsoneditor-modes").click()
+        time.sleep(0.5)
+        for el in driver.find_elements(By.CSS_SELECTOR, ".jsoneditor-type-modes div"):
+            if el.text.strip() == "Code":
+                el.click()
+                break
+        time.sleep(1)
+
+        raw = driver.execute_script(
+            "return ace.edit(document.querySelector('.ace_editor')).getValue();"
+        )
+        current = json.loads(raw)
+        _deep_merge(current, {"order_settings": target})
+
+        driver.execute_script(
+            "ace.edit(document.querySelector('.ace_editor')).setValue(arguments[0], -1);",
+            json.dumps(current, indent=2),
+        )
+        time.sleep(1)
+
+        driver.execute_script("""
+            Array.from(document.querySelectorAll('button'))
+                 .find(b => b.textContent.trim() === 'Update')
+                 ?.click();
+        """)
+        time.sleep(3)
+        return True, "Distance settings applied successfully!"
+    except Exception as e:
+        return False, str(e)
+    finally:
+        try:
+            driver.quit()
+        except Exception:
+            pass
+
+
 # ── Distance task runner ──────────────────────────────────────────────────────
 
 def _run_distance_task(task_id: str, city_name: str, dist_profile: str, user: str):
     start = time.time()
     try:
-        tasks[task_id]["status"] = "running"
-        tasks[task_id]["message"] = f"Posting distances to Slack: {city_name} → {dist_profile}..."
+        with dist_lock:
+            dp = DISTANCE_PROFILES[dist_profile]
+            tasks[task_id]["status"] = "running"
+            tasks[task_id]["message"] = f"Opening Chrome for {city_name}..."
 
-        cfg = _load_config()
-        token = cfg.get("slack_token", "")
-        if not token:
-            raise RuntimeError("No Slack token configured. Paste it in the dashboard header.")
+            _cleanup_chrome()
+            time.sleep(1)
 
-        slack_cfg = _fetch_slack_config()
-        channel = slack_cfg["channel_id"]
-        dp = DISTANCE_PROFILES[dist_profile]
-        vals = dp["order_settings"]["arrival_distance_threshold_in_meters"]
-        city_info = CITIES[city_name]
+            success, message = _apply_selenium_distance(city_name, dist_profile)
+            elapsed = time.time() - start
+            _cleanup_chrome()
 
-        text = (
-            f"<@U0AEPHE0CHH> /update {city_name} (ID: {city_info['id']})\n"
-            f"Section: order_settings.arrival_distance_threshold_in_meters\n"
-            f"provider_warning: {vals['provider_warning']}\n"
-            f"eater_warning: {vals['eater_warning']}\n"
-            f"provider_error: {vals['provider_error']}\n"
-            f"eater_error: {vals['eater_error']}"
-        )
+            tasks[task_id].update(
+                status="success" if success else "error",
+                finished_at=datetime.now().isoformat(),
+                duration=round(elapsed, 1),
+                message=message,
+            )
 
-        r = requests.post(
-            "https://slack.com/api/chat.postMessage",
-            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
-            json={"channel": channel, "text": text},
-            timeout=15,
-        )
-        body = r.json()
-        if not body.get("ok"):
-            raise RuntimeError(f"Slack API error: {body.get('error', 'unknown')}")
-
-        elapsed = time.time() - start
-        tasks[task_id].update(
-            status="success",
-            finished_at=datetime.now().isoformat(),
-            duration=round(elapsed, 1),
-            message=f"{dp['label']} distances posted to Slack!",
-        )
-        _push_github_distance_status(city_name, dist_profile, user)
+            if success:
+                _push_github_distance_status(city_name, dist_profile, user)
 
     except Exception as exc:
+        _cleanup_chrome()
         elapsed = time.time() - start
         tasks[task_id].update(
             status="error", message=str(exc), finished_at=datetime.now().isoformat(),
@@ -1155,7 +1219,7 @@ function askDist(city,mode){
   if(!user){toast('Select your name first!','error');return;}
   pending={city,distMode:mode};
   document.getElementById('mt').textContent='Apply '+distLabels[mode]+' Distances?';
-  document.getElementById('md').textContent=user.split('@')[0]+' \u2192 '+city+' \u2192 '+(mode==='air_alarm'?'Extended (30M/40M)':'Normal (300/400)')+' arrival distances';
+  document.getElementById('md').textContent=user.split('@')[0]+' \u2192 '+city+' \u2192 '+(mode==='air_alarm'?'Extended (30M/40M)':'Normal (300/400)')+' via Selenium';
   document.getElementById('ov').classList.add('open');
 }
 
@@ -1173,7 +1237,7 @@ async function applyDist(city,mode){
   const all=document.querySelectorAll('.b');
   all.forEach(b=>b.disabled=true);if(btn)btn.classList.add('ld');
   const ls=document.getElementById('liveStatus'),lt=document.getElementById('liveText');
-  ls.classList.add('busy');lt.textContent='Distance: '+distLabels[mode]+' \u2192 '+city+'...';
+  ls.classList.add('busy');lt.textContent='Selenium: '+distLabels[mode]+' \u2192 '+city+'...';
   try{
     const r=await fetch('/api/apply-distance',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({city,mode,user})});
     if(!r.ok){const e=await r.json();toast(e.error||'Request failed','error');return}
