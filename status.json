@@ -181,14 +181,20 @@
       "timestamp": "2026-07-05T12:09:47.447718"
     },
     "Kolomyia": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-07-07T23:09:32.241035"
+      "timestamp": "2026-07-08T14:06:44.927448"
     }
   },
   "team": [],
-  "last_updated": "2026-07-08T14:05:22.162154",
+  "last_updated": "2026-07-08T14:06:44.927448",
   "history": [
+    {
+      "city": "Kolomyia",
+      "profile": "good",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-07-08T14:06:44.927448"
+    },
     {
       "city": "Ternopil",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-06-14T11:19:00.139724"
-    },
-    {
-      "city": "Dnipro",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-06-14T10:34:27.614968"
     }
   ],
   "distances": {
