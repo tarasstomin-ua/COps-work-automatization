@@ -171,9 +171,9 @@
       "timestamp": "2026-07-07T23:09:12.200679"
     },
     "Kovel": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-07-07T23:09:16.274257"
+      "timestamp": "2026-07-08T14:05:01.967533"
     },
     "Oleksandriia": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-07-08T14:04:29.614194",
+  "last_updated": "2026-07-08T14:05:01.967533",
   "history": [
+    {
+      "city": "Kovel",
+      "profile": "good",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-07-08T14:05:01.967533"
+    },
     {
       "city": "Rivne",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-06-13T16:05:27.387453"
-    },
-    {
-      "city": "Kyiv",
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-06-12T20:33:49.333706"
     }
   ],
   "distances": {
