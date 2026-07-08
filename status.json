@@ -11,9 +11,9 @@
       "timestamp": "2026-07-08T11:56:19.152302"
     },
     "Odesa": {
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-06-07T14:16:22.397019"
+      "profile": "harsh",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-07-08T17:28:27.344358"
     },
     "Lviv": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-07-08T17:18:50.042041",
+  "last_updated": "2026-07-08T17:28:27.344358",
   "history": [
+    {
+      "city": "Odesa",
+      "profile": "harsh",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-07-08T17:28:27.344358"
+    },
     {
       "city": "Vyshhorod",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-06-15T12:16:12.079967"
-    },
-    {
-      "city": "Ternopil",
-      "profile": "harsh",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-06-15T11:27:58.744032"
     }
   ],
   "distances": {
