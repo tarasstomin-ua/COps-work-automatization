@@ -82,6 +82,35 @@ CITIES = {
 
 VALID_PROFILES = {"good", "bad", "harsh"}
 
+# ── Distance profiles (Air Alarm / Regular) ──────────────────────────────────
+
+DISTANCE_CITIES = {"Kyiv", "Lviv", "Dnipro", "Kharkiv", "Vinnytsia", "Odesa"}
+
+DISTANCE_PROFILES = {
+    "air_alarm": {
+        "label": "Air Alarm",
+        "order_settings": {
+            "arrival_distance_threshold_in_meters": {
+                "provider_warning": 30000000,
+                "eater_warning": 30000000,
+                "provider_error": 40000000,
+                "eater_error": 40000000,
+            }
+        },
+    },
+    "regular": {
+        "label": "Regular",
+        "order_settings": {
+            "arrival_distance_threshold_in_meters": {
+                "provider_warning": 300,
+                "eater_warning": 300,
+                "provider_error": 400,
+                "eater_error": 400,
+            }
+        },
+    },
+}
+
 # ── Flask app ─────────────────────────────────────────────────────────────────
 
 app = Flask(__name__)
@@ -357,6 +386,101 @@ def _run_task(task_id: str, city_name: str, profile: str, user: str):
         )
         _log_action(city_name, profile, "error", elapsed, user)
 
+# ── Distance task runner ──────────────────────────────────────────────────────
+
+def _run_distance_task(task_id: str, city_name: str, dist_profile: str, user: str):
+    start = time.time()
+    try:
+        tasks[task_id]["status"] = "running"
+        tasks[task_id]["message"] = f"Posting distances to Slack: {city_name} → {dist_profile}..."
+
+        cfg = _load_config()
+        token = cfg.get("slack_token", "")
+        if not token:
+            raise RuntimeError("No Slack token configured. Paste it in the dashboard header.")
+
+        slack_cfg = _fetch_slack_config()
+        channel = slack_cfg["channel_id"]
+        dp = DISTANCE_PROFILES[dist_profile]
+        vals = dp["order_settings"]["arrival_distance_threshold_in_meters"]
+        city_info = CITIES[city_name]
+
+        text = (
+            f"<@U0AEPHE0CHH> /update {city_name} (ID: {city_info['id']})\n"
+            f"Section: order_settings.arrival_distance_threshold_in_meters\n"
+            f"provider_warning: {vals['provider_warning']}\n"
+            f"eater_warning: {vals['eater_warning']}\n"
+            f"provider_error: {vals['provider_error']}\n"
+            f"eater_error: {vals['eater_error']}"
+        )
+
+        r = requests.post(
+            "https://slack.com/api/chat.postMessage",
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+            json={"channel": channel, "text": text},
+            timeout=15,
+        )
+        body = r.json()
+        if not body.get("ok"):
+            raise RuntimeError(f"Slack API error: {body.get('error', 'unknown')}")
+
+        elapsed = time.time() - start
+        tasks[task_id].update(
+            status="success",
+            finished_at=datetime.now().isoformat(),
+            duration=round(elapsed, 1),
+            message=f"{dp['label']} distances posted to Slack!",
+        )
+        _push_github_distance_status(city_name, dist_profile, user)
+
+    except Exception as exc:
+        elapsed = time.time() - start
+        tasks[task_id].update(
+            status="error", message=str(exc), finished_at=datetime.now().isoformat(),
+        )
+
+
+def _push_github_distance_status(city, dist_profile, user):
+    cfg = _load_config()
+    pat = cfg.get("pat", "")
+    if not pat:
+        return
+    try:
+        headers = {"Authorization": f"Bearer {pat}", "Accept": "application/vnd.github+json"}
+        fr = requests.get(
+            f"{GH_API}/repos/{OWNER}/{REPO}/contents/status.json",
+            headers=headers, timeout=10,
+        )
+        sha = None
+        remote = {"cities": {}, "history": [], "last_updated": None}
+        if fr.ok:
+            d = fr.json()
+            sha = d["sha"]
+            remote = json.loads(base64.b64decode(d["content"]).decode())
+
+        ts = datetime.now().isoformat()
+        distances = remote.setdefault("distances", {})
+        distances[city] = {"mode": dist_profile, "user": user, "timestamp": ts}
+
+        remote.setdefault("history", []).insert(0, {
+            "city": city, "action": f"distance:{dist_profile}", "user": user, "timestamp": ts,
+        })
+        remote["history"] = remote["history"][:300]
+        remote["last_updated"] = ts
+
+        body = {
+            "message": f"Distance: {city} -> {dist_profile} by {user}",
+            "content": base64.b64encode(json.dumps(remote, indent=2).encode()).decode(),
+        }
+        if sha:
+            body["sha"] = sha
+        requests.put(
+            f"{GH_API}/repos/{OWNER}/{REPO}/contents/status.json",
+            headers=headers, json=body, timeout=10,
+        )
+    except Exception as e:
+        print(f"  Push distance status error: {e}")
+
 # ── API routes ────────────────────────────────────────────────────────────────
 
 @app.route("/")
@@ -371,7 +495,8 @@ def api_cities():
         g = cfg["group"]
         if g not in group_map:
             group_map[g] = {"order": cfg["group_order"], "cities": []}
-        group_map[g]["cities"].append({"name": name, "profiles": cfg["profiles"]})
+        has_dist = name in DISTANCE_CITIES
+        group_map[g]["cities"].append({"name": name, "profiles": cfg["profiles"], "has_distance": has_dist})
     groups = sorted(group_map.items(), key=lambda x: x[1]["order"])
 
     gh = _pull_github_status()
@@ -383,9 +508,19 @@ def api_cities():
             "user": info.get("user", ""),
         }
 
+    dist_status = {}
+    for city, info in gh.get("distances", {}).items():
+        dist_status[city] = {
+            "mode": info["mode"],
+            "since": info["timestamp"],
+            "user": info.get("user", ""),
+        }
+
     return jsonify({
         "groups": [{"name": k, "count": len(v["cities"]), "cities": v["cities"]} for k, v in groups],
         "active_profiles": active,
+        "distance_status": dist_status,
+        "distance_cities": list(DISTANCE_CITIES),
     })
 
 
@@ -413,6 +548,32 @@ def api_apply():
         "finished_at": None, "duration": None,
     }
     threading.Thread(target=_run_task, args=(task_id, city, profile, user), daemon=True).start()
+    return jsonify({"task_id": task_id})
+
+
+@app.route("/api/apply-distance", methods=["POST"])
+def api_apply_distance():
+    data = request.json or {}
+    city = data.get("city", "")
+    mode = data.get("mode", "")
+    user = data.get("user", "")
+    if not user:
+        return jsonify({"error": "Select your name first"}), 400
+    if city not in CITIES:
+        return jsonify({"error": f"Unknown city: {city}"}), 400
+    if city not in DISTANCE_CITIES:
+        return jsonify({"error": f"Distance profiles not available for {city}"}), 400
+    if mode not in DISTANCE_PROFILES:
+        return jsonify({"error": f"Unknown distance mode: {mode}"}), 400
+
+    task_id = str(uuid.uuid4())[:8]
+    tasks[task_id] = {
+        "id": task_id, "city": city, "mode": mode, "user": user,
+        "status": "queued", "message": "Starting...",
+        "created_at": datetime.now().isoformat(),
+        "finished_at": None, "duration": None,
+    }
+    threading.Thread(target=_run_distance_task, args=(task_id, city, mode, user), daemon=True).start()
     return jsonify({"task_id": task_id})
 
 
@@ -600,6 +761,7 @@ HTML_PAGE = r"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%231a1a2e'/><path d='M20 38c-5.5 0-10-4.5-10-10 0-4.8 3.4-8.8 8-9.8C19.5 13 24.3 9 30 9c6.6 0 12 5 12.6 11.4C47 21.6 50 25.5 50 30c0 5.5-4.5 10-10 10H20z' fill='%238b5cf6' opacity='.9'/><path d='M33 28l-8 14h6l-2 10 10-16h-7l3-8z' fill='%23fbbf24'/></svg>">
 <title>Courier Ops — Ukraine Weather Control</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -686,6 +848,15 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 .b .sp{display:none;width:12px;height:12px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto}
 .b.ld .lb{display:none}.b.ld .sp{display:block}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+.dist-sep{border:none;border-top:1px dashed var(--bd2);margin:10px 0 6px}
+.dist-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--mu);margin-bottom:6px}
+.dist-status{font-size:10px;color:var(--mu);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.dist-status .ds-mode{font-weight:600}
+.dist-status .ds-mode.air_alarm{color:#f97316}
+.dist-status .ds-mode.regular{color:#06b6d4}
+.b.air_alarm{background:#f97316}.b.air_alarm:hover:not(:disabled){background:#fb923c;transform:translateY(-1px)}
+.b.regular{background:#06b6d4}.b.regular:hover:not(:disabled){background:#22d3ee;transform:translateY(-1px)}
 
 .an-sum{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
 .sc{background:var(--bg);border-radius:var(--r2);padding:16px;text-align:center;border:1px solid var(--bd)}
@@ -825,10 +996,11 @@ tr.city-row:hover{background:var(--card2)}
 <script>
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const periodMap={day:'today',week:'week',month:'month'};
-let period='day',pending=null,activeData={},allGroups=[];
+let period='day',pending=null,activeData={},distData={},allGroups=[];
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 const labels={good:'Good',bad:'Bad',harsh:'Harsh'};
 const labelsF={good:'Good Weather',bad:'Bad Weather',harsh:'Harsh Weather'};
+const distLabels={air_alarm:'Air Alarm',regular:'Regular'};
 
 function fmtDate(iso){
   if(!iso)return '\u2014';
@@ -869,7 +1041,7 @@ loadConfig();
 
 async function loadCities(){
   const r=await fetch('/api/cities');const d=await r.json();
-  activeData=d.active_profiles;allGroups=d.groups;
+  activeData=d.active_profiles;distData=d.distance_status||{};allGroups=d.groups;
   renderOverview(d.groups,d.active_profiles);
   renderSections(d.groups,d.active_profiles);
   const ac=Object.keys(d.active_profiles).length;
@@ -887,7 +1059,9 @@ function renderOverview(groups,active){
       const ts=ap?fmtDate(ap.since):'';
       const u=ap?((ap.user||'').split('@')[0]||''):'';
       const extra=ts?(ts+(u?' \u00b7 '+u:'')):(u||'');
-      return '<span class="pill"><span class="d '+prof+'"></span><span class="pn">'+c.name+'</span><span class="pp '+prof+'">'+lbl+'</span>'+(extra?'<span class="pt">'+extra+'</span>':'')+'</span>';
+      const ds=distData[c.name];
+      const distBadge=ds?'<span style="font-size:9px;padding:1px 5px;border-radius:4px;margin-left:4px;font-weight:600;'+(ds.mode==='air_alarm'?'background:rgba(249,115,22,.15);color:#f97316':'background:rgba(6,182,212,.15);color:#06b6d4')+'">'+(ds.mode==='air_alarm'?'\u26A0':'\u2713')+'</span>':'';
+      return '<span class="pill"><span class="d '+prof+'"></span><span class="pn">'+c.name+distBadge+'</span><span class="pp '+prof+'">'+lbl+'</span>'+(extra?'<span class="pt">'+extra+'</span>':'')+'</span>';
     }).join('');
     return '<div class="ov-tier"><div class="ov-tier-h" onclick="toggleOvTier(this)"><span class="chv2">&#9662;</span>'+g.name+' <span style="color:var(--mu2)">'+g.count+'</span></div><div class="ov-pills">'+pills+'</div></div>';
   }).join('');
@@ -916,12 +1090,24 @@ function card(c,ap){
     ah='<div class="ap"><span class="d '+p+'" style="width:7px;height:7px;border-radius:50%;display:inline-block"></span><span class="pname">'+labelsF[p]+'</span><span class="since">Since '+fmtDate(ap.since)+u+'</span></div>';
   }
   const btns=c.profiles.map(p=>'<button class="b '+p+'" data-city="'+c.name+'" data-prof="'+p+'"><span class="lb">'+cap(p)+'</span><div class="sp"></div></button>').join('');
-  return '<div class="card" id="c-'+c.name+'"><div class="card-top"><span class="city">'+c.name+'</span></div>'+ah+'<div class="btns">'+btns+'</div></div>';
+  let distHtml='';
+  if(c.has_distance){
+    const ds=distData[c.name];
+    let dsInfo='';
+    if(ds){
+      const du=ds.user?(' \u00b7 '+ds.user.split('@')[0]):'';
+      dsInfo='<div class="dist-status"><span class="ds-mode '+ds.mode+'">'+(distLabels[ds.mode]||ds.mode)+' distances</span><span style="color:var(--accent);font-size:10px">Since '+fmtDate(ds.since)+du+'</span></div>';
+    }
+    distHtml='<hr class="dist-sep"><div class="dist-label">Distance Mode</div>'+dsInfo+'<div class="btns"><button class="b air_alarm" data-city="'+c.name+'" data-dist="air_alarm"><span class="lb">\u26A0 Air Alarm</span><div class="sp"></div></button><button class="b regular" data-city="'+c.name+'" data-dist="regular"><span class="lb">\u2713 Regular</span><div class="sp"></div></button></div>';
+  }
+  return '<div class="card" id="c-'+c.name+'"><div class="card-top"><span class="city">'+c.name+'</span></div>'+ah+'<div class="btns">'+btns+'</div>'+distHtml+'</div>';
 }
 
 document.addEventListener('click',function(e){
   var btn=e.target.closest('.b[data-city]');
-  if(btn&&!btn.disabled)ask(btn.dataset.city,btn.dataset.prof);
+  if(!btn||btn.disabled)return;
+  if(btn.dataset.dist)askDist(btn.dataset.city,btn.dataset.dist);
+  else if(btn.dataset.prof)ask(btn.dataset.city,btn.dataset.prof);
 });
 
 setInterval(()=>{loadCities();loadStats()},30000);
@@ -936,9 +1122,6 @@ function ask(city,prof){
 }
 function closeM(){document.getElementById('ov').classList.remove('open');pending=null}
 document.getElementById('mcn').onclick=closeM;
-document.getElementById('mc').onclick=async()=>{
-  if(!pending)return;const{city,profile}=pending;closeM();await apply(city,profile);
-};
 
 async function apply(city,prof){
   const user=document.getElementById('userSel').value;
@@ -964,6 +1147,48 @@ async function apply(city,prof){
   finally{
     all.forEach(b=>b.disabled=false);if(btn)btn.classList.remove('ld');
     ls.classList.remove('busy');lt.textContent='Live';loadCities();loadStats();
+  }
+}
+
+function askDist(city,mode){
+  const user=document.getElementById('userSel').value;
+  if(!user){toast('Select your name first!','error');return;}
+  pending={city,distMode:mode};
+  document.getElementById('mt').textContent='Apply '+distLabels[mode]+' Distances?';
+  document.getElementById('md').textContent=user.split('@')[0]+' \u2192 '+city+' \u2192 '+(mode==='air_alarm'?'Extended (30M/40M)':'Normal (300/400)')+' arrival distances';
+  document.getElementById('ov').classList.add('open');
+}
+
+document.getElementById('mc').onclick=async()=>{
+  if(!pending)return;
+  if(pending.distMode){const{city,distMode}=pending;closeM();await applyDist(city,distMode);}
+  else{const{city,profile}=pending;closeM();await apply(city,profile);}
+};
+
+async function applyDist(city,mode){
+  const user=document.getElementById('userSel').value;
+  if(!user){toast('Select your name first!','error');return;}
+  const crd=document.getElementById('c-'+city);
+  const btn=crd?crd.querySelector('.b.'+mode):null;
+  const all=document.querySelectorAll('.b');
+  all.forEach(b=>b.disabled=true);if(btn)btn.classList.add('ld');
+  const ls=document.getElementById('liveStatus'),lt=document.getElementById('liveText');
+  ls.classList.add('busy');lt.textContent='Distance: '+distLabels[mode]+' \u2192 '+city+'...';
+  try{
+    const r=await fetch('/api/apply-distance',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({city,mode,user})});
+    if(!r.ok){const e=await r.json();toast(e.error||'Request failed','error');return}
+    const{task_id}=await r.json();
+    while(true){
+      await new Promise(r=>setTimeout(r,1500));
+      const tr=await fetch('/api/tasks/'+task_id);const t=await tr.json();
+      if(t.status==='success'){toast(city+' \u2192 '+distLabels[mode]+' distances applied','success');break}
+      if(t.status==='error'){toast('Failed: '+t.message,'error');break}
+      lt.textContent=t.message||'Running...';
+    }
+  }catch(e){toast('Error: '+e.message,'error')}
+  finally{
+    all.forEach(b=>b.disabled=false);if(btn)btn.classList.remove('ld');
+    ls.classList.remove('busy');lt.textContent='Live';loadCities();
   }
 }
 
