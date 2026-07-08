@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-07-08T15:09:52.071507",
+  "last_updated": "2026-07-08T15:11:09.255376",
   "history": [
+    {
+      "city": "Dnipro",
+      "action": "distance:air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-07-08T15:11:09.255376"
+    },
     {
       "city": "Kyiv",
       "action": "distance:regular",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-06-15T10:02:19.733496"
-    },
-    {
-      "city": "Kyiv",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-06-15T10:02:17.138945"
     }
   ],
   "distances": {
@@ -2002,9 +2002,9 @@
       "timestamp": "2026-07-08T13:28:17.379335"
     },
     "Dnipro": {
-      "mode": "regular",
+      "mode": "air_alarm",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-07-08T13:47:15.028551"
+      "timestamp": "2026-07-08T15:11:09.255376"
     },
     "Vinnytsia": {
       "mode": "regular",
