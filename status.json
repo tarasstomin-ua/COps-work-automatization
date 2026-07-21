@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-07-21T19:31:17.305294",
+  "last_updated": "2026-07-21T19:50:36.836631",
   "history": [
+    {
+      "city": "Kyiv",
+      "action": "distance:air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-07-21T19:50:36.836631"
+    },
     {
       "city": "Kyiv",
       "action": "distance:regular",
@@ -1982,19 +1988,13 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-07-07T10:11:10.756147"
-    },
-    {
-      "city": "Sumy",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-07-06T18:51:58.095969"
     }
   ],
   "distances": {
     "Kyiv": {
-      "mode": "regular",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-07-21T19:31:17.305294"
+      "mode": "air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-07-21T19:50:36.836631"
     },
     "Kharkiv": {
       "mode": "air_alarm",
