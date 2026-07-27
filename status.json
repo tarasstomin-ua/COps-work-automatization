@@ -28,7 +28,7 @@
     "Vinnytsia": {
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-07-27T19:44:56.716516"
+      "timestamp": "2026-07-27T19:46:49.922284"
     },
     "Cherkasy": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-07-27T19:45:38.182220",
+  "last_updated": "2026-07-27T19:46:49.922284",
   "history": [
+    {
+      "city": "Vinnytsia",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-07-27T19:46:49.922284"
+    },
     {
       "city": "Lviv",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-07-09T15:40:04.076850"
-    },
-    {
-      "city": "Kamianets-Podilskyi",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-07-09T13:26:35.815926"
     }
   ],
   "distances": {
