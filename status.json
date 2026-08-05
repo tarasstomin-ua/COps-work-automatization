@@ -76,9 +76,9 @@
       "timestamp": "2026-07-24T16:46:25.061523"
     },
     "Rivne": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-07-28T10:36:26.616815"
+      "timestamp": "2026-08-05T14:03:40.411920"
     },
     "Uzhhorod": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-08-05T13:58:10.357537",
+  "last_updated": "2026-08-05T14:03:40.411920",
   "history": [
+    {
+      "city": "Rivne",
+      "profile": "harsh",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-08-05T14:03:40.411920"
+    },
     {
       "city": "Zaporizhia",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "action": "distance:air_alarm",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-07-14T17:48:02.986634"
-    },
-    {
-      "city": "Dnipro",
-      "profile": "harsh",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-07-14T14:38:53.654508"
     }
   ],
   "distances": {
