@@ -21,9 +21,9 @@
       "timestamp": "2026-07-28T13:10:29.434671"
     },
     "Kharkiv": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-08-05T13:54:52.047255"
+      "timestamp": "2026-08-06T10:25:58.141984"
     },
     "Vinnytsia": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-08-06T10:20:59.980646",
+  "last_updated": "2026-08-06T10:25:58.141984",
   "history": [
+    {
+      "city": "Kharkiv",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-08-06T10:25:58.141984"
+    },
     {
       "city": "Boryspil",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-07-16T10:05:28.081799"
-    },
-    {
-      "city": "Dnipro",
-      "profile": "good",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-07-16T10:05:21.038095"
     }
   ],
   "distances": {
