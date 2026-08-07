@@ -111,9 +111,9 @@
       "timestamp": "2026-08-04T11:43:05.713794"
     },
     "Ternopil": {
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-08-07T19:00:06.906813"
+      "profile": "good",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-08-07T22:50:55.301753"
     },
     "Lutsk": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-08-07T22:50:40.982222",
+  "last_updated": "2026-08-07T22:50:55.301753",
   "history": [
+    {
+      "city": "Ternopil",
+      "profile": "good",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-08-07T22:50:55.301753"
+    },
     {
       "city": "Ivano-Frankivsk",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-07-21T13:06:36.860376"
-    },
-    {
-      "city": "Kolomyia",
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-07-21T13:59:00.266973"
     }
   ],
   "distances": {
