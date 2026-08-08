@@ -151,9 +151,9 @@
       "timestamp": "2026-08-06T17:15:49.130489"
     },
     "Boryspil": {
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-08-07T22:51:00.115681"
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-08-08T10:59:45.264468"
     },
     "Vyshhorod": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-08-08T10:59:39.710166",
+  "last_updated": "2026-08-08T10:59:45.264468",
   "history": [
+    {
+      "city": "Boryspil",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-08-08T10:59:45.264468"
+    },
     {
       "city": "Brovary",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-07-21T16:16:25.020388"
-    },
-    {
-      "city": "Vinnytsia",
-      "profile": "harsh",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-07-21T14:54:40.086522"
     }
   ],
   "distances": {
