@@ -31,9 +31,9 @@
       "timestamp": "2026-08-18T20:21:53.783968"
     },
     "Cherkasy": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-08-18T16:57:00.476758"
+      "timestamp": "2026-08-19T10:33:55.329656"
     },
     "Kryvyi Rih": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-08-19T10:25:03.359839",
+  "last_updated": "2026-08-19T10:33:55.329656",
   "history": [
+    {
+      "city": "Cherkasy",
+      "profile": "good",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-08-19T10:33:55.329656"
+    },
     {
       "city": "Kyiv",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-08-05T15:23:11.849189"
-    },
-    {
-      "city": "Boryspil",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-08-05T15:23:05.521327"
     }
   ],
   "distances": {
