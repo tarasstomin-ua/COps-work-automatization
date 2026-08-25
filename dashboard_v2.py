@@ -42,36 +42,36 @@ USERS = [
 
 CITIES = {
     "Kyiv": {"group": "TOP cities", "group_order": 0, "id": 158, "base": "Kyiv", "jn": "Kyiv", "profiles": ["good", "bad", "harsh"]},
-    "Lviv": {"group": "TOP cities", "group_order": 0, "id": 496, "base": "Lviv", "jn": "Lviv", "profiles": ["good", "bad", "harsh"]},
-    "Dnipro": {"group": "TOP cities", "group_order": 0, "id": 499, "base": "Dnipro", "jn": "Dnipro", "profiles": ["good", "bad", "harsh"]},
     "Kharkiv": {"group": "TOP cities", "group_order": 0, "id": 491, "base": "Kharkiv", "jn": "Kharkiv", "profiles": ["good", "bad", "harsh"]},
+    "Lviv": {"group": "TOP cities", "group_order": 0, "id": 496, "base": "Lviv", "jn": "Lviv", "profiles": ["good", "bad", "harsh"]},
+    "Odesa": {"group": "TOP cities", "group_order": 0, "id": 498, "base": "Odesa", "jn": "Odesa", "profiles": ["good", "bad", "harsh"]},
+    "Dnipro": {"group": "TOP cities", "group_order": 0, "id": 499, "base": "Dnipro", "jn": "Dnipro", "profiles": ["good", "bad", "harsh"]},
+    "Zaporizhia": {"group": "Tier 2", "group_order": 1, "id": 500, "base": "Secondary cities/Tier3 cities/Zaporizhia", "jn": "Zaporizhia", "profiles": ["good", "bad", "harsh"]},
     "Vinnytsia": {"group": "TOP cities", "group_order": 0, "id": 501, "base": "Vinnytsia", "jn": "Vinnytsia", "profiles": ["good", "bad", "harsh"]},
-    "Odesa": {"group": "Tier 2", "group_order": 1, "id": 498, "base": "Secondary cities/Tier2 cities/Odesa", "jn": "Odesa", "profiles": ["good", "harsh"]},
-    "Kryvyi Rih": {"group": "Tier 2", "group_order": 1, "id": 504, "base": "Secondary cities/Tier2 cities/Kryvyi Rih", "jn": "Kryvyi Rih", "profiles": ["good", "harsh"]},
-    "Poltava": {"group": "Tier 2", "group_order": 1, "id": 506, "base": "Secondary cities/Tier2 cities/Poltava", "jn": "Poltava", "profiles": ["good", "harsh"]},
-    "Ivano-Frankivsk": {"group": "Tier 2", "group_order": 1, "id": 990, "base": "Secondary cities/Tier2 cities/Ivano-Frankivsk", "jn": "Ivano-Frankivsk", "profiles": ["good", "harsh"]},
-    "Chernivtsi": {"group": "Tier 2", "group_order": 1, "id": 1084, "base": "Secondary cities/Tier2 cities/Chernivtsi", "jn": "Chernivtsi", "profiles": ["good", "harsh"]},
-    "Irpin": {"group": "Tier 2", "group_order": 1, "id": 1261, "base": "Secondary cities/Tier2 cities/Irpin", "jn": "Irpin", "profiles": ["good", "harsh"]},
-    "Cherkasy": {"group": "Tier 2", "group_order": 1, "id": 1087, "base": "Secondary cities/Tier2 cities/Cherkasy", "jn": "Cherkasy", "profiles": ["good", "harsh"]},
-    "Zaporizhia": {"group": "Tier 3", "group_order": 2, "id": 500, "base": "Secondary cities/Tier3 cities/Zaporizhia", "jn": "Zaporizhia", "profiles": ["good", "harsh"]},
-    "Bila Tserkva": {"group": "Tier 3", "group_order": 2, "id": 1079, "base": "Secondary cities/Tier3 cities/Bila Tserkva", "jn": "Bila Tserkva", "profiles": ["good", "harsh"]},
-    "Khmelnytskyi": {"group": "Tier 3", "group_order": 2, "id": 1081, "base": "Secondary cities/Tier3 cities/Khmelnytskyi", "jn": "Khmelnytskyi", "profiles": ["good", "harsh"]},
-    "Rivne": {"group": "Tier 3", "group_order": 2, "id": 1086, "base": "Secondary cities/Tier3 cities/Rivne", "jn": "Rivne", "profiles": ["good", "harsh"]},
-    "Uzhhorod": {"group": "Tier 3", "group_order": 2, "id": 1131, "base": "Secondary cities/Tier3 cities/Uzhhorod", "jn": "Uzhhorod", "profiles": ["good", "harsh"]},
-    "Brovary": {"group": "Tier 3", "group_order": 2, "id": 1259, "base": "Secondary cities/Tier3 cities/Brovary", "jn": "Brovary", "profiles": ["good", "harsh"]},
-    "Zhytomyr": {"group": "Tier 3", "group_order": 2, "id": 1083, "base": "Secondary cities/Tier3 cities/Zhytomyr", "jn": "Zhytomyr", "profiles": ["good", "harsh"]},
-    "Mykolaiv": {"group": "Rest of cities", "group_order": 3, "id": 503, "base": "Secondary cities/Rest of the cities/Mykolaiv", "jn": "Mykolaiv", "profiles": ["good", "harsh"]},
-    "Chernihiv": {"group": "Rest of cities", "group_order": 3, "id": 1076, "base": "Secondary cities/Rest of the cities/Chenihiv", "jn": "Chernihiv", "profiles": ["good", "harsh"]},
-    "Sumy": {"group": "Rest of cities", "group_order": 3, "id": 1078, "base": "Secondary cities/Rest of the cities/Sumy", "jn": "Sumy", "profiles": ["good", "harsh"]},
-    "Ternopil": {"group": "Rest of cities", "group_order": 3, "id": 1080, "base": "Secondary cities/Rest of the cities/Ternopil", "jn": "Ternopil", "profiles": ["good", "harsh"]},
-    "Lutsk": {"group": "Rest of cities", "group_order": 3, "id": 1082, "base": "Secondary cities/Rest of the cities/Lutsk", "jn": "Lutsk", "profiles": ["good", "harsh"]},
-    "Kropyvnytskyi": {"group": "Rest of cities", "group_order": 3, "id": 1085, "base": "Secondary cities/Rest of the cities/Kropyvnytskyi", "jn": "Kropyvnytskyi", "profiles": ["good", "harsh"]},
-    "Kremenchuk": {"group": "Rest of cities", "group_order": 3, "id": 1088, "base": "Secondary cities/Rest of the cities/Kremenchuk", "jn": "Kremenchuk", "profiles": ["good", "harsh"]},
+    "Mykolaiv": {"group": "Tier 2", "group_order": 1, "id": 503, "base": "Secondary cities/Rest of the cities/Mykolaiv", "jn": "Mykolaiv", "profiles": ["good", "bad", "harsh"]},
+    "Kryvyi Rih": {"group": "Tier 2", "group_order": 1, "id": 504, "base": "Secondary cities/Tier2 cities/Kryvyi Rih", "jn": "Kryvyi Rih", "profiles": ["good", "bad", "harsh"]},
+    "Poltava": {"group": "Tier 2", "group_order": 1, "id": 506, "base": "Secondary cities/Tier2 cities/Poltava", "jn": "Poltava", "profiles": ["good", "bad", "harsh"]},
+    "Ivano-Frankivsk": {"group": "Tier 2", "group_order": 1, "id": 990, "base": "Secondary cities/Tier2 cities/Ivano-Frankivsk", "jn": "Ivano-Frankivsk", "profiles": ["good", "bad", "harsh"]},
+    "Chernihiv": {"group": "Tier 2", "group_order": 1, "id": 1076, "base": "Secondary cities/Rest of the cities/Chenihiv", "jn": "Chernihiv", "profiles": ["good", "bad", "harsh"]},
+    "Sumy": {"group": "Tier 2", "group_order": 1, "id": 1078, "base": "Secondary cities/Rest of the cities/Sumy", "jn": "Sumy", "profiles": ["good", "bad", "harsh"]},
+    "Bila Tserkva": {"group": "Tier 3", "group_order": 2, "id": 1079, "base": "Secondary cities/Tier3 cities/Bila Tserkva", "jn": "Bila Tserkva", "profiles": ["good", "bad", "harsh"]},
+    "Ternopil": {"group": "Tier 3", "group_order": 2, "id": 1080, "base": "Secondary cities/Rest of the cities/Ternopil", "jn": "Ternopil", "profiles": ["good", "bad", "harsh"]},
+    "Khmelnytskyi": {"group": "Tier 3", "group_order": 2, "id": 1081, "base": "Secondary cities/Tier3 cities/Khmelnytskyi", "jn": "Khmelnytskyi", "profiles": ["good", "bad", "harsh"]},
+    "Lutsk": {"group": "Tier 3", "group_order": 2, "id": 1082, "base": "Secondary cities/Rest of the cities/Lutsk", "jn": "Lutsk", "profiles": ["good", "bad", "harsh"]},
+    "Zhytomyr": {"group": "Tier 3", "group_order": 2, "id": 1083, "base": "Secondary cities/Tier3 cities/Zhytomyr", "jn": "Zhytomyr", "profiles": ["good", "bad", "harsh"]},
+    "Chernivtsi": {"group": "Tier 2", "group_order": 1, "id": 1084, "base": "Secondary cities/Tier2 cities/Chernivtsi", "jn": "Chernivtsi", "profiles": ["good", "bad", "harsh"]},
+    "Kropyvnytskyi": {"group": "Tier 3", "group_order": 2, "id": 1085, "base": "Secondary cities/Rest of the cities/Kropyvnytskyi", "jn": "Kropyvnytskyi", "profiles": ["good", "bad", "harsh"]},
+    "Rivne": {"group": "Tier 3", "group_order": 2, "id": 1086, "base": "Secondary cities/Tier3 cities/Rivne", "jn": "Rivne", "profiles": ["good", "bad", "harsh"]},
+    "Cherkasy": {"group": "Tier 2", "group_order": 1, "id": 1087, "base": "Secondary cities/Tier2 cities/Cherkasy", "jn": "Cherkasy", "profiles": ["good", "bad", "harsh"]},
+    "Kremenchuk": {"group": "Tier 3", "group_order": 2, "id": 1088, "base": "Secondary cities/Rest of the cities/Kremenchuk", "jn": "Kremenchuk", "profiles": ["good", "bad", "harsh"]},
+    "Uzhhorod": {"group": "Tier 3", "group_order": 2, "id": 1131, "base": "Secondary cities/Tier3 cities/Uzhhorod", "jn": "Uzhhorod", "profiles": ["good", "bad", "harsh"]},
     "Kamianets-Podilskyi": {"group": "Rest of cities", "group_order": 3, "id": 1132, "base": "Secondary cities/Rest of the cities/Kamianets-Podilskyi", "jn": "Kamianets-Podilskyi", "profiles": ["good", "harsh"]},
     "Pavlohrad": {"group": "Rest of cities", "group_order": 3, "id": 1176, "base": "Secondary cities/Rest of the cities/Pavlohrad", "jn": "Pavlohrad", "profiles": ["good", "harsh"]},
     "Kamianske": {"group": "Rest of cities", "group_order": 3, "id": 1178, "base": "Secondary cities/Rest of the cities/Kamianske", "jn": "Kamianske", "profiles": ["good", "harsh"]},
     "Mukachevo": {"group": "Rest of cities", "group_order": 3, "id": 1179, "base": "Secondary cities/Rest of the cities/Mukachevo", "jn": "Mukachevo", "profiles": ["good", "harsh"]},
-    "Boryspil": {"group": "Rest of cities", "group_order": 3, "id": 1220, "base": "Secondary cities/Rest of the cities/Boryspil", "jn": "Boryspil", "profiles": ["good", "harsh"]},
+    "Boryspil": {"group": "Tier 3", "group_order": 2, "id": 1220, "base": "Secondary cities/Rest of the cities/Boryspil", "jn": "Boryspil", "profiles": ["good", "bad", "harsh"]},
+    "Brovary": {"group": "Tier 3", "group_order": 2, "id": 1259, "base": "Secondary cities/Tier3 cities/Brovary", "jn": "Brovary", "profiles": ["good", "bad", "harsh"]},
+    "Irpin": {"group": "Tier 2", "group_order": 1, "id": 1261, "base": "Secondary cities/Tier2 cities/Irpin", "jn": "Irpin", "profiles": ["good", "bad", "harsh"]},
     "Vyshhorod": {"group": "Rest of cities", "group_order": 3, "id": 1262, "base": "Secondary cities/Rest of the cities/Vyshhorod", "jn": "Vyshhorod", "profiles": ["good", "harsh"]},
     "Drohobych": {"group": "Rest of cities", "group_order": 3, "id": 1348, "base": "Secondary cities/Rest of the cities/Drohobych", "jn": "Drohobych", "profiles": ["good", "harsh"]},
     "Truskavets": {"group": "Rest of cities", "group_order": 3, "id": 1357, "base": "Secondary cities/Rest of the cities/Truskavets", "jn": "Truskavets", "profiles": ["good", "harsh"]},
@@ -1062,8 +1062,8 @@ const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov',
 const periodMap={day:'today',week:'week',month:'month'};
 let period='day',pending=null,activeData={},distData={},allGroups=[];
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
-const labels={good:'Good',bad:'Bad',harsh:'Harsh'};
-const labelsF={good:'Good Weather',bad:'Bad Weather',harsh:'Harsh Weather'};
+const labels={good:'Default',bad:'Bad',harsh:'Harsh'};
+const labelsF={good:'Default',bad:'Bad Weather',harsh:'Harsh Weather'};
 const distLabels={air_alarm:'Air Alarm',regular:'Regular'};
 
 function fmtDate(iso){
@@ -1153,7 +1153,7 @@ function card(c,ap){
     const u=ap.user?(' \u00b7 '+ap.user.split('@')[0]):'';
     ah='<div class="ap"><span class="d '+p+'" style="width:7px;height:7px;border-radius:50%;display:inline-block"></span><span class="pname">'+labelsF[p]+'</span><span class="since">Since '+fmtDate(ap.since)+u+'</span></div>';
   }
-  const btns=c.profiles.map(p=>'<button class="b '+p+'" data-city="'+c.name+'" data-prof="'+p+'"><span class="lb">'+cap(p)+'</span><div class="sp"></div></button>').join('');
+  const btns=c.profiles.map(p=>'<button class="b '+p+'" data-city="'+c.name+'" data-prof="'+p+'"><span class="lb">'+labels[p]+'</span><div class="sp"></div></button>').join('');
   let distHtml='';
   if(c.has_distance){
     const ds=distData[c.name];
