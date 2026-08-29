@@ -101,9 +101,9 @@
       "timestamp": "2026-08-17T13:43:05.951175"
     },
     "Chernihiv": {
-      "profile": "good",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-08-17T13:43:09.448590"
+      "profile": "bad",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-08-29T13:24:57.112235"
     },
     "Sumy": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-08-29T12:13:40.028394",
+  "last_updated": "2026-08-29T13:24:57.112235",
   "history": [
+    {
+      "city": "Chernihiv",
+      "profile": "bad",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-08-29T13:24:57.112235"
+    },
     {
       "city": "Poltava",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-08-11T11:38:17.985046"
-    },
-    {
-      "city": "Dnipro",
-      "profile": "bad",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-08-11T11:38:15.137845"
     }
   ],
   "distances": {
