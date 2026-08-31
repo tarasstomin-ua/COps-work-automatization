@@ -1,9 +1,9 @@
 {
   "cities": {
     "Kyiv": {
-      "profile": "bad",
+      "profile": "good",
       "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-08-31T08:40:14.476530"
+      "timestamp": "2026-08-31T09:02:17.489081"
     },
     "Dnipro": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-08-31T08:44:43.423731",
+  "last_updated": "2026-08-31T09:02:17.489081",
   "history": [
+    {
+      "city": "Kyiv",
+      "profile": "good",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-08-31T09:02:17.489081"
+    },
     {
       "city": "Kyiv",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-08-14T11:28:19.334795"
-    },
-    {
-      "city": "Dnipro",
-      "profile": "good",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-08-13T20:12:11.780644"
     }
   ],
   "distances": {
