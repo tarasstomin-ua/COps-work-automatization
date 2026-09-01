@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-01T10:39:30.215419",
+  "last_updated": "2026-09-01T10:39:54.178542",
   "history": [
+    {
+      "city": "Vinnytsia",
+      "action": "distance:regular",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-09-01T10:39:54.178542"
+    },
     {
       "city": "Vinnytsia",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-08-15T17:22:17.237842"
-    },
-    {
-      "city": "Sumy",
-      "profile": "harsh",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-08-15T17:22:13.572462"
     }
   ],
   "distances": {
@@ -2007,9 +2007,9 @@
       "timestamp": "2026-07-08T15:11:09.255376"
     },
     "Vinnytsia": {
-      "mode": "air_alarm",
+      "mode": "regular",
       "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-09-01T09:24:31.016447"
+      "timestamp": "2026-09-01T10:39:54.178542"
     },
     "Lviv": {
       "mode": "regular",
