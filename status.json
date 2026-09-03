@@ -46,9 +46,9 @@
       "timestamp": "2026-09-02T11:08:54.356803"
     },
     "Ivano-Frankivsk": {
-      "profile": "bad",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-02T12:40:24.820051"
+      "timestamp": "2026-09-03T10:13:04.494527"
     },
     "Chernivtsi": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-02T15:21:23.569962",
+  "last_updated": "2026-09-03T10:13:04.494527",
   "history": [
+    {
+      "city": "Ivano-Frankivsk",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-03T10:13:04.494527"
+    },
     {
       "city": "Chernivtsi",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-08-17T13:43:36.539068"
-    },
-    {
-      "city": "Pavlohrad",
-      "profile": "good",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-08-17T13:43:31.896030"
     }
   ],
   "distances": {
