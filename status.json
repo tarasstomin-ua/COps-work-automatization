@@ -181,14 +181,20 @@
       "timestamp": "2026-08-17T13:43:36.539068"
     },
     "Kolomyia": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-04T16:16:01.502609"
+      "timestamp": "2026-09-05T14:34:41.606155"
     }
   },
   "team": [],
-  "last_updated": "2026-09-05T14:34:33.051505",
+  "last_updated": "2026-09-05T14:34:41.606155",
   "history": [
+    {
+      "city": "Kolomyia",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-05T14:34:41.606155"
+    },
     {
       "city": "Brovary",
       "profile": "bad",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-08-19T10:28:14.072698"
-    },
-    {
-      "city": "Zaporizhia",
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-08-19T11:17:53.712614"
     }
   ],
   "distances": {
