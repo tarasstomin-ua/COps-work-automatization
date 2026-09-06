@@ -151,9 +151,9 @@
       "timestamp": "2026-08-31T08:22:37.543652"
     },
     "Boryspil": {
-      "profile": "bad",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-05T14:34:30.058589"
+      "timestamp": "2026-09-06T12:23:01.375447"
     },
     "Vyshhorod": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-06T12:22:43.252911",
+  "last_updated": "2026-09-06T12:23:01.375447",
   "history": [
+    {
+      "city": "Boryspil",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-06T12:23:01.375447"
+    },
     {
       "city": "Chernihiv",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-08-20T10:51:09.042159"
-    },
-    {
-      "city": "Dnipro",
-      "profile": "bad",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-08-20T10:18:11.115948"
     }
   ],
   "distances": {
