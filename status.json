@@ -162,8 +162,8 @@
     },
     "Drohobych": {
       "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-08-17T10:22:20.938374"
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-07T12:38:55.368927"
     },
     "Truskavets": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-07T12:38:21.654392",
+  "last_updated": "2026-09-07T12:38:55.368927",
   "history": [
+    {
+      "city": "Drohobych",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-07T12:38:55.368927"
+    },
     {
       "city": "Mykolaiv",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-08-25T09:47:19.373507"
-    },
-    {
-      "city": "Odesa",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-08-24T20:57:42.872867"
     }
   ],
   "distances": {
