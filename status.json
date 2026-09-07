@@ -177,8 +177,8 @@
     },
     "Oleksandriia": {
       "profile": "good",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-08-17T13:43:36.539068"
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-07T12:39:30.341351"
     },
     "Kolomyia": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-07T12:39:25.649939",
+  "last_updated": "2026-09-07T12:39:30.341351",
   "history": [
+    {
+      "city": "Oleksandriia",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-07T12:39:30.341351"
+    },
     {
       "city": "Kovel",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-08-25T12:51:54.674372"
-    },
-    {
-      "city": "Uzhhorod",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-08-25T11:49:35.286935"
     }
   ],
   "distances": {
