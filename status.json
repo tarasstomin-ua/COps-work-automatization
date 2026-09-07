@@ -97,8 +97,8 @@
     },
     "Mykolaiv": {
       "profile": "good",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-08-17T13:43:05.951175"
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-07T12:38:21.654392"
     },
     "Chernihiv": {
       "profile": "harsh",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-07T12:37:53.961784",
+  "last_updated": "2026-09-07T12:38:21.654392",
   "history": [
+    {
+      "city": "Mykolaiv",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-07T12:38:21.654392"
+    },
     {
       "city": "Kamianets-Podilskyi",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-08-24T20:57:42.872867"
-    },
-    {
-      "city": "Odesa",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-08-24T14:21:56.236357"
     }
   ],
   "distances": {
