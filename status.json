@@ -141,9 +141,9 @@
       "timestamp": "2026-09-04T10:20:44.763647"
     },
     "Kamianske": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-05T14:32:05.747567"
+      "timestamp": "2026-09-07T18:50:06.921367"
     },
     "Mukachevo": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-07T18:50:02.405293",
+  "last_updated": "2026-09-07T18:50:06.921367",
   "history": [
+    {
+      "city": "Kamianske",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-07T18:50:06.921367"
+    },
     {
       "city": "Uzhhorod",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-08-26T10:25:26.152904"
-    },
-    {
-      "city": "Uzhhorod",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-08-26T10:25:15.215342"
     }
   ],
   "distances": {
