@@ -36,9 +36,9 @@
       "timestamp": "2026-09-11T11:39:03.020078"
     },
     "Kryvyi Rih": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-10T13:10:25.502825"
+      "timestamp": "2026-09-11T14:16:25.627858"
     },
     "Poltava": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-11T14:16:16.402474",
+  "last_updated": "2026-09-11T14:16:25.627858",
   "history": [
+    {
+      "city": "Kryvyi Rih",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-11T14:16:25.627858"
+    },
     {
       "city": "Mykolaiv",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-08-28T21:11:45.467979"
-    },
-    {
-      "city": "Kyiv",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-08-28T20:19:08.738072"
     }
   ],
   "distances": {
