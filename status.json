@@ -86,9 +86,9 @@
       "timestamp": "2026-09-13T16:17:23.236902"
     },
     "Brovary": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-11T23:14:10.773018"
+      "timestamp": "2026-09-14T10:17:35.367695"
     },
     "Zhytomyr": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-14T10:16:53.443686",
+  "last_updated": "2026-09-14T10:17:35.367695",
   "history": [
+    {
+      "city": "Brovary",
+      "profile": "good",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-09-14T10:17:35.367695"
+    },
     {
       "city": "Lutsk",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-09-01T10:41:12.327331"
-    },
-    {
-      "city": "Vinnytsia",
-      "action": "distance:regular",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-09-01T10:39:54.178542"
     }
   ],
   "distances": {
