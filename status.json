@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-15T13:28:56.641272",
+  "last_updated": "2026-09-15T13:14:30.477667",
   "history": [
+    {
+      "city": "Odesa",
+      "action": "distance:air_alarm",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-09-15T13:14:30.477667"
+    },
     {
       "city": "Cherkasy",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-03T13:08:11.781158"
-    },
-    {
-      "city": "Vinnytsia",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-03T13:08:08.773405"
     }
   ],
   "distances": {
@@ -2017,9 +2017,9 @@
       "timestamp": "2026-08-27T11:42:47.655327"
     },
     "Odesa": {
-      "mode": "regular",
+      "mode": "air_alarm",
       "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-09-14T12:11:47.990681"
+      "timestamp": "2026-09-15T13:14:30.477667"
     }
   }
 }
