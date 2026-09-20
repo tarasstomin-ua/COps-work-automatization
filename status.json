@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:35:18.671478",
+  "last_updated": "2026-09-20T15:35:32.744017",
   "history": [
+    {
+      "city": "Bila Tserkva",
+      "action": "distance:regular",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:35:32.744017"
+    },
     {
       "city": "Irpin",
       "action": "distance:regular",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-09-09T15:59:51.283146"
-    },
-    {
-      "city": "Cherkasy",
-      "profile": "bad",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-09T13:56:14.275802"
     }
   ],
   "distances": {
@@ -2072,9 +2072,9 @@
       "timestamp": "2026-09-20T15:35:18.671478"
     },
     "Bila Tserkva": {
-      "mode": "air_alarm",
+      "mode": "regular",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-20T15:27:37.918099"
+      "timestamp": "2026-09-20T15:35:32.744017"
     },
     "Ternopil": {
       "mode": "air_alarm",
