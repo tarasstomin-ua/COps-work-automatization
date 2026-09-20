@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:25:30.853830",
+  "last_updated": "2026-09-20T15:25:43.185156",
   "history": [
+    {
+      "city": "Mykolaiv",
+      "action": "distance:air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:25:43.185156"
+    },
     {
       "city": "Zaporizhia",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-09-07T17:11:06.334592"
-    },
-    {
-      "city": "Zaporizhia",
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-07T16:06:42.417990"
     }
   ],
   "distances": {
@@ -2025,6 +2025,11 @@
       "mode": "air_alarm",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:25:30.853830"
+    },
+    "Mykolaiv": {
+      "mode": "air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:25:43.185156"
     }
   }
 }
