@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:30:38.049919",
+  "last_updated": "2026-09-20T15:30:50.249418",
   "history": [
+    {
+      "city": "Vyshhorod",
+      "action": "distance:air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:30:50.249418"
+    },
     {
       "city": "Mukachevo",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-08T12:12:52.653171"
-    },
-    {
-      "city": "Vinnytsia",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-08T12:12:40.663157"
     }
   ],
   "distances": {
@@ -2145,6 +2145,11 @@
       "mode": "air_alarm",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:30:38.049919"
+    },
+    "Vyshhorod": {
+      "mode": "air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:30:50.249418"
     }
   }
 }
