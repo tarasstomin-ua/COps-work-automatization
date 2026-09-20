@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:26:21.881031",
+  "last_updated": "2026-09-20T15:26:34.363938",
   "history": [
+    {
+      "city": "Chernihiv",
+      "action": "distance:air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:26:34.363938"
+    },
     {
       "city": "Ivano-Frankivsk",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "action": "distance:air_alarm",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-09-07T17:44:09.722504"
-    },
-    {
-      "city": "Cherkasy",
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-07T17:11:53.050432"
     }
   ],
   "distances": {
@@ -2045,6 +2045,11 @@
       "mode": "air_alarm",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:26:21.881031"
+    },
+    "Chernihiv": {
+      "mode": "air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:26:34.363938"
     }
   }
 }
