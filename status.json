@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:27:25.165006",
+  "last_updated": "2026-09-20T15:27:37.918099",
   "history": [
+    {
+      "city": "Bila Tserkva",
+      "action": "distance:air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:27:37.918099"
+    },
     {
       "city": "Irpin",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-07T18:49:52.856886"
-    },
-    {
-      "city": "Kropyvnytskyi",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-07T18:49:48.994145"
     }
   ],
   "distances": {
@@ -2070,6 +2070,11 @@
       "mode": "air_alarm",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:27:25.165006"
+    },
+    "Bila Tserkva": {
+      "mode": "air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:27:37.918099"
     }
   }
 }
