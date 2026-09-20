@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:25:55.893385",
+  "last_updated": "2026-09-20T15:26:09.511751",
   "history": [
+    {
+      "city": "Poltava",
+      "action": "distance:air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:26:09.511751"
+    },
     {
       "city": "Kryvyi Rih",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-09-07T17:11:40.655900"
-    },
-    {
-      "city": "Brovary",
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-07T17:11:09.400575"
     }
   ],
   "distances": {
@@ -2035,6 +2035,11 @@
       "mode": "air_alarm",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:25:55.893385"
+    },
+    "Poltava": {
+      "mode": "air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:26:09.511751"
     }
   }
 }
