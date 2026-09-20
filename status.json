@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:28:42.963562",
+  "last_updated": "2026-09-20T15:28:55.350725",
   "history": [
+    {
+      "city": "Rivne",
+      "action": "distance:air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:28:55.350725"
+    },
     {
       "city": "Kropyvnytskyi",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-09-08T10:39:35.603704"
-    },
-    {
-      "city": "Kyiv",
-      "action": "distance:regular",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-08T10:35:13.914176"
     }
   ],
   "distances": {
@@ -2100,6 +2100,11 @@
       "mode": "air_alarm",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:28:42.963562"
+    },
+    "Rivne": {
+      "mode": "air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:28:55.350725"
     }
   }
 }
