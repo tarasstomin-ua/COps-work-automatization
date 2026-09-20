@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:26:09.511751",
+  "last_updated": "2026-09-20T15:26:21.881031",
   "history": [
+    {
+      "city": "Ivano-Frankivsk",
+      "action": "distance:air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:26:21.881031"
+    },
     {
       "city": "Poltava",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-09-07T17:11:53.050432"
-    },
-    {
-      "city": "Rivne",
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-07T17:11:40.655900"
     }
   ],
   "distances": {
@@ -2040,6 +2040,11 @@
       "mode": "air_alarm",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:26:09.511751"
+    },
+    "Ivano-Frankivsk": {
+      "mode": "air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:26:21.881031"
     }
   }
 }
