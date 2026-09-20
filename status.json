@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:40:49.010330",
+  "last_updated": "2026-09-20T15:41:01.237718",
   "history": [
+    {
+      "city": "Pavlohrad",
+      "action": "distance:air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:41:01.237718"
+    },
     {
       "city": "Odesa",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-09-10T15:52:51.203533"
-    },
-    {
-      "city": "Kyiv",
-      "profile": "harsh",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-10T15:22:56.415799"
     }
   ],
   "distances": {
@@ -2132,9 +2132,9 @@
       "timestamp": "2026-09-20T15:37:51.838954"
     },
     "Pavlohrad": {
-      "mode": "regular",
+      "mode": "air_alarm",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-20T15:38:04.387900"
+      "timestamp": "2026-09-20T15:41:01.237718"
     },
     "Kamianske": {
       "mode": "regular",
