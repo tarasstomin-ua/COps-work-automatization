@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:30:11.880280",
+  "last_updated": "2026-09-20T15:30:25.384303",
   "history": [
+    {
+      "city": "Kamianske",
+      "action": "distance:air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:30:25.384303"
+    },
     {
       "city": "Pavlohrad",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-08T12:12:18.070718"
-    },
-    {
-      "city": "Khmelnytskyi",
-      "profile": "bad",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-08T12:12:05.288153"
     }
   ],
   "distances": {
@@ -2135,6 +2135,11 @@
       "mode": "air_alarm",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:30:11.880280"
+    },
+    "Kamianske": {
+      "mode": "air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:30:25.384303"
     }
   }
 }
