@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:25:43.185156",
+  "last_updated": "2026-09-20T15:25:55.893385",
   "history": [
+    {
+      "city": "Kryvyi Rih",
+      "action": "distance:air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:25:55.893385"
+    },
     {
       "city": "Mykolaiv",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-09-07T17:11:09.400575"
-    },
-    {
-      "city": "Boryspil",
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-07T17:11:06.334592"
     }
   ],
   "distances": {
@@ -2030,6 +2030,11 @@
       "mode": "air_alarm",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:25:43.185156"
+    },
+    "Kryvyi Rih": {
+      "mode": "air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:25:55.893385"
     }
   }
 }
