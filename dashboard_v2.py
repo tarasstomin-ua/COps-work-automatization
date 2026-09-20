@@ -84,7 +84,7 @@ VALID_PROFILES = {"good", "bad", "harsh"}
 
 # ── Distance profiles (Air Alarm / Regular) ──────────────────────────────────
 
-DISTANCE_CITIES = {"Kyiv", "Lviv", "Dnipro", "Kharkiv", "Vinnytsia", "Odesa"}
+DISTANCE_CITIES = set(CITIES.keys())
 
 DISTANCE_PROFILES = {
     "air_alarm": {
@@ -394,9 +394,22 @@ def _make_driver():
     from selenium.webdriver.chrome.options import Options
     tmp = Path.home() / ".chrome_selenium_profile"
     tmp.mkdir(exist_ok=True)
+    pol_dir = tmp / "policies" / "managed"
+    pol_dir.mkdir(parents=True, exist_ok=True)
+    pol_file = pol_dir / "auto_cert.json"
+    if not pol_file.exists():
+        pol_file.write_text(json.dumps({
+            "AutoSelectCertificateForUrls": [
+                '{"pattern":"https://admin-panel.bolt.eu","filter":{}}'
+            ]
+        }))
     opts = Options()
     opts.add_argument(f"--user-data-dir={tmp}")
     opts.add_argument("--profile-directory=AutomationProfile")
+    opts.add_argument('--auto-select-certificate-for-urls={"pattern":"https://admin-panel.bolt.eu","filter":{}}')
+    opts.add_experimental_option("prefs", {
+        "profile.default_content_setting_values.automatic_downloads": 1,
+    })
     from selenium import webdriver
     return webdriver.Chrome(options=opts)
 
