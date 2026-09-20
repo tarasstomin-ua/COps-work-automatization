@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:28:16.711155",
+  "last_updated": "2026-09-20T15:28:29.167885",
   "history": [
+    {
+      "city": "Zhytomyr",
+      "action": "distance:air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:28:29.167885"
+    },
     {
       "city": "Lutsk",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-09-08T10:27:25.768226"
-    },
-    {
-      "city": "Vinnytsia",
-      "profile": "harsh",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-09-08T09:20:31.440003"
     }
   ],
   "distances": {
@@ -2090,6 +2090,11 @@
       "mode": "air_alarm",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:28:16.711155"
+    },
+    "Zhytomyr": {
+      "mode": "air_alarm",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:28:29.167885"
     }
   }
 }
