@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:36:48.729059",
+  "last_updated": "2026-09-20T15:37:01.028639",
   "history": [
+    {
+      "city": "Kremenchuk",
+      "action": "distance:regular",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:37:01.028639"
+    },
     {
       "city": "Rivne",
       "action": "distance:regular",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-09-10T11:08:39.921883"
-    },
-    {
-      "city": "Zaporizhia",
-      "profile": "harsh",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-10T10:52:51.765508"
     }
   ],
   "distances": {
@@ -2107,9 +2107,9 @@
       "timestamp": "2026-09-20T15:36:48.729059"
     },
     "Kremenchuk": {
-      "mode": "air_alarm",
+      "mode": "regular",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-20T15:29:07.657536"
+      "timestamp": "2026-09-20T15:37:01.028639"
     },
     "Uzhhorod": {
       "mode": "air_alarm",
