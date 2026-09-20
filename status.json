@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-20T15:38:42.951577",
+  "last_updated": "2026-09-20T15:38:55.222940",
   "history": [
+    {
+      "city": "Drohobych",
+      "action": "distance:regular",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-20T15:38:55.222940"
+    },
     {
       "city": "Vyshhorod",
       "action": "distance:regular",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-10T13:10:52.483147"
-    },
-    {
-      "city": "Lutsk",
-      "profile": "bad",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-10T13:10:34.454685"
     }
   ],
   "distances": {
@@ -2152,9 +2152,9 @@
       "timestamp": "2026-09-20T15:38:42.951577"
     },
     "Drohobych": {
-      "mode": "air_alarm",
+      "mode": "regular",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-20T15:31:02.907759"
+      "timestamp": "2026-09-20T15:38:55.222940"
     },
     "Truskavets": {
       "mode": "air_alarm",
