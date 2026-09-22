@@ -66,9 +66,9 @@
       "timestamp": "2026-09-22T09:31:22.006782"
     },
     "Bila Tserkva": {
-      "profile": "harsh",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-21T10:48:01.211062"
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-22T09:32:51.814881"
     },
     "Khmelnytskyi": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-22T09:32:47.633415",
+  "last_updated": "2026-09-22T09:32:51.814881",
   "history": [
+    {
+      "city": "Bila Tserkva",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-22T09:32:51.814881"
+    },
     {
       "city": "Ternopil",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-09-11T23:15:45.649483"
-    },
-    {
-      "city": "Sumy",
-      "profile": "harsh",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-11T23:14:53.158614"
     }
   ],
   "distances": {
