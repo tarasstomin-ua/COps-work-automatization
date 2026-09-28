@@ -61,9 +61,9 @@
       "timestamp": "2026-09-28T14:13:03.760267"
     },
     "Zaporizhia": {
-      "profile": "bad",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-28T14:13:32.579110"
+      "timestamp": "2026-09-28T20:37:42.883298"
     },
     "Bila Tserkva": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-28T20:37:38.030825",
+  "last_updated": "2026-09-28T20:37:42.883298",
   "history": [
+    {
+      "city": "Zaporizhia",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-09-28T20:37:42.883298"
+    },
     {
       "city": "Uzhhorod",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-09-15T18:55:11.842549"
-    },
-    {
-      "city": "Kyiv",
-      "action": "distance:regular",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-15T16:21:02.647910"
     }
   ],
   "distances": {
