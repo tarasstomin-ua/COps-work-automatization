@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-28T11:21:35.372614",
+  "last_updated": "2026-09-28T11:22:06.861438",
   "history": [
+    {
+      "city": "Odesa",
+      "action": "distance:regular",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-09-28T11:22:06.861438"
+    },
     {
       "city": "Chernihiv",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-15T14:28:24.848518"
-    },
-    {
-      "city": "Kremenchuk",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-15T14:27:55.390787"
     }
   ],
   "distances": {
@@ -2017,9 +2017,9 @@
       "timestamp": "2026-09-20T15:32:32.535557"
     },
     "Odesa": {
-      "mode": "air_alarm",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-20T15:40:49.010330"
+      "mode": "regular",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-09-28T11:22:06.861438"
     },
     "Zaporizhia": {
       "mode": "air_alarm",
