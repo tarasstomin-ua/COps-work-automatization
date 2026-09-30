@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-09-30T14:56:26.022435",
+  "last_updated": "2026-09-30T14:57:06.049039",
   "history": [
+    {
+      "city": "Zhytomyr",
+      "action": "distance:air_alarm",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-09-30T14:57:06.049039"
+    },
     {
       "city": "Kryvyi Rih",
       "action": "distance:air_alarm",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-09-17T10:42:34.416266"
-    },
-    {
-      "city": "Kyiv",
-      "action": "distance:regular",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-16T18:09:47.198410"
     }
   ],
   "distances": {
@@ -2092,9 +2092,9 @@
       "timestamp": "2026-09-20T15:36:09.726522"
     },
     "Zhytomyr": {
-      "mode": "regular",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-20T15:36:23.555737"
+      "mode": "air_alarm",
+      "user": "anna.tiurina@bolt.eu",
+      "timestamp": "2026-09-30T14:57:06.049039"
     },
     "Kropyvnytskyi": {
       "mode": "regular",
