@@ -121,9 +121,9 @@
       "timestamp": "2026-09-22T13:12:01.275946"
     },
     "Kropyvnytskyi": {
-      "profile": "harsh",
+      "profile": "bad",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-05T10:46:11.176595"
+      "timestamp": "2026-10-05T12:46:14.296364"
     },
     "Kremenchuk": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-05T10:46:11.176595",
+  "last_updated": "2026-10-05T12:46:14.296364",
   "history": [
+    {
+      "city": "Kropyvnytskyi",
+      "profile": "bad",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-05T12:46:14.296364"
+    },
     {
       "city": "Kropyvnytskyi",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-17T13:49:03.702971"
-    },
-    {
-      "city": "Sumy",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-17T13:48:58.047714"
     }
   ],
   "distances": {
