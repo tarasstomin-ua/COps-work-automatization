@@ -181,14 +181,20 @@
       "timestamp": "2026-09-07T12:39:30.341351"
     },
     "Kolomyia": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-10T11:28:50.900995"
+      "timestamp": "2026-10-10T12:41:15.951227"
     }
   },
   "team": [],
-  "last_updated": "2026-10-10T12:41:12.375288",
+  "last_updated": "2026-10-10T12:41:15.951227",
   "history": [
+    {
+      "city": "Kolomyia",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-10T12:41:15.951227"
+    },
     {
       "city": "Kamianets-Podilskyi",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "action": "distance:regular",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:23:00.117165"
-    },
-    {
-      "city": "Poltava",
-      "profile": "good",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-09-20T14:54:46.290779"
     }
   ],
   "distances": {
