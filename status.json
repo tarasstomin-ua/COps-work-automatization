@@ -116,9 +116,9 @@
       "timestamp": "2026-10-11T10:12:36.375001"
     },
     "Lutsk": {
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-09-22T13:12:01.275946"
+      "profile": "bad",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-11T15:25:08.826233"
     },
     "Kropyvnytskyi": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-11T11:45:50.203406",
+  "last_updated": "2026-10-11T15:25:08.826233",
   "history": [
+    {
+      "city": "Lutsk",
+      "profile": "bad",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-11T15:25:08.826233"
+    },
     {
       "city": "Uzhhorod",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "action": "distance:air_alarm",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:28:16.711155"
-    },
-    {
-      "city": "Khmelnytskyi",
-      "action": "distance:air_alarm",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-20T15:28:04.396975"
     }
   ],
   "distances": {
