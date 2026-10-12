@@ -181,14 +181,20 @@
       "timestamp": "2026-09-07T12:39:30.341351"
     },
     "Kolomyia": {
-      "profile": "harsh",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-10-11T10:12:14.731565"
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-12T11:08:02.253295"
     }
   },
   "team": [],
-  "last_updated": "2026-10-12T11:07:41.794371",
+  "last_updated": "2026-10-12T11:08:02.253295",
   "history": [
+    {
+      "city": "Kolomyia",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-12T11:08:02.253295"
+    },
     {
       "city": "Mukachevo",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "action": "distance:air_alarm",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:31:54.042532"
-    },
-    {
-      "city": "Oleksandriia",
-      "action": "distance:air_alarm",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-20T15:31:41.460841"
     }
   ],
   "distances": {
