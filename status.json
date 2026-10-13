@@ -146,9 +146,9 @@
       "timestamp": "2026-10-02T10:35:47.506025"
     },
     "Mukachevo": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-12T23:03:01.453724"
+      "timestamp": "2026-10-13T10:43:53.869958"
     },
     "Boryspil": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-13T10:23:48.666155",
+  "last_updated": "2026-10-13T10:43:53.869958",
   "history": [
+    {
+      "city": "Mukachevo",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-13T10:43:53.869958"
+    },
     {
       "city": "Odesa",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "action": "distance:regular",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-20T15:38:55.222940"
-    },
-    {
-      "city": "Vyshhorod",
-      "action": "distance:regular",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-20T15:38:42.951577"
     }
   ],
   "distances": {
