@@ -41,9 +41,9 @@
       "timestamp": "2026-10-14T12:38:00.030692"
     },
     "Poltava": {
-      "profile": "harsh",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-10-15T15:29:00.510072"
+      "profile": "bad",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-15T23:58:13.654242"
     },
     "Ivano-Frankivsk": {
       "profile": "bad",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-15T23:58:07.817435",
+  "last_updated": "2026-10-15T23:58:13.654242",
   "history": [
+    {
+      "city": "Poltava",
+      "profile": "bad",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-15T23:58:13.654242"
+    },
     {
       "city": "Kyiv",
       "profile": "bad",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-23T10:13:13.984171"
-    },
-    {
-      "city": "Kharkiv",
-      "profile": "good",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-09-23T08:55:03.550954"
     }
   ],
   "distances": {
