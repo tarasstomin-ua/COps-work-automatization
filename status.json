@@ -86,9 +86,9 @@
       "timestamp": "2026-10-14T15:50:36.008378"
     },
     "Brovary": {
-      "profile": "good",
+      "profile": "bad",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-12T20:34:17.164976"
+      "timestamp": "2026-10-15T23:58:55.805679"
     },
     "Zhytomyr": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-15T23:58:51.745439",
+  "last_updated": "2026-10-15T23:58:55.805679",
   "history": [
+    {
+      "city": "Brovary",
+      "profile": "bad",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-15T23:58:55.805679"
+    },
     {
       "city": "Boryspil",
       "profile": "bad",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-23T14:08:49.786057"
-    },
-    {
-      "city": "Mykolaiv",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-23T14:08:40.145912"
     }
   ],
   "distances": {
