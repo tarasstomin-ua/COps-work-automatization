@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-16T16:50:33.889921",
+  "last_updated": "2026-10-16T16:51:50.446725",
   "history": [
+    {
+      "city": "Cherkasy",
+      "action": "distance:air_alarm",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-10-16T16:51:50.446725"
+    },
     {
       "city": "Cherkasy",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-28T20:37:42.883298"
-    },
-    {
-      "city": "Uzhhorod",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-28T20:37:38.030825"
     }
   ],
   "distances": {
@@ -2062,9 +2062,9 @@
       "timestamp": "2026-09-20T15:34:53.344564"
     },
     "Cherkasy": {
-      "mode": "regular",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-20T15:35:06.243788"
+      "mode": "air_alarm",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-10-16T16:51:50.446725"
     },
     "Irpin": {
       "mode": "regular",
