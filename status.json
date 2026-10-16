@@ -66,9 +66,9 @@
       "timestamp": "2026-10-15T23:58:03.208933"
     },
     "Bila Tserkva": {
-      "profile": "harsh",
+      "profile": "bad",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-10-16T09:59:24.980505"
+      "timestamp": "2026-10-16T13:28:46.930520"
     },
     "Khmelnytskyi": {
       "profile": "harsh",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-16T13:28:34.197458",
+  "last_updated": "2026-10-16T13:28:46.930520",
   "history": [
+    {
+      "city": "Bila Tserkva",
+      "profile": "bad",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-10-16T13:28:46.930520"
+    },
     {
       "city": "Lutsk",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-09-26T11:56:06.944296"
-    },
-    {
-      "city": "Chernihiv",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-09-26T11:55:43.451710"
     }
   ],
   "distances": {
