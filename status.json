@@ -51,9 +51,9 @@
       "timestamp": "2026-10-16T18:43:34.452359"
     },
     "Chernivtsi": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-16T14:52:49.974805"
+      "timestamp": "2026-10-16T19:12:09.877136"
     },
     "Irpin": {
       "profile": "bad",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-16T19:10:40.743918",
+  "last_updated": "2026-10-16T19:12:09.877136",
   "history": [
+    {
+      "city": "Chernivtsi",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-16T19:12:09.877136"
+    },
     {
       "city": "Ternopil",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-10-01T11:02:31.135289"
-    },
-    {
-      "city": "Kyiv",
-      "profile": "good",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-10-01T09:48:04.776766"
     }
   ],
   "distances": {
