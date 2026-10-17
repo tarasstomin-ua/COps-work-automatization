@@ -106,9 +106,9 @@
       "timestamp": "2026-10-16T14:52:56.842517"
     },
     "Sumy": {
-      "profile": "good",
+      "profile": "bad",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-16T14:52:52.952372"
+      "timestamp": "2026-10-17T12:43:10.020161"
     },
     "Ternopil": {
       "profile": "harsh",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-17T12:42:49.283140",
+  "last_updated": "2026-10-17T12:43:10.020161",
   "history": [
+    {
+      "city": "Sumy",
+      "profile": "bad",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-17T12:43:10.020161"
+    },
     {
       "city": "Pavlohrad",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-10-02T10:35:47.506025"
-    },
-    {
-      "city": "Boryspil",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-01T22:02:03.636894"
     }
   ],
   "distances": {
