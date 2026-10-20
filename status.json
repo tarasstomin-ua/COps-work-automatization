@@ -76,9 +76,9 @@
       "timestamp": "2026-10-20T12:21:14.187136"
     },
     "Rivne": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-20T10:51:49.198337"
+      "timestamp": "2026-10-20T18:03:44.397623"
     },
     "Uzhhorod": {
       "profile": "harsh",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-20T18:03:33.156068",
+  "last_updated": "2026-10-20T18:03:44.397623",
   "history": [
+    {
+      "city": "Rivne",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-20T18:03:44.397623"
+    },
     {
       "city": "Poltava",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-10-15T11:59:49.476993"
-    },
-    {
-      "city": "Khmelnytskyi",
-      "profile": "bad",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-15T11:59:37.853902"
     }
   ],
   "distances": {
