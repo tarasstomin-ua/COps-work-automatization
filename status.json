@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-20T16:08:33.419433",
+  "last_updated": "2026-10-20T16:16:26.990163",
   "history": [
+    {
+      "city": "Lviv",
+      "action": "distance:air_alarm",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-10-20T16:16:26.990163"
+    },
     {
       "city": "Lviv",
       "profile": "bad",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-10-15T11:09:24.247194"
-    },
-    {
-      "city": "Kropyvnytskyi",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-15T11:04:31.050059"
     }
   ],
   "distances": {
@@ -2012,9 +2012,9 @@
       "timestamp": "2026-10-12T09:35:13.966823"
     },
     "Lviv": {
-      "mode": "regular",
+      "mode": "air_alarm",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-10-20T15:35:05.367345"
+      "timestamp": "2026-10-20T16:16:26.990163"
     },
     "Odesa": {
       "mode": "regular",
