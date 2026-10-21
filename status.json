@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-21T14:56:36.375898",
+  "last_updated": "2026-10-21T15:17:40.694954",
   "history": [
+    {
+      "city": "Rivne",
+      "action": "distance:air_alarm",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-10-21T15:17:40.694954"
+    },
     {
       "city": "Poltava",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-10-15T19:22:39.089745"
-    },
-    {
-      "city": "Chernivtsi",
-      "profile": "bad",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-15T19:22:06.815802"
     }
   ],
   "distances": {
@@ -2102,9 +2102,9 @@
       "timestamp": "2026-09-20T15:36:36.190845"
     },
     "Rivne": {
-      "mode": "regular",
+      "mode": "air_alarm",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-10-21T13:33:47.200314"
+      "timestamp": "2026-10-21T15:17:40.694954"
     },
     "Kremenchuk": {
       "mode": "regular",
