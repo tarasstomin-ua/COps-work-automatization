@@ -81,9 +81,9 @@
       "timestamp": "2026-10-20T18:03:44.397623"
     },
     "Uzhhorod": {
-      "profile": "good",
+      "profile": "bad",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-21T14:56:24.589423"
+      "timestamp": "2026-10-21T15:50:09.914855"
     },
     "Brovary": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-21T15:49:56.318348",
+  "last_updated": "2026-10-21T15:50:09.914855",
   "history": [
+    {
+      "city": "Uzhhorod",
+      "profile": "bad",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-21T15:50:09.914855"
+    },
     {
       "city": "Khmelnytskyi",
       "profile": "bad",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-10-15T23:58:03.208933"
-    },
-    {
-      "city": "Dnipro",
-      "profile": "bad",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-15T23:57:59.862410"
     }
   ],
   "distances": {
