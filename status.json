@@ -26,9 +26,9 @@
       "timestamp": "2026-10-21T13:26:37.227141"
     },
     "Vinnytsia": {
-      "profile": "good",
+      "profile": "bad",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-10-22T11:21:15.368777"
+      "timestamp": "2026-10-22T12:03:26.762346"
     },
     "Cherkasy": {
       "profile": "harsh",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-22T11:55:35.989426",
+  "last_updated": "2026-10-22T12:03:26.762346",
   "history": [
+    {
+      "city": "Vinnytsia",
+      "profile": "bad",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-10-22T12:03:26.762346"
+    },
     {
       "city": "Cherkasy",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "anna.tiurina@bolt.eu",
       "timestamp": "2026-10-16T10:16:25.234629"
-    },
-    {
-      "city": "Dnipro",
-      "profile": "good",
-      "user": "anna.tiurina@bolt.eu",
-      "timestamp": "2026-10-16T10:16:10.174947"
     }
   ],
   "distances": {
