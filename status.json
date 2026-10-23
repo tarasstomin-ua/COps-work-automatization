@@ -71,9 +71,9 @@
       "timestamp": "2026-10-20T13:55:03.289353"
     },
     "Khmelnytskyi": {
-      "profile": "bad",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-23T18:15:43.920147"
+      "timestamp": "2026-10-23T21:53:13.454898"
     },
     "Rivne": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-23T21:53:09.249669",
+  "last_updated": "2026-10-23T21:53:13.454898",
   "history": [
+    {
+      "city": "Khmelnytskyi",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-23T21:53:13.454898"
+    },
     {
       "city": "Chernivtsi",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-10-17T13:07:24.793283"
-    },
-    {
-      "city": "Sumy",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-17T13:07:13.178989"
     }
   ],
   "distances": {
