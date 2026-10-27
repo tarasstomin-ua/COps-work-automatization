@@ -111,9 +111,9 @@
       "timestamp": "2026-10-23T10:26:28.711570"
     },
     "Ternopil": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-10-26T17:41:15.062514"
+      "timestamp": "2026-10-27T12:57:47.795107"
     },
     "Lutsk": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-27T12:32:06.978302",
+  "last_updated": "2026-10-27T12:57:47.795107",
   "history": [
+    {
+      "city": "Ternopil",
+      "profile": "good",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-10-27T12:57:47.795107"
+    },
     {
       "city": "Khmelnytskyi",
       "profile": "bad",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-10-19T10:17:51.360693"
-    },
-    {
-      "city": "Vinnytsia",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-18T18:50:07.248957"
     }
   ],
   "distances": {
