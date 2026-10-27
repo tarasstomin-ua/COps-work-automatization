@@ -71,9 +71,9 @@
       "timestamp": "2026-10-20T13:55:03.289353"
     },
     "Khmelnytskyi": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-10-27T16:26:23.608531"
+      "timestamp": "2026-10-27T18:14:14.718879"
     },
     "Rivne": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-27T18:14:00.737710",
+  "last_updated": "2026-10-27T18:14:14.718879",
   "history": [
+    {
+      "city": "Khmelnytskyi",
+      "profile": "harsh",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-10-27T18:14:14.718879"
+    },
     {
       "city": "Ivano-Frankivsk",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-10-19T11:57:55.116456"
-    },
-    {
-      "city": "Lviv",
-      "profile": "good",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-10-19T11:55:34.330073"
     }
   ],
   "distances": {
