@@ -1,9 +1,9 @@
 {
   "cities": {
     "Kyiv": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-23T20:21:36.150776"
+      "timestamp": "2026-10-29T09:40:48.743615"
     },
     "Dnipro": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-10-28T19:55:56.076280",
+  "last_updated": "2026-10-29T09:40:48.743615",
   "history": [
+    {
+      "city": "Kyiv",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-10-29T09:40:48.743615"
+    },
     {
       "city": "Kamianets-Podilskyi",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-10-20T10:22:12.806714"
-    },
-    {
-      "city": "Odesa",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-10-19T19:03:55.867516"
     }
   ],
   "distances": {
