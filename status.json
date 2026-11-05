@@ -3,7 +3,7 @@
     "Kyiv": {
       "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-11-05T20:57:03.234567"
+      "timestamp": "2026-11-05T20:57:25.868048"
     },
     "Dnipro": {
       "profile": "harsh",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-11-05T20:57:03.234567",
+  "last_updated": "2026-11-05T20:57:25.868048",
   "history": [
+    {
+      "city": "Kyiv",
+      "profile": "harsh",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-11-05T20:57:25.868048"
+    },
     {
       "city": "Kyiv",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-10-26T13:08:11.465215"
-    },
-    {
-      "city": "Lviv",
-      "profile": "bad",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-10-26T12:56:06.904568"
     }
   ],
   "distances": {
