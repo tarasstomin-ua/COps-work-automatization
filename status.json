@@ -101,9 +101,9 @@
       "timestamp": "2026-11-14T17:05:37.985119"
     },
     "Chernihiv": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-11-14T16:14:08.812125"
+      "timestamp": "2026-11-15T11:17:12.108567"
     },
     "Sumy": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-11-14T18:51:10.162462",
+  "last_updated": "2026-11-15T11:17:12.108567",
   "history": [
+    {
+      "city": "Chernihiv",
+      "profile": "harsh",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-11-15T11:17:12.108567"
+    },
     {
       "city": "Kyiv",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-11-07T22:22:10.249819"
-    },
-    {
-      "city": "Zhytomyr",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-11-07T18:34:02.871961"
     }
   ],
   "distances": {
