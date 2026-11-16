@@ -171,9 +171,9 @@
       "timestamp": "2026-11-14T00:30:00.039075"
     },
     "Kovel": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-11-14T17:04:41.843737"
+      "timestamp": "2026-11-16T09:07:34.959202"
     },
     "Oleksandriia": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-11-16T09:07:30.949456",
+  "last_updated": "2026-11-16T09:07:34.959202",
   "history": [
+    {
+      "city": "Kovel",
+      "profile": "good",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-11-16T09:07:34.959202"
+    },
     {
       "city": "Brovary",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-11-08T21:38:02.688397"
-    },
-    {
-      "city": "Chernivtsi",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-11-08T21:37:59.030851"
     }
   ],
   "distances": {
