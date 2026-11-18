@@ -181,14 +181,20 @@
       "timestamp": "2026-09-07T12:39:30.341351"
     },
     "Kolomyia": {
-      "profile": "harsh",
+      "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-11-17T18:21:11.259038"
+      "timestamp": "2026-11-18T10:51:15.109908"
     }
   },
   "team": [],
-  "last_updated": "2026-11-18T10:50:51.155331",
+  "last_updated": "2026-11-18T10:51:15.109908",
   "history": [
+    {
+      "city": "Kolomyia",
+      "profile": "good",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-11-18T10:51:15.109908"
+    },
     {
       "city": "Kovel",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-11-11T21:35:25.341811"
-    },
-    {
-      "city": "Chernivtsi",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-11-11T21:32:31.469038"
     }
   ],
   "distances": {
