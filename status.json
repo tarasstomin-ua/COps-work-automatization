@@ -76,9 +76,9 @@
       "timestamp": "2026-11-18T20:12:41.988197"
     },
     "Rivne": {
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-11-19T10:20:52.954701"
+      "profile": "harsh",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-11-19T22:58:32.735535"
     },
     "Uzhhorod": {
       "profile": "bad",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-11-19T22:58:14.088444",
+  "last_updated": "2026-11-19T22:58:32.735535",
   "history": [
+    {
+      "city": "Rivne",
+      "profile": "harsh",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-11-19T22:58:32.735535"
+    },
     {
       "city": "Bila Tserkva",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-11-13T01:46:43.016337"
-    },
-    {
-      "city": "Kamianets-Podilskyi",
-      "profile": "harsh",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-11-13T01:46:38.493096"
     }
   ],
   "distances": {
