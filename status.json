@@ -16,9 +16,9 @@
       "timestamp": "2026-11-23T13:16:09.292048"
     },
     "Lviv": {
-      "profile": "bad",
+      "profile": "good",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-11-23T18:11:46.892420"
+      "timestamp": "2026-11-24T10:23:05.986838"
     },
     "Kharkiv": {
       "profile": "harsh",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-11-23T19:40:51.554096",
+  "last_updated": "2026-11-24T10:23:05.986838",
   "history": [
+    {
+      "city": "Lviv",
+      "profile": "good",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-11-24T10:23:05.986838"
+    },
     {
       "city": "Oleksandriia",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-11-14T17:03:25.483584"
-    },
-    {
-      "city": "Brovary",
-      "profile": "harsh",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-11-14T17:03:10.928160"
     }
   ],
   "distances": {
