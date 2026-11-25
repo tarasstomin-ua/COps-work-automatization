@@ -81,9 +81,9 @@
       "timestamp": "2026-11-25T11:16:24.246760"
     },
     "Uzhhorod": {
-      "profile": "good",
+      "profile": "harsh",
       "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-11-24T19:17:52.109445"
+      "timestamp": "2026-11-25T11:17:04.517750"
     },
     "Brovary": {
       "profile": "bad",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-11-25T11:16:24.246760",
+  "last_updated": "2026-11-25T11:17:04.517750",
   "history": [
+    {
+      "city": "Uzhhorod",
+      "profile": "harsh",
+      "user": "nataliia.malakova@bolt.eu",
+      "timestamp": "2026-11-25T11:17:04.517750"
+    },
     {
       "city": "Rivne",
       "profile": "harsh",
@@ -1982,12 +1988,6 @@
       "profile": "bad",
       "user": "nataliia.malakova@bolt.eu",
       "timestamp": "2026-11-17T10:21:14.712610"
-    },
-    {
-      "city": "Dnipro",
-      "profile": "harsh",
-      "user": "nataliia.malakova@bolt.eu",
-      "timestamp": "2026-11-17T10:21:02.721575"
     }
   ],
   "distances": {
