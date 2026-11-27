@@ -126,9 +126,9 @@
       "timestamp": "2026-11-27T11:29:56.940609"
     },
     "Kremenchuk": {
-      "profile": "good",
+      "profile": "bad",
       "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-11-25T11:56:11.196521"
+      "timestamp": "2026-11-27T12:30:43.105212"
     },
     "Kamianets-Podilskyi": {
       "profile": "good",
@@ -187,8 +187,14 @@
     }
   },
   "team": [],
-  "last_updated": "2026-11-27T12:30:30.217968",
+  "last_updated": "2026-11-27T12:30:43.105212",
   "history": [
+    {
+      "city": "Kremenchuk",
+      "profile": "bad",
+      "user": "taras.stomin@bolt.eu",
+      "timestamp": "2026-11-27T12:30:43.105212"
+    },
     {
       "city": "Kharkiv",
       "profile": "good",
@@ -1982,12 +1988,6 @@
       "profile": "good",
       "user": "taras.stomin@bolt.eu",
       "timestamp": "2026-11-18T20:11:51.550520"
-    },
-    {
-      "city": "Cherkasy",
-      "profile": "good",
-      "user": "taras.stomin@bolt.eu",
-      "timestamp": "2026-11-18T20:11:48.018953"
     }
   ],
   "distances": {
